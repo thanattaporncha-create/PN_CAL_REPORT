@@ -227,7 +227,7 @@
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
             gap: 8px;
-            text-align: center;
+            text-align: center.
         }
         
         .total-item {
@@ -671,6 +671,33 @@
                 volume: cernVol.toFixed(1),
                 note: cernNote
             });
+        }
+
+        // --------------------------
+        // Vitamin K (ก่อน Fat)
+        // --------------------------
+        if (data.vitKChoice === 'daily') {
+            const vitKVol = data.vitKDaily ? parseFloat(String(data.vitKDaily).replace(/[^0-9.]/g, '')) : 0;
+            if (vitKVol > 0) {
+                compositions.push({
+                    name: 'Vitamin K',
+                    input: '10 mcg/kg/day',
+                    volume: vitKVol.toFixed(3),
+                    note: 'Per day'
+                });
+            }
+        } else if (data.vitKChoice === 'weekly') {
+            const vitKVol = data.vitKWeekly ? parseFloat(String(data.vitKWeekly).replace(/[^0-9.]/g, '')) : 0;
+            if (vitKVol > 0) {
+                const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+                const dayName = days[parseInt(data.vitKDay || 1)];
+                compositions.push({
+                    name: 'Vitamin K',
+                    input: '10 mcg/kg/week',
+                    volume: vitKVol.toFixed(3),
+                    note: 'Weekly (' + dayName + ')'
+                });
+            }
         }
 
         // --------------------------
