@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TPN Calculator</title>
+  <script src="/_sdk/element_sdk.js"></script>
+  <style>
+    body {
+      box-sizing: border-box;
+      font-family: 'Sarabun', 'Noto Sans Thai', Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100%;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+
+    .header {
+      background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+      color: white;
+      padding: 30px;
+      text-align: center;
+    }
+
+    .header h1 {
+      margin: 0 0 10px 0;
+      font-size: 2.2em;
+      font-weight: 600;
+    }
+
+    .header p {
+      margin: 0;
+      font-size: 1.1em;
+      opacity: 0.9;
+    }
+
+    .content {
+      padding: 30px;
+    }
+
+    .section {
+      background: #f8fafc;
+      border-radius: 12px;
+      padding: 25px;
+      margin-bottom: 25px;
+      border-left: 4px solid #4facfe;
+    }
+
+    .section h2 {
+      color: #2d3748;
+      margin: 0 0 20px 0;
+      font-size: 1.4em;
+      font-weight: 600;
+    }
+
+    .input-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .input-field {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .input-field label {
+      color: #4a5568;
+      font-weight: 500;
+      margin-bottom: 8px;
+      font-size: 0.95em;
+    }
+
+    .input-with-unit {
+      display: flex;
+      align-items: center;
+      position: relative;
+    }
+
+    .input-field input {
+      padding: 12px 16px;
+      border: 2px solid #e2e8f0;
+      border-radius: 8px;
+      font-size: 1em;
+      transition: all 0.3s ease;
+      background: white;
+      flex: 1;
+      padding-right: 60px;
+      -webkit-appearance: none;
+      -moz-appearance: textfield;
+    }
+
+    .input-field input[type="date"] {
+      padding-right: 16px;
+    }
+
+    .input-field input:focus {
+      outline: none;
+      border-color: #4facfe;
+      box-shadow: 0 0 0 3px rgba(79, 172, 254, 0.1);
+    }
+
+    .unit {
+      position: absolute;
+      right: 16px;
+      color: #718096;
+      font-size: 0.9em;
+      font-weight: 500;
+      pointer-events: none;
+      background: white;
+      padding-left: 8px;
+    }
+
+    .submit-section {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .submit-btn {
+      background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+      color: white;
+      border: none;
+      padding: 14px 28px;
+      border-radius: 8px;
+      font-size: 1.1em;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .submit-btn:hover {
+      background: linear-gradient(135deg, #3b8ad6 0%, #00b6ff 100%);
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+
+<body>
+  <main class="container">
+    <header class="header">
+      <h1>TPN Calculator</h1>
+      <p>สำหรับเด็ก</p>
+    </header>
+
+    <div class="content">
+      <!-- Section 1: Patient Info -->
+      <section class="section">
+        <h2>👶 ข้อมูลผู้ป่วย</h2>
+        <div class="input-group">
+          <div class="input-field">
+            <label>วันที่สั่ง</label>
+            <input type="date" id="order-date" />
+          </div>
+          <div class="input-field">
+            <label>HN</label>
+            <input type="text" id="patient-hn" placeholder="เช่น 123456" />
+          </div>
+          <div class="input-field">
+            <label>ชื่อ</label>
+            <input type="text" id="patient-name" placeholder="ชื่อผู้ป่วย" />
+          </div>
+          <div class="input-field">
+            <label>Ward</label>
+            <input type="text" id="patient-ward" placeholder="เช่น NICU" />
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 2: Route & Basic Data -->
+      <section class="section">
+        <h2>💧 Route และข้อมูลพื้นฐาน</h2>
+        <div class="input-group">
+          <div class="input-field">
+            <label>Route</label>
+            <div>
+              <label><input type="radio" name="tpn-route" value="central" checked> Central</label>
+              <label style="margin-left:10px;"><input type="radio" name="tpn-route" value="peripheral"> Peripheral</label>
+            </div>
+          </div>
+
+          <div class="input-field">
+            <label>น้ำหนักตัว (kg)</label>
+            <div class="input-with-unit">
+              <input type="number" id="bw" step="0.1" />
+              <span class="unit">kg</span>
+            </div>
+          </div>
+
+          <div class="input-field">
+            <label>Rate</label>
+            <div class="input-with-unit">
+              <input type="number" id="rate" step="0.1" />
+              <span class="unit">ml/hr</span>
+            </div>
+          </div>
+
+          <div class="input-field">
+            <label>Bag Volume</label>
+            <div class="input-with-unit">
+              <input type="number" id="bag" step="0.1" />
+              <span class="unit">ml</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 3: Macronutrients -->
+      <section class="section">
+        <h2>🍞 Macronutrients</h2>
+        <div class="input-group">
+          <div class="input-field">
+            <label>Protein (g/kg/day)</label>
+            <input type="number" id="protein" step="0.1" />
+          </div>
+          <div class="input-field">
+            <label>Dextrose (%)</label>
+            <input type="number" id="dextrose" step="0.1" />
+          </div>
+          <div class="input-field">
+            <label>Fat (g/kg/day)</label>
+            <input type="number" id="fat" step="0.1" />
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 4: Electrolytes -->
+      <section class="section">
+        <h2>⚡ Electrolytes</h2>
+        <div class="input-group">
+          <div class="input-field">
+            <label>Phosphate (mmol/kg/day)</label>
+            <input type="number" id="p" step="0.1" />
+          </div>
+
+          <div class="input-field">
+            <label>Sodium (mEq/kg/day)</label>
+            <input type="number" id="na" step="0.1" />
+          </div>
+
+          <div class="input-field">
+            <label>Potassium (mEq/kg/day)</label>
+            <input type="number" id="k" step="0.1" />
+          </div>
+
+          <div class="input-field">
+            <label>Calcium (mmol/kg/day)</label>
+            <input type="number" id="ca" step="0.1" />
+          </div>
+
+          <div class="input-field">
+            <label>Magnesium (mmol/kg/day)</label>
+            <input type="number" id="mg" step="0.1" />
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 5: สารเสริม -->
+      <section class="section">
+        <h2>💊 สารเสริม</h2>
+        <div class="input-group">
+          <div class="input-field">
+            <label><input type="checkbox" id="picc-line-checkbox" /> มี PICC line</label>
+          </div>
+        </div>
+      </section>
+
+      <!-- Submit -->
+      <section class="submit-section">
+        <button id="submitBtn" class="submit-btn">📄 สร้างรายงาน PDF</button>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    // ---------- พรีฟิลข้อมูลจาก report.html ----------
+    document.addEventListener('DOMContentLoaded', () => {
+      const saved = JSON.parse(localStorage.getItem('tpnReportData') || '{}');
+      const setVal = (id, val) => {
+        const el = document.getElementById(id);
+        if (el) el.value = val || '';
+      };
+      const check = (name, val) => {
+        const el = document.querySelector(`input[name="${name}"][value="${val}"]`);
+        if (el) el.checked = true;
+      };
+
+      if (Object.keys(saved).length) {
+        setVal('order-date', saved.orderDate || '');
+        setVal('patient-hn', saved.hn || '');
+        setVal('patient-name', saved.name || '');
+        setVal('patient-ward', saved.ward || '');
+        check('tpn-route', saved.route || 'central');
+        setVal('bw', saved.bw || '');
+        setVal('rate', saved.rate || '');
+        setVal('bag', saved.bag || '');
+        setVal('protein', saved.protein || '');
+        setVal('dextrose', saved.dextrose || '');
+        setVal('fat', saved.fat || '');
+        setVal('p', saved.p || '');
+        setVal('na', saved.na || '');
+        setVal('k', saved.k || '');
+        setVal('ca', saved.ca || '');
+        setVal('mg', saved.mg || '');
+        const picc = document.getElementById('picc-line-checkbox');
+        if (picc) picc.checked = !!saved.hasPicc;
+      }
+    });
+
+    // ---------- สร้างรายงาน ----------
+    document.getElementById('submitBtn').addEventListener('click', () => {
+      const data = {
+        orderDate: document.getElementById('order-date').value,
+        hn: document.getElementById('patient-hn').value,
+        name: document.getElementById('patient-name').value,
+        ward: document.getElementById('patient-ward').value,
+        route: document.querySelector('input[name="tpn-route"]:checked')?.value,
+        bw: document.getElementById('bw').value,
+        rate: document.getElementById('rate').value,
+        bag: document.getElementById('bag').value,
+        protein: document.getElementById('protein').value,
+        dextrose: document.getElementById('dextrose').value,
+        fat: document.getElementById('fat').value,
+        p: document.getElementById('p').value,
+        na: document.getElementById('na').value,
+        k: document.getElementById('k').value,
+        ca: document.getElementById('ca').value,
+        mg: document.getElementById('mg').value,
+        hasPicc: document.getElementById('picc-line-checkbox').checked,
+      };
+      localStorage.setItem('tpnReportData', JSON.stringify(data));
+      window.location.href = 'report.html';
+    });
+  </script>
+</body>
+</html>
