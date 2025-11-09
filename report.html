@@ -37,6 +37,9 @@
             margin-bottom: 12px;
             border-bottom: 3px solid #4facfe;
             padding-bottom: 8px;
+            /* วางตำแหน่งสำหรับกล่องวันที่ด้านขวา และขยับหัวเรื่องลงเล็กน้อย */
+            position: relative;
+            padding-top: 6px; /* ขยับ 📋 TPN Order Report ลงมาอีกนิด */
         }
         
         .header h1 {
@@ -45,11 +48,8 @@
             margin-bottom: 4px;
             font-weight: 700;
         }
-        
-        .header p {
-            font-size: 9pt;
-            color: #718096;
-        }
+
+        /* ลบข้อความบรรทัดย่อยออกตามคำขอ (ไม่มี .header p แล้ว) */
         
         .section {
             margin-bottom: 10px;
@@ -89,31 +89,36 @@
             color: #4a5568;
             flex: 1;
         }
-        
+
+        /* ย้าย order date + day badge ไปมุมขวาในหัวกระดาษ เดิม .order-date-special เป็นบล็อกเต็มแถว */
         .order-date-special {
             background: #f0f9ff;
             border: 2px solid #4facfe;
-            padding: 8px 12px;
+            padding: 6px 10px;           /* กระชับขึ้นเล็กน้อย */
             border-radius: 6px;
-            margin-bottom: 10px;
-            display: flex;
-            justify-content: space-between;
+            display: inline-flex;
+            gap: 8px;
             align-items: center;
+            position: absolute;
+            right: 0;                     /* มุมขวา */
+            top: 6px;                     /* อยู่ใน layout เดียวกับหัวเรื่อง */
         }
         
         .order-date-special .date-info {
-            font-size: 12pt;
+            font-size: 10pt;              /* เดิม 12pt → ลดเล็กน้อยให้ประหยัดพื้นที่ */
             font-weight: 600;
             color: #0369a1;
+            white-space: nowrap;
         }
         
         .order-date-special .day-badge {
             background: #0369a1;
             color: white;
-            padding: 4px 12px;
+            padding: 3px 10px;            /* กระชับ */
             border-radius: 20px;
-            font-size: 10pt;
+            font-size: 9pt;
             font-weight: 600;
+            white-space: nowrap;
         }
         
         .route-badge {
@@ -175,35 +180,35 @@
             background: #f0f9ff;
             border: 2px solid #4facfe;
             border-radius: 6px;
-            padding: 10px;
+            padding: 8px;                 /* เดิม 10px → ลดลงนิด */
             margin-bottom: 10px;
         }
         
         .summary-grid {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
-            gap: 10px;
+            gap: 8px;                     /* เดิม 10px → ลดลงนิด */
             text-align: center;
         }
         
         .summary-item {
-            padding: 8px;
+            padding: 6px;                 /* เดิม 8px → ลดลงนิด */
         }
         
         .summary-label {
-            font-size: 9pt;
+            font-size: 8.5pt;             /* เดิม 9pt → ลดลงเล็กน้อย */
             color: #4a5568;
             margin-bottom: 4px;
         }
         
         .summary-value {
-            font-size: 16pt;
+            font-size: 14pt;              /* เดิม 16pt → ลดลงเพื่อให้พอดี A4 */
             font-weight: 700;
             color: #0369a1;
         }
         
         .summary-unit {
-            font-size: 9pt;
+            font-size: 8.5pt;             /* เดิม 9pt → ลดลงเล็กน้อย */
             color: #718096;
         }
         
@@ -211,37 +216,37 @@
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             border-radius: 6px;
-            padding: 12px;
+            padding: 10px;                /* เดิม 12px → ลดลงนิด */
             margin-top: 10px;
         }
         
         .total-summary h3 {
             text-align: center;
-            margin-bottom: 10px;
-            font-size: 12pt;
+            margin-bottom: 8px;           /* เดิม 10px → ลดลงนิด */
+            font-size: 11pt;              /* เดิม 12pt → ลดลงเล็กน้อย */
         }
         
         .total-grid {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
-            gap: 10px;
+            gap: 8px;                     /* เดิม 10px → ลดลงนิด */
             text-align: center;
         }
         
         .total-item {
             background: rgba(255,255,255,0.2);
             border-radius: 4px;
-            padding: 8px;
+            padding: 6px;                 /* เดิม 8px → ลดลงนิด */
         }
         
         .total-label {
-            font-size: 9pt;
+            font-size: 8.5pt;             /* เดิม 9pt → ลดลงเล็กน้อย */
             opacity: 0.9;
             margin-bottom: 4px;
         }
         
         .total-value {
-            font-size: 18pt;
+            font-size: 16pt;              /* เดิม 18pt → ลดลงเพื่อพิมพ์พอดี */
             font-weight: 700;
         }
         
@@ -335,7 +340,7 @@
             background: #f0fdf4;
             border: 2px solid #86efac;
             border-radius: 6px;
-            padding: 10px;
+            padding: 8px;                 /* เดิม 10px → ลดลงนิด */
             text-align: center;
         }
         
@@ -345,7 +350,7 @@
         }
         
         .osmol-label {
-            font-size: 9pt;
+            font-size: 8.5pt;             /* เดิม 9pt → ลดลงเล็กน้อย */
             color: #166534;
             margin-bottom: 4px;
         }
@@ -355,7 +360,7 @@
         }
         
         .osmol-value {
-            font-size: 18pt;
+            font-size: 16pt;              /* เดิม 18pt → ลดลงนิด */
             font-weight: 700;
             color: #166534;
         }
@@ -384,16 +389,16 @@
         <!-- Header -->
         <div class="header">
             <h1>📋 TPN Order Report</h1>
-            <p>รายงานการสั่ง Total Parenteral Nutrition</p>
+            <!-- ย้าย Order Date + Day Badge มุมขวาบน อยู่ใน header เดียวกัน -->
+            <div class="order-date-special">
+                <div class="date-info">
+                    📅 Order Date: <span id="display-order-date"></span>
+                </div>
+                <div class="day-badge" id="display-day-name"></div>
+            </div>
         </div>
 
-        <!-- Order Date -->
-        <div class="order-date-special">
-            <div class="date-info">
-                📅 Order Date: <span id="display-order-date"></span>
-            </div>
-            <div class="day-badge" id="display-day-name"></div>
-        </div>
+        <!-- (ย้ายออก: ข้อความ "รายงานการสั่ง Total Parenteral Nutrition" ถูกลบตามคำขอ) -->
 
         <!-- Patient Information -->
         <div class="section">
