@@ -1,345 +1,774 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TPN Calculator</title>
-  <script src="/_sdk/element_sdk.js"></script>
-  <style>
-    body {
-      box-sizing: border-box;
-      font-family: 'Sarabun', 'Noto Sans Thai', Arial, sans-serif;
-      margin: 0;
-      padding: 20px;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      min-height: 100%;
-    }
-
-    .container {
-      max-width: 800px;
-      margin: 0 auto;
-      background: white;
-      border-radius: 16px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-      overflow: hidden;
-    }
-
-    .header {
-      background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-      color: white;
-      padding: 30px;
-      text-align: center;
-    }
-
-    .header h1 {
-      margin: 0 0 10px 0;
-      font-size: 2.2em;
-      font-weight: 600;
-    }
-
-    .header p {
-      margin: 0;
-      font-size: 1.1em;
-      opacity: 0.9;
-    }
-
-    .content {
-      padding: 30px;
-    }
-
-    .section {
-      background: #f8fafc;
-      border-radius: 12px;
-      padding: 25px;
-      margin-bottom: 25px;
-      border-left: 4px solid #4facfe;
-    }
-
-    .section h2 {
-      color: #2d3748;
-      margin: 0 0 20px 0;
-      font-size: 1.4em;
-      font-weight: 600;
-    }
-
-    .input-group {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-      margin-bottom: 20px;
-    }
-
-    .input-field {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .input-field label {
-      color: #4a5568;
-      font-weight: 500;
-      margin-bottom: 8px;
-      font-size: 0.95em;
-    }
-
-    .input-with-unit {
-      display: flex;
-      align-items: center;
-      position: relative;
-    }
-
-    .input-field input {
-      padding: 12px 16px;
-      border: 2px solid #e2e8f0;
-      border-radius: 8px;
-      font-size: 1em;
-      transition: all 0.3s ease;
-      background: white;
-      flex: 1;
-      padding-right: 60px;
-      -webkit-appearance: none;
-      -moz-appearance: textfield;
-    }
-
-    .input-field input[type="date"] {
-      padding-right: 16px;
-    }
-
-    .input-field input:focus {
-      outline: none;
-      border-color: #4facfe;
-      box-shadow: 0 0 0 3px rgba(79, 172, 254, 0.1);
-    }
-
-    .unit {
-      position: absolute;
-      right: 16px;
-      color: #718096;
-      font-size: 0.9em;
-      font-weight: 500;
-      pointer-events: none;
-      background: white;
-      padding-left: 8px;
-    }
-
-    .submit-section {
-      text-align: center;
-      margin-top: 30px;
-    }
-
-    .submit-btn {
-      background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-      color: white;
-      border: none;
-      padding: 14px 28px;
-      border-radius: 8px;
-      font-size: 1.1em;
-      cursor: pointer;
-      font-weight: 600;
-      transition: all 0.3s ease;
-    }
-
-    .submit-btn:hover {
-      background: linear-gradient(135deg, #3b8ad6 0%, #00b6ff 100%);
-      transform: translateY(-2px);
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TPN Order Report</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 10mm;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Sarabun', 'Noto Sans Thai', Arial, sans-serif;
+            font-size: 10pt;
+            line-height: 1.3;
+            color: #000;
+            background: #fff;
+            padding: 0;
+        }
+        
+        .report-container {
+            max-width: 210mm;
+            margin: 0 auto;
+            background: white;
+            padding: 10mm;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 12px;
+            border-bottom: 3px solid #4facfe;
+            padding-bottom: 8px;
+        }
+        
+        .header h1 {
+            font-size: 18pt;
+            color: #2d3748;
+            margin-bottom: 4px;
+            font-weight: 700;
+        }
+        
+        .header p {
+            font-size: 9pt;
+            color: #718096;
+        }
+        
+        .section {
+            margin-bottom: 10px;
+        }
+        
+        .section-title {
+            background: #4facfe;
+            color: white;
+            padding: 5px 10px;
+            font-size: 10pt;
+            font-weight: 600;
+            border-radius: 4px;
+            margin-bottom: 6px;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px 20px;
+            margin-bottom: 8px;
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: baseline;
+            gap: 6px;
+        }
+        
+        .info-label {
+            font-weight: 600;
+            color: #2d3748;
+            min-width: 90px;
+            flex-shrink: 0;
+        }
+        
+        .info-value {
+            color: #4a5568;
+            flex: 1;
+        }
+        
+        .order-date-special {
+            background: #f0f9ff;
+            border: 2px solid #4facfe;
+            padding: 8px 12px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .order-date-special .date-info {
+            font-size: 12pt;
+            font-weight: 600;
+            color: #0369a1;
+        }
+        
+        .order-date-special .day-badge {
+            background: #0369a1;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 10pt;
+            font-weight: 600;
+        }
+        
+        .route-badge {
+            display: inline-block;
+            background: #10b981;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 10pt;
+            font-weight: 600;
+        }
+        
+        .route-badge.peripheral {
+            background: #f59e0b;
+        }
+        
+        .composition-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 10px;
+            font-size: 9pt;
+        }
+        
+        .composition-table th {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 5px 6px;
+            text-align: left;
+            font-weight: 600;
+            color: #2d3748;
+        }
+        
+        .composition-table td {
+            border: 1px solid #e2e8f0;
+            padding: 4px 6px;
+            color: #4a5568;
+        }
+        
+        .composition-table tr:nth-child(even) {
+            background: #f8fafc;
+        }
+        
+        .highlight-row {
+            background: #fef3c7 !important;
+            font-weight: 600;
+        }
+        
+        .input-badge {
+            background: #e0f2fe;
+            color: #0369a1;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 8pt;
+            font-weight: 600;
+            display: inline-block;
+        }
+        
+        .summary-box {
+            background: #f0f9ff;
+            border: 2px solid #4facfe;
+            border-radius: 6px;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .summary-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 10px;
+            text-align: center;
+        }
+        
+        .summary-item {
+            padding: 8px;
+        }
+        
+        .summary-label {
+            font-size: 9pt;
+            color: #4a5568;
+            margin-bottom: 4px;
+        }
+        
+        .summary-value {
+            font-size: 16pt;
+            font-weight: 700;
+            color: #0369a1;
+        }
+        
+        .summary-unit {
+            font-size: 9pt;
+            color: #718096;
+        }
+        
+        .total-summary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 6px;
+            padding: 12px;
+            margin-top: 10px;
+        }
+        
+        .total-summary h3 {
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 12pt;
+        }
+        
+        .total-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 10px;
+            text-align: center;
+        }
+        
+        .total-item {
+            background: rgba(255,255,255,0.2);
+            border-radius: 4px;
+            padding: 8px;
+        }
+        
+        .total-label {
+            font-size: 9pt;
+            opacity: 0.9;
+            margin-bottom: 4px;
+        }
+        
+        .total-value {
+            font-size: 18pt;
+            font-weight: 700;
+        }
+        
+        .total-unit {
+            font-size: 8pt;
+            opacity: 0.8;
+        }
+        
+        .footer {
+            margin-top: 15px;
+            padding-top: 10px;
+            border-top: 2px solid #e2e8f0;
+            text-align: center;
+            font-size: 9pt;
+            color: #718096;
+        }
+        
+        .print-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #4facfe;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(79, 172, 254, 0.4);
+            z-index: 1000;
+        }
+        
+        .print-btn:hover {
+            background: #3b8ad6;
+        }
+        
+        .back-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: #718096;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(113, 128, 150, 0.4);
+            z-index: 1000;
+        }
+        
+        .back-btn:hover {
+            background: #4a5568;
+        }
+        
+        @media print {
+            body {
+                padding: 0;
+                margin: 0;
+            }
+            
+            .print-btn, .back-btn {
+                display: none;
+            }
+            
+            .report-container {
+                box-shadow: none;
+                padding: 0;
+                max-width: 100%;
+            }
+            
+            .header {
+                margin-bottom: 10px;
+                padding-bottom: 6px;
+            }
+            
+            .section {
+                margin-bottom: 8px;
+            }
+        }
+        
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        
+        .osmol-display {
+            background: #f0fdf4;
+            border: 2px solid #86efac;
+            border-radius: 6px;
+            padding: 10px;
+            text-align: center;
+        }
+        
+        .osmol-display.high {
+            background: #fee2e2;
+            border-color: #fca5a5;
+        }
+        
+        .osmol-label {
+            font-size: 9pt;
+            color: #166534;
+            margin-bottom: 4px;
+        }
+        
+        .osmol-display.high .osmol-label {
+            color: #991b1b;
+        }
+        
+        .osmol-value {
+            font-size: 18pt;
+            font-weight: 700;
+            color: #166534;
+        }
+        
+        .osmol-display.high .osmol-value {
+            color: #991b1b;
+        }
+        
+        .osmol-note {
+            font-size: 8pt;
+            color: #166534;
+            margin-top: 4px;
+        }
+        
+        .osmol-display.high .osmol-note {
+            color: #991b1b;
+            font-weight: 600;
+        }
+    </style>
 </head>
-
 <body>
-  <main class="container">
-    <header class="header">
-      <h1>TPN Calculator</h1>
-      <p>สำหรับเด็ก</p>
-    </header>
+    <button class="back-btn" onclick="goBack()">← ย้อนกลับ</button>
+    <button class="print-btn" onclick="window.print()">🖨️ พิมพ์รายงาน</button>
 
-    <div class="content">
-      <!-- Section 1: Patient Info -->
-      <section class="section">
-        <h2>👶 ข้อมูลผู้ป่วย</h2>
-        <div class="input-group">
-          <div class="input-field">
-            <label>วันที่สั่ง</label>
-            <input type="date" id="order-date" />
-          </div>
-          <div class="input-field">
-            <label>HN</label>
-            <input type="text" id="patient-hn" placeholder="เช่น 123456" />
-          </div>
-          <div class="input-field">
-            <label>ชื่อ</label>
-            <input type="text" id="patient-name" placeholder="ชื่อผู้ป่วย" />
-          </div>
-          <div class="input-field">
-            <label>Ward</label>
-            <input type="text" id="patient-ward" placeholder="เช่น NICU" />
-          </div>
+    <div class="report-container">
+        <!-- Header -->
+        <div class="header">
+            <h1>📋 TPN Order Report</h1>
+            <p>รายงานการสั่ง Total Parenteral Nutrition</p>
         </div>
-      </section>
 
-      <!-- Section 2: Route & Basic Data -->
-      <section class="section">
-        <h2>💧 Route และข้อมูลพื้นฐาน</h2>
-        <div class="input-group">
-          <div class="input-field">
-            <label>Route</label>
-            <div>
-              <label><input type="radio" name="tpn-route" value="central" checked> Central</label>
-              <label style="margin-left:10px;"><input type="radio" name="tpn-route" value="peripheral"> Peripheral</label>
+        <!-- Order Date -->
+        <div class="order-date-special">
+            <div class="date-info">
+                📅 Order Date: <span id="display-order-date"></span>
             </div>
-          </div>
+            <div class="day-badge" id="display-day-name"></div>
+        </div>
 
-          <div class="input-field">
-            <label>น้ำหนักตัว (kg)</label>
-            <div class="input-with-unit">
-              <input type="number" id="bw" step="0.1" />
-              <span class="unit">kg</span>
+        <!-- Patient Information -->
+        <div class="section">
+            <div class="section-title">👤 Patient Information</div>
+            <div class="info-grid">
+                <div class="info-item">
+                    <span class="info-label">HN:</span>
+                    <span class="info-value" id="display-hn"></span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Name:</span>
+                    <span class="info-value" id="display-name"></span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Ward:</span>
+                    <span class="info-value" id="display-ward"></span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Body Weight:</span>
+                    <span class="info-value" id="display-bw"></span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Route:</span>
+                    <span class="info-value"><span class="route-badge" id="display-route"></span></span>
+                </div>
             </div>
-          </div>
+        </div>
 
-          <div class="input-field">
-            <label>Rate</label>
-            <div class="input-with-unit">
-              <input type="number" id="rate" step="0.1" />
-              <span class="unit">ml/hr</span>
+        <!-- TPN Configuration -->
+        <div class="section">
+            <div class="section-title">💊 TPN Configuration</div>
+            <div class="info-grid">
+                <div class="info-item">
+                    <span class="info-label">Bag Volume:</span>
+                    <span class="info-value" id="display-bag"></span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Rate:</span>
+                    <span class="info-value" id="display-rate"></span>
+                </div>
             </div>
-          </div>
+        </div>
 
-          <div class="input-field">
-            <label>Bag Volume</label>
-            <div class="input-with-unit">
-              <input type="number" id="bag" step="0.1" />
-              <span class="unit">ml</span>
+        <!-- TPN Composition -->
+        <div class="section">
+            <div class="section-title">🧪 TPN Composition</div>
+            <table class="composition-table" id="composition-table">
+                <thead>
+                    <tr>
+                        <th style="width: 35%;">Component</th>
+                        <th style="width: 20%; text-align: center;">Input</th>
+                        <th style="width: 20%; text-align: center;">Volume (ml)</th>
+                        <th style="width: 25%; text-align: center;">Note</th>
+                    </tr>
+                </thead>
+                <tbody id="composition-body">
+                    <!-- Will be populated by JavaScript -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- PN Summary -->
+        <div class="section">
+            <div class="section-title">📊 PN Summary</div>
+            <div class="two-col">
+                <div class="summary-box">
+                    <div class="summary-grid" style="grid-template-columns: 1fr;">
+                        <div class="summary-item">
+                            <div class="summary-label">Total PN Calories</div>
+                            <div class="summary-value" id="display-pn-cal"></div>
+                            <div class="summary-unit">kcal/kg/day</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="osmol-display" id="osmol-container">
+                    <div class="osmol-label">Total mOsmol/L</div>
+                    <div class="osmol-value" id="display-osmol"></div>
+                    <div class="osmol-note" id="osmol-note"></div>
+                </div>
             </div>
-          </div>
         </div>
-      </section>
 
-      <!-- Section 3: Macronutrients -->
-      <section class="section">
-        <h2>🍞 Macronutrients</h2>
-        <div class="input-group">
-          <div class="input-field">
-            <label>Protein (g/kg/day)</label>
-            <input type="number" id="protein" step="0.1" />
-          </div>
-          <div class="input-field">
-            <label>Dextrose (%)</label>
-            <input type="number" id="dextrose" step="0.1" />
-          </div>
-          <div class="input-field">
-            <label>Fat (g/kg/day)</label>
-            <input type="number" id="fat" step="0.1" />
-          </div>
+        <!-- Total Calories Summary -->
+        <div class="total-summary">
+            <h3>🎯 Total Calories Summary</h3>
+            <div class="total-grid">
+                <div class="total-item">
+                    <div class="total-label">From PN</div>
+                    <div class="total-value" id="display-pn-total"></div>
+                    <div class="total-unit">kcal/kg/day</div>
+                </div>
+                <div class="total-item">
+                    <div class="total-label">From Milk</div>
+                    <div class="total-value" id="display-milk-total"></div>
+                    <div class="total-unit">kcal/kg/day</div>
+                </div>
+                <div class="total-item">
+                    <div class="total-label">Total</div>
+                    <div class="total-value" id="display-grand-total"></div>
+                    <div class="total-unit">kcal/kg/day</div>
+                </div>
+            </div>
         </div>
-      </section>
 
-      <!-- Section 4: Electrolytes -->
-      <section class="section">
-        <h2>⚡ Electrolytes</h2>
-        <div class="input-group">
-          <div class="input-field">
-            <label>Phosphate (mmol/kg/day)</label>
-            <input type="number" id="p" step="0.1" />
-          </div>
-
-          <div class="input-field">
-            <label>Sodium (mEq/kg/day)</label>
-            <input type="number" id="na" step="0.1" />
-          </div>
-
-          <div class="input-field">
-            <label>Potassium (mEq/kg/day)</label>
-            <input type="number" id="k" step="0.1" />
-          </div>
-
-          <div class="input-field">
-            <label>Calcium (mmol/kg/day)</label>
-            <input type="number" id="ca" step="0.1" />
-          </div>
-
-          <div class="input-field">
-            <label>Magnesium (mmol/kg/day)</label>
-            <input type="number" id="mg" step="0.1" />
-          </div>
+        <!-- Footer -->
+        <div class="footer">
+            <p>Generated on <span id="generated-date"></span></p>
+            <p style="margin-top: 5px;">TPN Calculator for Pediatrics © 2024</p>
         </div>
-      </section>
-
-      <!-- Section 5: สารเสริม -->
-      <section class="section">
-        <h2>💊 สารเสริม</h2>
-        <div class="input-group">
-          <div class="input-field">
-            <label><input type="checkbox" id="picc-line-checkbox" /> มี PICC line</label>
-          </div>
-        </div>
-      </section>
-
-      <!-- Submit -->
-      <section class="submit-section">
-        <button id="submitBtn" class="submit-btn">📄 สร้างรายงาน PDF</button>
-      </section>
     </div>
-  </main>
 
-  <script>
-    // ---------- พรีฟิลข้อมูลจาก report.html ----------
-    document.addEventListener('DOMContentLoaded', () => {
-      const saved = JSON.parse(localStorage.getItem('tpnReportData') || '{}');
-      const setVal = (id, val) => {
-        const el = document.getElementById(id);
-        if (el) el.value = val || '';
-      };
-      const check = (name, val) => {
-        const el = document.querySelector(`input[name="${name}"][value="${val}"]`);
-        if (el) el.checked = true;
-      };
+    <script>
+        // Function to go back to index with data preserved
+        function goBack() {
+            // Data is already in localStorage, just navigate back
+            window.location.href = 'index.html';
+        }
 
-      if (Object.keys(saved).length) {
-        setVal('order-date', saved.orderDate || '');
-        setVal('patient-hn', saved.hn || '');
-        setVal('patient-name', saved.name || '');
-        setVal('patient-ward', saved.ward || '');
-        check('tpn-route', saved.route || 'central');
-        setVal('bw', saved.bw || '');
-        setVal('rate', saved.rate || '');
-        setVal('bag', saved.bag || '');
-        setVal('protein', saved.protein || '');
-        setVal('dextrose', saved.dextrose || '');
-        setVal('fat', saved.fat || '');
-        setVal('p', saved.p || '');
-        setVal('na', saved.na || '');
-        setVal('k', saved.k || '');
-        setVal('ca', saved.ca || '');
-        setVal('mg', saved.mg || '');
-        const picc = document.getElementById('picc-line-checkbox');
-        if (picc) picc.checked = !!saved.hasPicc;
-      }
-    });
+        // Load data from localStorage
+        const data = JSON.parse(localStorage.getItem('tpnReportData') || '{}');
 
-    // ---------- สร้างรายงาน ----------
-    document.getElementById('submitBtn').addEventListener('click', () => {
-      const data = {
-        orderDate: document.getElementById('order-date').value,
-        hn: document.getElementById('patient-hn').value,
-        name: document.getElementById('patient-name').value,
-        ward: document.getElementById('patient-ward').value,
-        route: document.querySelector('input[name="tpn-route"]:checked')?.value,
-        bw: document.getElementById('bw').value,
-        rate: document.getElementById('rate').value,
-        bag: document.getElementById('bag').value,
-        protein: document.getElementById('protein').value,
-        dextrose: document.getElementById('dextrose').value,
-        fat: document.getElementById('fat').value,
-        p: document.getElementById('p').value,
-        na: document.getElementById('na').value,
-        k: document.getElementById('k').value,
-        ca: document.getElementById('ca').value,
-        mg: document.getElementById('mg').value,
-        hasPicc: document.getElementById('picc-line-checkbox').checked,
-      };
-      localStorage.setItem('tpnReportData', JSON.stringify(data));
-      window.location.href = 'report.html';
-    });
-  </script>
+        // Display patient information
+        document.getElementById('display-hn').textContent = data.hn || '-';
+        document.getElementById('display-name').textContent = data.name || '-';
+        document.getElementById('display-ward').textContent = data.ward || '-';
+        document.getElementById('display-bw').textContent = data.bw ? `${data.bw} kg` : '-';
+
+        // Display order date with day name (convert to Thai Buddhist year)
+        let displayDate = data.orderDate || '-';
+        if (data.orderDate && data.orderDate !== '-') {
+            const date = new Date(data.orderDate);
+            const thaiMonths = ['มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน', 
+                              'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม'];
+            const day = date.getDate();
+            const month = thaiMonths[date.getMonth()];
+            const year = date.getFullYear() + 543; // Convert to Buddhist year
+            displayDate = `${day} ${month} ${year}`;
+        }
+        document.getElementById('display-order-date').textContent = displayDate;
+        document.getElementById('display-day-name').textContent = data.orderDayName || '-';
+
+        // Display route
+        const routeBadge = document.getElementById('display-route');
+        routeBadge.textContent = data.route === 'central' ? 'Central' : 'Peripheral';
+        if (data.route === 'peripheral') {
+            routeBadge.classList.add('peripheral');
+        }
+
+        // Display bag and rate
+        document.getElementById('display-bag').textContent = data.bag ? `${data.bag} ml` : '-';
+        document.getElementById('display-rate').textContent = data.rate ? `${data.rate} ml/hr` : '-';
+
+        // Build composition table
+        const tbody = document.getElementById('composition-body');
+        const compositions = [];
+
+        // Macronutrients
+        if (parseFloat(data.proteinVol) > 0) {
+            compositions.push({
+                name: '10% Protein',
+                input: `${data.protein || '0'} g/kg/day`,
+                volume: data.proteinVol,
+                note: ''
+            });
+        }
+
+        if (parseFloat(data.dextroseVol) > 0) {
+            compositions.push({
+                name: '50% Dextrose',
+                input: `${data.dextrose || '0'}%`,
+                volume: data.dextroseVol,
+                note: ''
+            });
+        }
+
+        if (parseFloat(data.fatVol) > 0) {
+            compositions.push({
+                name: '20% Fat',
+                input: `${data.fat || '0'} g/kg/day`,
+                volume: data.fatVol,
+                note: ''
+            });
+        }
+
+        // Electrolytes
+        if (parseFloat(data.pVol) > 0) {
+            compositions.push({
+                name: 'Glycophos® (P)',
+                input: `${data.p || '0'} mmol/kg/day`,
+                volume: parseFloat(data.pVol.replace(/[^0-9.]/g, '')).toFixed(1),
+                note: 'Contains Na ' + data.naFromGly
+            });
+        }
+
+        // Na source
+        if (data.naSource === 'nacl' && parseFloat(data.naclVol) > 0) {
+            compositions.push({
+                name: '3% NaCl',
+                input: `${data.na || '0'} mEq/kg/day`,
+                volume: parseFloat(data.naclVol.replace(/[^0-9.]/g, '')).toFixed(1),
+                note: ''
+            });
+        } else if (data.naSource === 'na-acetate' && parseFloat(data.naAcVol) > 0) {
+            compositions.push({
+                name: 'Na Acetate',
+                input: `${data.na || '0'} mEq/kg/day`,
+                volume: parseFloat(data.naAcVol.replace(/[^0-9.]/g, '')).toFixed(1),
+                note: ''
+            });
+        }
+
+        // K source
+        if (data.kSource === 'kcl' && parseFloat(data.kclVol) > 0) {
+            compositions.push({
+                name: '15% KCl',
+                input: `${data.k || '0'} mEq/kg/day`,
+                volume: parseFloat(data.kclVol.replace(/[^0-9.]/g, '')).toFixed(1),
+                note: ''
+            });
+        } else if (data.kSource === 'k-acetate' && parseFloat(data.kAcVol) > 0) {
+            compositions.push({
+                name: 'K Acetate',
+                input: `${data.k || '0'} mEq/kg/day`,
+                volume: parseFloat(data.kAcVol.replace(/[^0-9.]/g, '')).toFixed(1),
+                note: ''
+            });
+        }
+
+        // Ca
+        if (parseFloat(data.caVol) > 0) {
+            compositions.push({
+                name: 'Ca Gluconate',
+                input: `${data.ca || '0'} mmol/kg/day`,
+                volume: parseFloat(data.caVol.replace(/[^0-9.]/g, '')).toFixed(1),
+                note: ''
+            });
+        }
+
+        // Mg
+        if (parseFloat(data.mgVol) > 0) {
+            compositions.push({
+                name: 'MgSO₄',
+                input: `${data.mg || '0'} mmol/kg/day`,
+                volume: parseFloat(data.mgVol.replace(/[^0-9.]/g, '')).toFixed(1),
+                note: ''
+            });
+        }
+
+        // Micronutrients
+        const peditVol = data.peditrace ? parseFloat(data.peditrace.replace(/[^0-9.]/g, '')) : 0;
+        if (peditVol > 0) {
+            let peditNote = '';
+            if (data.peditFreq === 'daily') peditNote = 'Per day';
+            else if (data.peditFreq === 'mwf') peditNote = 'Mon, Wed, Fri';
+            else if (data.peditFreq === 'weekly') {
+                const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+                peditNote = 'Weekly (' + days[parseInt(data.peditDay || 1)] + ')';
+            }
+            compositions.push({
+                name: 'Peditrace®',
+                input: '1 ml/kg/day',
+                volume: peditVol.toFixed(1),
+                note: peditNote
+            });
+        }
+
+        const cernVol = data.cernevit ? parseFloat(data.cernevit.replace(/[^0-9.]/g, '')) : 0;
+        if (cernVol > 0) {
+            let cernNote = '';
+            if (data.cernFreq === 'daily') cernNote = 'Per day';
+            else if (data.cernFreq === 'mwf') cernNote = 'Mon, Wed, Fri';
+            else if (data.cernFreq === 'weekly') {
+                const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+                cernNote = 'Weekly (' + days[parseInt(data.cernDay || 1)] + ')';
+            }
+            compositions.push({
+                name: 'Cernevit®',
+                input: '1 ml/kg/day',
+                volume: cernVol.toFixed(1),
+                note: cernNote
+            });
+        }
+
+        // Vitamin K
+        if (data.vitKChoice === 'daily') {
+            const vitKVol = data.vitKDaily ? parseFloat(data.vitKDaily.replace(/[^0-9.]/g, '')) : 0;
+            if (vitKVol > 0) {
+                compositions.push({
+                    name: 'Vitamin K',
+                    input: '10 mcg/kg/day',
+                    volume: vitKVol.toFixed(3),
+                    note: 'Per day'
+                });
+            }
+        } else if (data.vitKChoice === 'weekly') {
+            const vitKVol = data.vitKWeekly ? parseFloat(data.vitKWeekly.replace(/[^0-9.]/g, '')) : 0;
+            if (vitKVol > 0) {
+                const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+                const dayName = days[parseInt(data.vitKDay || 1)];
+                compositions.push({
+                    name: 'Vitamin K',
+                    input: '10 mcg/kg/week',
+                    volume: vitKVol.toFixed(3),
+                    note: 'Weekly (' + dayName + ')'
+                });
+            }
+        }
+
+        // Heparin
+        if (data.hasPicc && parseFloat(data.heparinVol) > 0) {
+            compositions.push({
+                name: 'Heparin',
+                input: '1 unit/ml bag',
+                volume: data.heparinVol,
+                note: 'PICC line'
+            });
+        }
+
+        // Sterile Water
+        if (parseFloat(data.sterileWater) > 0) {
+            compositions.push({
+                name: 'Sterile Water',
+                input: '-',
+                volume: data.sterileWater,
+                note: '',
+                highlight: true
+            });
+        }
+
+        // Populate table
+        compositions.forEach(comp => {
+            const row = document.createElement('tr');
+            if (comp.highlight) row.classList.add('highlight-row');
+            row.innerHTML = `
+                <td>${comp.name}</td>
+                <td style="text-align: center;"><span class="input-badge">${comp.input}</span></td>
+                <td style="text-align: center; font-weight: 600;">${comp.volume} ml</td>
+                <td style="text-align: center; font-size: 8pt;">${comp.note}</td>
+            `;
+            tbody.appendChild(row);
+        });
+
+        // Display PN calories
+        document.getElementById('display-pn-cal').textContent = data.pnCalKg || '0';
+
+        // Display mOsmol with warning if > 900
+        const osmolValue = data.totalOsmol ? data.totalOsmol.replace('~', '') : '0';
+        const osmolNum = parseInt(osmolValue);
+        document.getElementById('display-osmol').textContent = '~' + osmolValue;
+        
+        const osmolContainer = document.getElementById('osmol-container');
+        const osmolNote = document.getElementById('osmol-note');
+        
+        if (osmolNum > 900) {
+            osmolContainer.classList.add('high');
+            osmolNote.textContent = '⚠️ > 900 (ไม่เหมาะสำหรับ Peripheral)';
+        } else {
+            osmolNote.textContent = '✓ < 900 (เหมาะสำหรับ Peripheral)';
+        }
+
+        // Display total calories summary
+        document.getElementById('display-pn-total').textContent = data.pnCalKg || '0';
+        document.getElementById('display-milk-total').textContent = data.milkCalKg || '0';
+        document.getElementById('display-grand-total').textContent = data.totalCalKg || '0';
+
+        // Display generation date
+        const now = new Date();
+        const dateStr = now.toLocaleDateString('th-TH', { 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+        document.getElementById('generated-date').textContent = dateStr;
+    </script>
 </body>
 </html>
