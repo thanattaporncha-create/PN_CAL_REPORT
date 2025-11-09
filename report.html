@@ -549,7 +549,9 @@
         const tbody = document.getElementById('composition-body');
         const compositions = [];
 
-        // Macronutrients
+        // --------------------------
+        // Macronutrients (Protein, Dextrose) — เว้น Fat ไว้ก่อน
+        // --------------------------
         if (parseFloat(data.proteinVol) > 0) {
             compositions.push({
                 name: '10% Protein',
@@ -568,22 +570,15 @@
             });
         }
 
-        if (parseFloat(data.fatVol) > 0) {
-            compositions.push({
-                name: '20% Fat',
-                input: `${data.fat || '0'} g/kg/day`,
-                volume: data.fatVol,
-                note: ''
-            });
-        }
-
+        // --------------------------
         // Electrolytes
+        // --------------------------
         if (parseFloat(data.pVol) > 0) {
             compositions.push({
                 name: 'Glycophos® (P)',
                 input: `${data.p || '0'} mmol/kg/day`,
-                volume: parseFloat(data.pVol.replace(/[^0-9.]/g, '')).toFixed(1),
-                note: 'Contains Na ' + data.naFromGly
+                volume: parseFloat(String(data.pVol).replace(/[^0-9.]/g, '')).toFixed(1),
+                note: 'Contains Na ' + (data.naFromGly || '')
             });
         }
 
@@ -592,14 +587,14 @@
             compositions.push({
                 name: '3% NaCl',
                 input: `${data.na || '0'} mEq/kg/day`,
-                volume: parseFloat(data.naclVol.replace(/[^0-9.]/g, '')).toFixed(1),
+                volume: parseFloat(String(data.naclVol).replace(/[^0-9.]/g, '')).toFixed(1),
                 note: ''
             });
         } else if (data.naSource === 'na-acetate' && parseFloat(data.naAcVol) > 0) {
             compositions.push({
                 name: 'Na Acetate',
                 input: `${data.na || '0'} mEq/kg/day`,
-                volume: parseFloat(data.naAcVol.replace(/[^0-9.]/g, '')).toFixed(1),
+                volume: parseFloat(String(data.naAcVol).replace(/[^0-9.]/g, '')).toFixed(1),
                 note: ''
             });
         }
@@ -609,14 +604,14 @@
             compositions.push({
                 name: '15% KCl',
                 input: `${data.k || '0'} mEq/kg/day`,
-                volume: parseFloat(data.kclVol.replace(/[^0-9.]/g, '')).toFixed(1),
+                volume: parseFloat(String(data.kclVol).replace(/[^0-9.]/g, '')).toFixed(1),
                 note: ''
             });
         } else if (data.kSource === 'k-acetate' && parseFloat(data.kAcVol) > 0) {
             compositions.push({
                 name: 'K Acetate',
                 input: `${data.k || '0'} mEq/kg/day`,
-                volume: parseFloat(data.kAcVol.replace(/[^0-9.]/g, '')).toFixed(1),
+                volume: parseFloat(String(data.kAcVol).replace(/[^0-9.]/g, '')).toFixed(1),
                 note: ''
             });
         }
@@ -626,7 +621,7 @@
             compositions.push({
                 name: 'Ca Gluconate',
                 input: `${data.ca || '0'} mmol/kg/day`,
-                volume: parseFloat(data.caVol.replace(/[^0-9.]/g, '')).toFixed(1),
+                volume: parseFloat(String(data.caVol).replace(/[^0-9.]/g, '')).toFixed(1),
                 note: ''
             });
         }
@@ -636,13 +631,15 @@
             compositions.push({
                 name: 'MgSO₄',
                 input: `${data.mg || '0'} mmol/kg/day`,
-                volume: parseFloat(data.mgVol.replace(/[^0-9.]/g, '')).toFixed(1),
+                volume: parseFloat(String(data.mgVol).replace(/[^0-9.]/g, '')).toFixed(1),
                 note: ''
             });
         }
 
+        // --------------------------
         // Micronutrients
-        const peditVol = data.peditrace ? parseFloat(data.peditrace.replace(/[^0-9.]/g, '')) : 0;
+        // --------------------------
+        const peditVol = data.peditrace ? parseFloat(String(data.peditrace).replace(/[^0-9.]/g, '')) : 0;
         if (peditVol > 0) {
             let peditNote = '';
             if (data.peditFreq === 'daily') peditNote = 'Per day';
@@ -659,7 +656,7 @@
             });
         }
 
-        const cernVol = data.cernevit ? parseFloat(data.cernevit.replace(/[^0-9.]/g, '')) : 0;
+        const cernVol = data.cernevit ? parseFloat(String(data.cernevit).replace(/[^0-9.]/g, '')) : 0;
         if (cernVol > 0) {
             let cernNote = '';
             if (data.cernFreq === 'daily') cernNote = 'Per day';
@@ -676,42 +673,24 @@
             });
         }
 
-        // Vitamin K
-        if (data.vitKChoice === 'daily') {
-            const vitKVol = data.vitKDaily ? parseFloat(data.vitKDaily.replace(/[^0-9.]/g, '')) : 0;
-            if (vitKVol > 0) {
-                compositions.push({
-                    name: 'Vitamin K',
-                    input: '10 mcg/kg/day',
-                    volume: vitKVol.toFixed(3),
-                    note: 'Per day'
-                });
-            }
-        } else if (data.vitKChoice === 'weekly') {
-            const vitKVol = data.vitKWeekly ? parseFloat(data.vitKWeekly.replace(/[^0-9.]/g, '')) : 0;
-            if (vitKVol > 0) {
-                const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-                const dayName = days[parseInt(data.vitKDay || 1)];
-                compositions.push({
-                    name: 'Vitamin K',
-                    input: '10 mcg/kg/week',
-                    volume: vitKVol.toFixed(3),
-                    note: 'Weekly (' + dayName + ')'
-                });
-            }
-        }
-
-        // Heparin
-        if (data.hasPicc && parseFloat(data.heparinVol) > 0) {
+        // --------------------------
+        // 20% Fat — ย้ายมาไว้ก่อน Sterile Water และเพิ่ม +6 ml
+        // --------------------------
+        const fatVolNum = data.fatVol ? parseFloat(String(data.fatVol).replace(/[^0-9.]/g, '')) : 0;
+        if (fatVolNum > 0) {
+            const fatVolPlus6 = (fatVolNum + 6).toFixed(1);
             compositions.push({
-                name: 'Heparin',
-                input: '1 unit/ml bag',
-                volume: data.heparinVol,
-                note: 'PICC line'
+                name: '20% Fat',
+                input: `${data.fat || '0'} g/kg/day`,
+                volume: fatVolPlus6,          // แสดงค่า ml + 6
+                note: '(+ 6ml เผื่อไล่สายแล้ว) IV drip in 24 hr.',
+                fat: true                     // ธงไว้สำหรับทำสีแดงในคอลัมน์ Volume
             });
         }
 
-        // Sterile Water
+        // --------------------------
+        // Sterile Water — อยู่ท้ายสุด
+        // --------------------------
         if (parseFloat(data.sterileWater) > 0) {
             compositions.push({
                 name: 'Sterile Water',
@@ -726,11 +705,14 @@
         compositions.forEach(comp => {
             const row = document.createElement('tr');
             if (comp.highlight) row.classList.add('highlight-row');
+            const volumeCellStyle = comp.fat
+                ? 'text-align: center; font-weight: 600; color: #dc2626;' /* แดงสำหรับ Fat */
+                : 'text-align: center; font-weight: 600;';
             row.innerHTML = `
                 <td>${comp.name}</td>
                 <td style="text-align: center;"><span class="input-badge">${comp.input}</span></td>
-                <td style="text-align: center; font-weight: 600;">${comp.volume} ml</td>
-                <td style="text-align: center; font-size: 8pt;">${comp.note}</td>
+                <td style="${volumeCellStyle}">${comp.volume} ml</td>
+                <td style="text-align: center; font-size: 8pt;">${comp.note || ''}</td>
             `;
             tbody.appendChild(row);
         });
