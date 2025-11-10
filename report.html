@@ -254,6 +254,16 @@
     <script>
         function goBack() { window.location.href = 'index.html'; }
 
+        // ===== ปัดแบบพิเศษ 2 ตำแหน่ง (เหมือน r2 ใน index.html) สำหรับ fallback =====
+        function specialRound2(v){
+            const n = Number(v);
+            if (!isFinite(n) || n === 0) return '0.00';
+            const h = Math.floor(n * 1000);
+            const d3 = h % 10; // หลักที่ 3
+            const out = (d3 === 9) ? Math.ceil(n * 100) / 100 : Math.floor(n * 100) / 100;
+            return out.toFixed(2);
+        }
+
         // Load data
         const data = JSON.parse(localStorage.getItem('tpnReportData') || '{}');
 
@@ -263,7 +273,7 @@
         document.getElementById('display-ward').textContent = data.ward || '-';
         document.getElementById('display-bw').textContent = data.bw ? `${data.bw} kg` : '-';
 
-        // ===== Order date (B.E.) + Day-of-week (คำนวณตรงจาก orderDate เพื่อให้ติดตอน export) =====
+        // ===== Order date (B.E.) + Day-of-week =====
         let displayDate = data.orderDate || '-';
         let dayNameText = data.orderDayName || '-';
         if (data.orderDate && data.orderDate !== '-') {
@@ -274,16 +284,15 @@
             const year = date.getFullYear() + 543;
             displayDate = `${day} ${month} ${year}`;
 
-            // คำนวณวันในสัปดาห์โดยตรง (ภาษาอังกฤษตามตัวอย่างหน้าจอ)
             const daysEn = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
             dayNameText = daysEn[date.getDay()];
         }
         document.getElementById('display-order-date').textContent = displayDate;
         document.getElementById('display-day-name').textContent = dayNameText;
 
-        // Route
+        // ===== Route badge: Central Line / Peripheral Line =====
         const routeBadge = document.getElementById('display-route');
-        routeBadge.textContent = data.route === 'central' ? 'Central' : 'Peripheral';
+        routeBadge.textContent = (data.route === 'central') ? 'Central Line' : 'Peripheral Line';
         if (data.route === 'peripheral') routeBadge.classList.add('peripheral');
 
         // Bag & Rate
@@ -294,7 +303,7 @@
         const tbody = document.getElementById('composition-body');
         const compositions = [];
 
-        // Macronutrients (Protein, Dextrose) — Fat ใส่ภายหลัง
+        // Macronutrients
         if (parseFloat(data.proteinVol) > 0) {
             compositions.push({ name: '10% Protein', input: `${data.protein || '0'} g/kg/day`, volume: data.proteinVol, note: '' });
         }
@@ -333,10 +342,38 @@
             compositions.push({ name: 'Ca Gluconate', input: `${data.ca || '0'} mmol/kg/day`,
                 volume: parseFloat(String(data.caVol).replace(/[^0-9.]/g, '')).toFixed(1), note: '' });
         }
-        if (parseFloat(data.mgVol) > 0) {
-            compositions.push({ name: 'MgSO₄', input: `${data.mg || '0'} mmol/kg/day`,
-                volume: parseFloat(String(data.mgVol).replace(/[^0-9.]/g, '')).toFixed(1), note: '' });
-        }
+
+        /* ===== MgSO₄: แสดง 2 ตำแหน่ง =====
+           - พยายามใช้ค่า 2 ตำแหน่งที่มาจาก index.html (data.mgVol) ก่อน
+           - ถ้าไม่มีค่า ให้ fallback ไปคำนวณ/ปัดแบบพิเศษ (specialRound2) ให้ 2 ตำแหน่ง
+        */
+        (function handleMg() {
+            const mgRawStr = (data.mgVol !== undefined && data.mgVol !== null && String(data.mgVol).trim() !== '')
+                ? String(data.mgVol).replace(/[^0-9.\-]/g, '')
+                : '';
+            let mgDisplay2 = '';
+            if (mgRawStr) {
+                // ตรวจว่ามีทศนิยม 2 ตำแหน่งอยู่แล้วหรือยัง
+                if (/^-?\d+(\.\d{2})$/.test(mgRawStr)) {
+                    mgDisplay2 = mgRawStr; // ใช้ตรง ๆ จาก index.html
+                } else {
+                    mgDisplay2 = specialRound2(mgRawStr);
+                }
+            } else if (data.mg && data.bw) {
+                // เผื่อกรณีไม่มี mgVol แต่มี mg และ bw → คำนวณตามสูตรเดียวกับ index: (mg*bw)/2 แล้วปัดพิเศษ 2 ตำแหน่ง
+                const mgCalc = (parseFloat(data.mg) * parseFloat(data.bw)) / 2;
+                mgDisplay2 = specialRound2(mgCalc);
+            }
+
+            if (mgDisplay2 && parseFloat(mgDisplay2) > 0) {
+                compositions.push({
+                    name: 'MgSO₄',
+                    input: `${data.mg || '0'} mmol/kg/day`,
+                    volume: mgDisplay2,   // 2 ตำแหน่ง
+                    note: ''
+                });
+            }
+        })();
 
         // Micronutrients
         const peditVol = data.peditrace ? parseFloat(String(data.peditrace).replace(/[^0-9.]/g, '')) : 0;
