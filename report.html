@@ -138,15 +138,14 @@
         }
 
         /* ============= โหมด export เท่านั้น ============= */
-        /* แก้ layout ของ header ชั่วคราวเพื่อกันการตัดขอบของ order-date-special */
         #report-root.exporting .header {
             display: flex;
             align-items: flex-start;
             gap: 10px;
         }
         #report-root.exporting .order-date-special {
-            position: static;       /* ยกเลิก absolute */
-            margin-left: auto;      /* ชิดขวา */
+            position: static;
+            margin-left: auto;
         }
     </style>
 </head>
@@ -264,8 +263,9 @@
         document.getElementById('display-ward').textContent = data.ward || '-';
         document.getElementById('display-bw').textContent = data.bw ? `${data.bw} kg` : '-';
 
-        // Order date (B.E.)
+        // ===== Order date (B.E.) + Day-of-week (คำนวณตรงจาก orderDate เพื่อให้ติดตอน export) =====
         let displayDate = data.orderDate || '-';
+        let dayNameText = data.orderDayName || '-';
         if (data.orderDate && data.orderDate !== '-') {
             const date = new Date(data.orderDate);
             const thaiMonths = ['มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน','กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม'];
@@ -273,9 +273,13 @@
             const month = thaiMonths[date.getMonth()];
             const year = date.getFullYear() + 543;
             displayDate = `${day} ${month} ${year}`;
+
+            // คำนวณวันในสัปดาห์โดยตรง (ภาษาอังกฤษตามตัวอย่างหน้าจอ)
+            const daysEn = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+            dayNameText = daysEn[date.getDay()];
         }
         document.getElementById('display-order-date').textContent = displayDate;
-        document.getElementById('display-day-name').textContent = data.orderDayName || '-';
+        document.getElementById('display-day-name').textContent = dayNameText;
 
         // Route
         const routeBadge = document.getElementById('display-route');
@@ -425,7 +429,7 @@
             osmolNoteEl.classList.remove('osmol-high'); osmolNoteEl.classList.add('osmol-ok');
         }
 
-        // แสดงค่าตามเดิม (kcal/kg/day)
+        // ค่าต่อ kg/day ตามเดิม
         document.getElementById('display-pn-total').textContent = data.pnCalKg || '0';
         document.getElementById('display-milk-total').textContent = data.milkCalKg || '0';
         document.getElementById('display-grand-total').textContent = data.totalCalKg || '0';
@@ -449,15 +453,15 @@
 
         async function saveAsPDF() {
             const { jsPDF } = window.jspdf;
-            toggleExporting(true);   // จัด layout header ให้ปลอดภัย
-            toggleScale80(true);     // สเกล 80%
+            toggleExporting(true);
+            toggleScale80(true);
             await new Promise(r => requestAnimationFrame(r));
 
             const target = document.getElementById('report-root');
             const canvas = await html2canvas(target, { scale: 2, useCORS: true, backgroundColor: '#ffffff' });
 
             toggleScale80(false);
-            toggleExporting(false);  // คืน layout เดิม
+            toggleExporting(false);
 
             const imgData = canvas.toDataURL('image/png');
             const pdf = new jsPDF('p', 'mm', 'a4');
