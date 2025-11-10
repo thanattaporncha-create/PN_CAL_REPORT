@@ -7,8 +7,11 @@
   <script src="/_sdk/element_sdk.js"></script>
   <style>
     body { box-sizing: border-box; font-family: 'Sarabun','Noto Sans Thai',Arial,sans-serif; margin:0; padding:20px; background:linear-gradient(135deg,#667eea 0%,#764ba2 100%); min-height:100%; }
-    .container { max-width:800px; margin:0 auto; background:white; border-radius:16px; box-shadow:0 20px 40px rgba(0,0,0,0.1); overflow:hidden; }
-    .header { background:linear-gradient(135deg,#4facfe 0%,#00f2fe 100%); color:white; padding:30px; text-align:center; }
+    .container { max-width:800px; margin:0 auto; background:white; border-radius:16px; box-shadow:0 20px 40px rgba(0,0,0,0.1); overflow:hidden; position:relative; }
+    .clear-btn { position:absolute; top:20px; right:20px; background:#ef4444; color:white; border:none; padding:10px 20px; font-size:0.9em; border-radius:8px; cursor:pointer; box-shadow:0 2px 8px rgba(239,68,68,0.3); transition:all 0.3s; font-weight:600; z-index:10; }
+    .clear-btn:hover { background:#dc2626; transform:translateY(-2px); box-shadow:0 4px 12px rgba(239,68,68,0.5); }
+    .clear-btn:active { transform:translateY(0); }
+    .header { background:linear-gradient(135deg,#4facfe 0%,#00f2fe 100%); color:white; padding:30px; padding-top:60px; text-align:center; }
     .header h1 { margin:0 0 10px 0; font-size:2.2em; font-weight:600; }
     .header p { margin:0; font-size:1.1em; opacity:.9; }
     .content { padding:30px; }
@@ -97,6 +100,8 @@
     .submit-btn:active { transform:translateY(0); }
 
     @media (max-width:768px){
+      .clear-btn { top:10px; right:10px; padding:8px 16px; font-size:0.85em; }
+      .header { padding-top:50px; }
       .input-group{grid-template-columns:1fr}
       .route-options{flex-direction:column}
       .electrolyte-header{grid-template-columns:1fr}
@@ -119,6 +124,9 @@
 </head>
 <body>
 <main class="container">
+  <!-- Clear Data Button -->
+  <button id="clearBtn" class="clear-btn">🗑️ Clear data</button>
+
   <header class="header">
     <h1 id="app-title">TPN Calculator</h1>
     <p id="subtitle">สำหรับเด็ก</p>
@@ -173,11 +181,11 @@
         <div class="route-options">
           <label class="route-option">
             <input type="radio" name="tpn-route" value="central" id="route-central" checked />
-            <label for="route-central">Central</label>
+            <label for="route-central">Central Line</label>
           </label>
           <label class="route-option">
             <input type="radio" name="tpn-route" value="peripheral" id="route-peripheral" />
-            <label for="route-peripheral">Peripheral</label>
+            <label for="route-peripheral">Peripheral Line</label>
           </label>
         </div>
       </div>
@@ -649,6 +657,48 @@
     } catch(e) { /* ignore */ }
   }
 
+  function clearAllData() {
+    if (!confirm('⚠️ คุณต้องการล้างข้อมูลทั้งหมดใช่หรือไม่?')) return;
+    
+    // Clear all input fields
+    const ids = ['patient-hn','patient-name','patient-ward','bw','rate','bag','protein','dextrose','fat','milk','total-milk','p','na','k','ca','mg'];
+    ids.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.value = '';
+    });
+    
+    // Reset date to today
+    const dateEl = document.getElementById('order-date');
+    if (dateEl) {
+      const today = new Date();
+      dateEl.value = today.toISOString().split('T')[0];
+    }
+    
+    // Reset radios to default
+    document.querySelector('input[name="tpn-route"][value="central"]')?.click();
+    document.querySelector('input[name="na-source"]')?.checked && (document.querySelector('input[name="na-source"]').checked = false);
+    document.querySelector('input[name="k-source"]')?.checked && (document.querySelector('input[name="k-source"]').checked = false);
+    document.querySelector('input[name="peditrace-freq"][value="daily"]')?.click();
+    document.querySelector('input[name="cernevit-freq"][value="daily"]')?.click();
+    document.querySelector('input[name="vitamin-k-choice"][value="none"]')?.click();
+    
+    // Reset selects
+    const peditDay = document.getElementById('peditrace-day'); if (peditDay) peditDay.value = '1';
+    const cernDay = document.getElementById('cernevit-day'); if (cernDay) cernDay.value = '1';
+    const vitKDay = document.getElementById('vitamin-k-day'); if (vitKDay) vitKDay.value = '1';
+    
+    // Reset checkbox
+    const picc = document.getElementById('picc-line-checkbox'); if (picc) picc.checked = false;
+    
+    // Clear autosave
+    localStorage.removeItem(AUTOSAVE_KEY);
+    
+    // Recalculate
+    calculateTPN();
+    
+    alert('✅ ล้างข้อมูลเรียบร้อยแล้ว');
+  }
+
   // ===== Helpers =====
   function shouldIncludeMicronutrient(freq, selectedDay, orderDate) {
     if (!orderDate) return false;
@@ -934,6 +984,9 @@
       document.getElementById('vitamin-k-day-selector').style.display = (vk==='weekly') ? 'block' : 'none';
     };
     setSelectorDisplay();
+
+    // Clear button listener
+    document.getElementById('clearBtn')?.addEventListener('click', clearAllData);
 
     // listeners recalc
     ['bw','rate','bag','protein','dextrose','fat','p','na','k','ca','mg','order-date'].forEach(id=>{
