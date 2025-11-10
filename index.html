@@ -48,6 +48,7 @@
     .calc-row { display:grid; grid-template-columns:2fr 1fr 1fr; gap:15px; align-items:center; padding:12px 0; border-bottom:1px solid #f1f5f9; }
     .calc-row:last-child { border-bottom:none; }
     .calc-label { font-weight:500; color:#2d3748; }
+    .calc-label.bold { font-weight:700; color:#1e293b; }
 
     .total-section { background:linear-gradient(135deg,#667eea 0%,#764ba2 100%); color:white; border-radius:12px; padding:25px; text-align:center; margin-top:25px; }
     .total-section h2 { margin:0 0 15px 0; font-size:1.6em; }
@@ -393,7 +394,7 @@
         <!-- Peditrace -->
         <div class="calc-row" style="display:flex; flex-direction:column; align-items:stretch; border-bottom:1px solid #f1f5f9; padding-bottom:15px;">
           <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-            <div class="calc-label">Peditrace® (max 15 ml/day)</div>
+            <div class="calc-label bold">Peditrace® (max 15 ml/day)</div>
             <div class="calc-result" id="peditrace-volume" style="background:#dcfce7; color:#166534; border:1px solid #86efac;">0 ml</div>
           </div>
           <div class="frequency-selection">
@@ -427,7 +428,7 @@
         <!-- Cernevit -->
         <div class="calc-row" style="display:flex; flex-direction:column; align-items:stretch; border-bottom:1px solid #f1f5f9; padding-bottom:15px;">
           <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-            <div class="calc-label">Cernevit® (max 3 ml/day)</div>
+            <div class="calc-label bold">Cernevit® (max 3 ml/day)</div>
             <div class="calc-result" id="cernevit-volume" style="background:#dcfce7; color:#166534; border:1px solid #86efac;">0 ml</div>
           </div>
           <div class="frequency-selection">
@@ -461,7 +462,7 @@
         <!-- Vitamin K -->
         <div class="calc-row" style="display:flex; flex-direction:column; align-items:stretch;">
           <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-            <div class="calc-label">Vitamin K (max 0.5 ml/day)</div>
+            <div class="calc-label bold">Vitamin K (max 0.5 ml/day)</div>
           </div>
           <div class="frequency-selection">
             <h4>เลือกวิธีการให้:</h4>
@@ -614,7 +615,6 @@
     const ids = ['order-date','patient-hn','patient-name','patient-ward','bw','rate','bag','protein','dextrose','fat','milk','total-milk','p','na','k','ca','mg'];
     const data = {};
     ids.forEach(id => { const el = document.getElementById(id); if (el) data[id] = el.value ?? ''; });
-    // radios & checkbox
     const route = document.querySelector('input[name="tpn-route"]:checked')?.value || '';
     const naSrc = document.querySelector('input[name="na-source"]:checked')?.value || '';
     const kSrc  = document.querySelector('input[name="k-source"]:checked')?.value || '';
@@ -636,12 +636,10 @@
     try {
       const data = JSON.parse(raw);
       Object.entries(data).forEach(([k,v])=>{
-        // inputs
         if (['order-date','patient-hn','patient-name','patient-ward','bw','rate','bag','protein','dextrose','fat','milk','total-milk','p','na','k','ca','mg'].includes(k)) {
           const el = document.getElementById(k); if (el) el.value = v;
         }
       });
-      // radios & checkbox
       if (data.route) document.querySelector(`input[name="tpn-route"][value="${data.route}"]`)?.click();
       if (data.naSrc) document.querySelector(`input[name="na-source"][value="${data.naSrc}"]`)?.click();
       if (data.kSrc)  document.querySelector(`input[name="k-source"][value="${data.kSrc}"]`)?.click();
@@ -654,27 +652,24 @@
       const vday = document.getElementById('vitamin-k-day'); if (vday) vday.value = data.vitKDay ?? '1';
 
       const picc = document.getElementById('picc-line-checkbox'); if (picc) picc.checked = !!data.hasPicc;
-    } catch(e) { /* ignore */ }
+    } catch(e) { }
   }
 
   function clearAllData() {
     if (!confirm('⚠️ คุณต้องการล้างข้อมูลทั้งหมดใช่หรือไม่?')) return;
     
-    // Clear all input fields
     const ids = ['patient-hn','patient-name','patient-ward','bw','rate','bag','protein','dextrose','fat','milk','total-milk','p','na','k','ca','mg'];
     ids.forEach(id => {
       const el = document.getElementById(id);
       if (el) el.value = '';
     });
     
-    // Reset date to today
     const dateEl = document.getElementById('order-date');
     if (dateEl) {
       const today = new Date();
       dateEl.value = today.toISOString().split('T')[0];
     }
     
-    // Reset radios to default
     document.querySelector('input[name="tpn-route"][value="central"]')?.click();
     document.querySelector('input[name="na-source"]')?.checked && (document.querySelector('input[name="na-source"]').checked = false);
     document.querySelector('input[name="k-source"]')?.checked && (document.querySelector('input[name="k-source"]').checked = false);
@@ -682,18 +677,14 @@
     document.querySelector('input[name="cernevit-freq"][value="daily"]')?.click();
     document.querySelector('input[name="vitamin-k-choice"][value="none"]')?.click();
     
-    // Reset selects
     const peditDay = document.getElementById('peditrace-day'); if (peditDay) peditDay.value = '1';
     const cernDay = document.getElementById('cernevit-day'); if (cernDay) cernDay.value = '1';
     const vitKDay = document.getElementById('vitamin-k-day'); if (vitKDay) vitKDay.value = '1';
     
-    // Reset checkbox
     const picc = document.getElementById('picc-line-checkbox'); if (picc) picc.checked = false;
     
-    // Clear autosave
     localStorage.removeItem(AUTOSAVE_KEY);
     
-    // Recalculate
     calculateTPN();
     
     alert('✅ ล้างข้อมูลเรียบร้อยแล้ว');
@@ -703,7 +694,7 @@
   function shouldIncludeMicronutrient(freq, selectedDay, orderDate) {
     if (!orderDate) return false;
     const date = new Date(orderDate);
-    const dayOfWeek = date.getDay(); // 0=Sun..6=Sat
+    const dayOfWeek = date.getDay();
     if (freq === 'daily') return true;
     if (freq === 'mwf') return [1,3,5].includes(dayOfWeek);
     if (freq === 'weekly') return dayOfWeek === parseInt(selectedDay);
@@ -716,10 +707,26 @@
     return days[d.getDay()];
   }
 
-  // 1dp special rounding
-  function r1(v){ if(!isFinite(v)||v===0) return 0; const h=Math.floor(v*100); const d2=h%10; return d2===9? Math.ceil(v*10)/10 : Math.floor(v*10)/10; }
-  // int special rounding
-  function r0(v){ if(!isFinite(v)||v===0) return 0; const m=v*10; const d1=Math.floor(m)%10; return d1===9? Math.ceil(v) : Math.floor(v); }
+  function r1(v){ 
+    if(!isFinite(v)||v===0) return 0; 
+    const h=Math.floor(v*100); 
+    const d2=h%10; 
+    return d2===9? Math.ceil(v*10)/10 : Math.floor(v*10)/10; 
+  }
+  
+  function r2(v){ 
+    if(!isFinite(v)||v===0) return 0; 
+    const h=Math.floor(v*1000); 
+    const d3=h%10; 
+    return d3===9? Math.ceil(v*100)/100 : Math.floor(v*100)/100; 
+  }
+  
+  function r0(v){ 
+    if(!isFinite(v)||v===0) return 0; 
+    const m=v*10; 
+    const d1=Math.floor(m)%10; 
+    return d1===9? Math.ceil(v) : Math.floor(v); 
+  }
 
   function calculateTPN(){
     const bw = parseFloat(document.getElementById('bw').value) || 0;
@@ -738,7 +745,6 @@
 
     const orderDate = document.getElementById('order-date').value;
 
-    // Macronutrients
     const proteinVol_raw = (bw*protein*100)/10;
     const proteinCal_raw = bw*protein*4;
     const proteinOsm_raw = bag>0 ? (protein*bw*1000*10)/bag : 0;
@@ -754,7 +760,6 @@
 
     const tfMilk_raw = (bw>0) ? totalMilk/bw : 0;
 
-    // Electrolytes & micro
     const pVol_1 = r1(p*bw);
     const naFromGly = pVol_1*2;
     const naReq_raw = na*bw;
@@ -768,9 +773,8 @@
     const kAcVol_1 = totalK_raw>0 ? r1(totalK_raw/3.0) : 0;
 
     const caVol_1 = r1((ca*bw)/0.25);
-    const mgVol_1 = r1((mg*bw)/2.0);
+    const mgVol_2 = r2((mg*bw)/2.0);
 
-    // Micro freq
     const peditFreq = document.querySelector('input[name="peditrace-freq"]:checked')?.value || 'daily';
     const peditDay = document.getElementById('peditrace-day')?.value || '1';
     const includePeditrace = shouldIncludeMicronutrient(peditFreq, peditDay, orderDate);
@@ -785,7 +789,6 @@
     let cern_raw = 1*bw; let cernExceeded=false; if(cern_raw>3){ cern_raw=3; cernExceeded=true; }
     const cern_1 = includeCernevit ? r1(cern_raw) : 0;
 
-    // Vitamin K
     const vitK_day_raw_calc = (10*bw/1000)*0.5;
     let vitK_day_raw = vitK_day_raw_calc;
     let vitKExceeded = false;
@@ -798,18 +801,16 @@
     if(vkChoice === 'daily') includeVitaminK = true;
     else if(vkChoice === 'weekly') includeVitaminK = shouldIncludeMicronutrient('weekly', vkDay, orderDate);
 
-    // Heparin
     const picc = document.getElementById('picc-line-checkbox')?.checked || false;
     const hep_calc_1 = r1(bag>0 ? bag/50 : 0);
     const hep_disp_1 = picc ? hep_calc_1 : 0;
 
-    // Total used volume (ในถุง TPN) - ไม่รวม Fat (ให้แยก line)
     let totalUsed = 0;
     totalUsed += proteinVol_raw;
     totalUsed += dextroseVol_raw;
     totalUsed += pVol_1;
     totalUsed += caVol_1;
-    totalUsed += mgVol_1;
+    totalUsed += mgVol_2;
     totalUsed += pedit_1;
     totalUsed += cern_1;
     totalUsed += hep_disp_1;
@@ -829,11 +830,9 @@
 
     const swVol = Math.floor(bag - totalUsed);
 
-    // Osmolality (approx)
     const elyteOsm_raw = bag>0 ? ((na+k)*bw*2*1000)/bag : 0;
     const totalOsm_raw = proteinOsm_raw + dextroseOsm_raw + elyteOsm_raw;
 
-    // Calories
     const pnCalDay = proteinCal_raw + dextroseCal_raw + fatCal_raw;
     const pnCalKg = bw>0 ? pnCalDay/bw : 0;
     const milkCalDay = totalMilk*20/30;
@@ -844,7 +843,6 @@
     const dispMilk = r0(milkCalKg);
     const dispTotalKg = dispPN + dispMilk;
 
-    // ==== Update UI ====
     document.getElementById('protein-volume').textContent = r1(proteinVol_raw).toFixed(1);
     document.getElementById('protein-calories').textContent = r1(proteinCal_raw).toFixed(1);
     document.getElementById('protein-osmol').textContent = r1(proteinOsm_raw).toFixed(1);
@@ -870,9 +868,8 @@
     document.getElementById('k-acetate-volume').textContent = kAcVol_1.toFixed(1) + ' ml';
 
     document.getElementById('ca-volume').textContent = caVol_1.toFixed(1) + ' ml';
-    document.getElementById('mg-volume').textContent = mgVol_1.toFixed(1) + ' ml';
+    document.getElementById('mg-volume').textContent = mgVol_2.toFixed(2) + ' ml';
 
-    // Peditrace
     const pedEl = document.getElementById('peditrace-volume');
     if (!includePeditrace) {
       pedEl.textContent = '0 ml (ไม่ให้วันนี้)';
@@ -886,7 +883,6 @@
       pedEl.style.border = (peditExceeded ? '1px solid #dc2626' : '1px solid #86efac');
     }
 
-    // Cernevit
     const cerEl = document.getElementById('cernevit-volume');
     if (!includeCernevit) {
       cerEl.textContent = '0 ml (ไม่ให้วันนี้)';
@@ -900,7 +896,6 @@
       cerEl.style.border = (cernExceeded ? '1px solid #dc2626' : '1px solid #86efac');
     }
 
-    // Vitamin K (display)
     const dailyRadio = document.querySelector('input[name="vitamin-k-choice"][value="daily"]');
     const weeklyRadio = document.querySelector('input[name="vitamin-k-choice"][value="weekly"]');
     const dailyLabel = dailyRadio?.parentElement;
@@ -927,33 +922,27 @@
     weeklyEl.style.color = '#1e40af';
     weeklyEl.style.border = '1px solid #bfdbfe';
 
-    // Heparin
     document.getElementById('heparin-volume').textContent = hep_disp_1.toFixed(1) + ' ml';
 
-    // Sterile water
     document.getElementById('sterile-water-volume').textContent = swVol;
     const swSec = document.getElementById('sterile-water-section');
     swSec.style.background = swVol<0 ? 'linear-gradient(135deg,#ef4444 0%,#dc2626 100%)'
                                      : 'linear-gradient(135deg,#06b6d4 0%,#0891b2 100%)';
 
-    // Total Osmol
     document.getElementById('total-osmol').textContent = '~' + r0(totalOsm_raw);
     const osmolSec = document.getElementById('osmol-section');
     osmolSec.style.background = r0(totalOsm_raw) > 900 ? 'linear-gradient(135deg,#ef4444 0%,#dc2626 100%)'
                                                        : 'linear-gradient(135deg,#10b981 0%,#059669 100%)';
 
-    // Totals
     document.getElementById('total-calories-day').textContent = r0(totalCalDay);
     document.getElementById('total-calories-kg').textContent = dispTotalKg;
     document.getElementById('breakdown-pn').textContent = dispPN;
     document.getElementById('breakdown-milk').textContent = dispMilk;
     document.getElementById('breakdown-total').textContent = dispTotalKg;
 
-    // autosave on every calc
     autosaveCollect();
   }
 
-  // extract first number from text like "12.3 ml" -> "12.3"
   function extractNumberString(text) {
     if (text === undefined || text === null) return '0';
     const s = String(text);
@@ -961,9 +950,7 @@
     return m ? m[0] : '0';
   }
 
-  // ===== INIT =====
   document.addEventListener('DOMContentLoaded', function() {
-    // default date = today (if empty)
     const dateEl = document.getElementById('order-date');
     if (dateEl && !dateEl.value) {
       const today = new Date();
@@ -971,10 +958,8 @@
       dateEl.value = dateStr;
     }
 
-    // restore autosave
     autosaveRestore();
 
-    // initial toggle of weekly selectors
     const setSelectorDisplay = () => {
       const pf = document.querySelector('input[name="peditrace-freq"]:checked')?.value || 'daily';
       document.getElementById('peditrace-day-selector').style.display = (pf==='weekly') ? 'block' : 'none';
@@ -985,10 +970,8 @@
     };
     setSelectorDisplay();
 
-    // Clear button listener
     document.getElementById('clearBtn')?.addEventListener('click', clearAllData);
 
-    // listeners recalc
     ['bw','rate','bag','protein','dextrose','fat','p','na','k','ca','mg','order-date'].forEach(id=>{
       const el=document.getElementById(id);
       if(el){ el.addEventListener('input', ()=>{ calculateTPN(); }); }
@@ -1006,7 +989,6 @@
     const totMilkEl=document.getElementById('total-milk');
     if(totMilkEl){ totMilkEl.addEventListener('input', ()=>{ calculateTPN(); }); }
 
-    // radios & checkbox
     document.querySelectorAll('input[name="na-source"]').forEach(r=>r.addEventListener('change', ()=>{ calculateTPN(); }));
     document.querySelectorAll('input[name="k-source"]').forEach(r=>r.addEventListener('change', ()=>{ calculateTPN(); }));
     const picc = document.getElementById('picc-line-checkbox');
@@ -1035,11 +1017,9 @@
     document.getElementById('cernevit-day')?.addEventListener('change', ()=>{ calculateTPN(); });
     document.getElementById('vitamin-k-day')?.addEventListener('change', ()=>{ calculateTPN(); });
 
-    // first calc
     calculateTPN();
   });
 
-  // ===== Submit → report.html =====
   document.getElementById('submitBtn')?.addEventListener('click', function() {
     const hn = document.getElementById('patient-hn')?.value.trim();
     const name = document.getElementById('patient-name')?.value.trim();
@@ -1122,7 +1102,6 @@
     };
 
     localStorage.setItem('tpnReportData', JSON.stringify(reportData));
-    // เก็บ autosave ล่าสุดด้วย (กันข้อมูลหายเวลา back)
     autosaveCollect();
     window.location.href = 'report.html';
   });
