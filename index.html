@@ -394,7 +394,7 @@
         <!-- Peditrace -->
         <div class="calc-row" style="display:flex; flex-direction:column; align-items:stretch; border-bottom:1px solid #f1f5f9; padding-bottom:15px;">
           <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-            <div class="calc-label bold">Peditrace® (max 15 ml/day)</div>
+            <div class="calc-label bold">Peditrace® (max 10 ml/day)</div>
             <div class="calc-result" id="peditrace-volume" style="background:#dcfce7; color:#166534; border:1px solid #86efac;">0 ml</div>
           </div>
           <div class="frequency-selection">
@@ -783,7 +783,7 @@
     const cernDay = document.getElementById('cernevit-day')?.value || '1';
     const includeCernevit = shouldIncludeMicronutrient(cernFreq, cernDay, orderDate);
 
-    let pedit_raw = 1*bw; let peditExceeded=false; if(pedit_raw>15){ pedit_raw=15; peditExceeded=true; }
+    let pedit_raw = 1*bw; let peditExceeded=false; if(pedit_raw>10){ pedit_raw=10; peditExceeded=true; }
     const pedit_1 = includePeditrace ? r1(pedit_raw) : 0;
 
     let cern_raw = 1*bw; let cernExceeded=false; if(cern_raw>3){ cern_raw=3; cernExceeded=true; }
