@@ -11,7 +11,7 @@
             size: A4;
         }
 
-```
+
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
@@ -339,7 +339,7 @@ body {
     height: auto;
 }
 </style>
-```
+    
 
 </head>
 <body>
@@ -371,7 +371,7 @@ body {
           </div>
       </div>
 
-```
+
   <div class="section">
     <div class="section-title">👤 Patient Information</div>
     <div style="display: grid; grid-template-columns: 1fr auto; gap: 20px; align-items: flex-start;">
@@ -451,7 +451,7 @@ body {
       <p>Generated on <span id="generated-date"></span></p>
       <p style="margin-top: 5px;">โรงพยาบาลขอนแก่น TPN Calculator for Pediatrics © 2025</p>
   </div>
-```
+
 
   </div>
 </div>
@@ -459,7 +459,20 @@ body {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
 <script>
-    function goBack() { window.location.href = 'index.html'; }
+    function goBack() {
+        // ✅ บันทึกข้อมูล fat options กลับไปที่ autosave
+        const AUTOSAVE_KEY = 'tpnCalculatorState';
+        const currentAutosave = JSON.parse(localStorage.getItem(AUTOSAVE_KEY) || '{}');
+        
+        // อัพเดทค่า fat options จาก report data
+        if (data.fatPriming) currentAutosave.fatPriming = data.fatPriming;
+        if (data.fatDripDuration) currentAutosave.fatDripDuration = data.fatDripDuration;
+        if (data.fatSplit) currentAutosave.fatSplit = data.fatSplit;
+        
+        localStorage.setItem(AUTOSAVE_KEY, JSON.stringify(currentAutosave));
+        
+        window.location.href = 'index.html';
+    }
 
     function specialRound2(v){
         const n = Number(v);
@@ -709,7 +722,9 @@ body {
         
         if (fatSplit === 'split-2') {
             const volPerSyr = (displayFatVol / 2).toFixed(1);
-            fatNote += ` แบ่งเตรียม = ${volPerSyr} ml × 2 syr`;
+            // ✅ เงื่อนไข: <= 50 ml → syr, > 50 ml → ขวด
+            const unit = parseFloat(volPerSyr) <= 50 ? 'syr' : 'ขวด';
+            fatNote += ` แบ่งเตรียม = ${volPerSyr} ml × 2 ${unit}`;
         }
         
         compositions.push({
