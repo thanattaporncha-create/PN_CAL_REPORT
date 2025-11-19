@@ -1180,7 +1180,7 @@
                         </label>
                         <label class="fat-admin-radio">
                             <input type="radio" name="fat-split" value="split-2">
-                            <span>แบ่งเตรียม 2 syr</span>
+                            <span>แบ่งเตรียม</span>
                         </label>
                     </div>
                     <div class="fat-split-display" id="fat-split-info" style="display: none;">
@@ -1666,10 +1666,16 @@
         const cernDay = document.getElementById('cernevit-day')?.value || '1';
         const vitKDay = document.getElementById('vitamin-k-day')?.value || '1';
         const hasPicc = document.getElementById('picc-line-checkbox')?.checked || false;
+        
+        // ✅ เพิ่ม Fat administration options
+        const fatPriming = document.querySelector('input[name="fat-priming"]:checked')?.value || 'priming';
+        const fatDripDuration = document.querySelector('input[name="fat-drip-duration"]:checked')?.value || '24';
+        const fatSplit = document.querySelector('input[name="fat-split"]:checked')?.value || 'no-split';
 
         Object.assign(data, {
             route, proteinProduct, fatProduct, naSrc, kSrc,
-            peditFreq, cernFreq, vitKChoice, peditDay, cernDay, vitKDay, hasPicc
+            peditFreq, cernFreq, vitKChoice, peditDay, cernDay, vitKDay, hasPicc,
+            fatPriming, fatDripDuration, fatSplit
         });
 
         localStorage.setItem(AUTOSAVE_KEY, JSON.stringify(data));
@@ -1711,6 +1717,11 @@
             if (data.peditFreq) document.querySelector(`input[name="peditrace-freq"][value="${data.peditFreq}"]`)?.click();
             if (data.cernFreq) document.querySelector(`input[name="cernevit-freq"][value="${data.cernFreq}"]`)?.click();
             if (data.vitKChoice) document.querySelector(`input[name="vitamin-k-choice"][value="${data.vitKChoice}"]`)?.click();
+            
+            // ✅ กู้คืน Fat administration options
+            if (data.fatPriming) document.querySelector(`input[name="fat-priming"][value="${data.fatPriming}"]`)?.click();
+            if (data.fatDripDuration) document.querySelector(`input[name="fat-drip-duration"][value="${data.fatDripDuration}"]`)?.click();
+            if (data.fatSplit) document.querySelector(`input[name="fat-split"][value="${data.fatSplit}"]`)?.click();
 
             const pday = document.getElementById('peditrace-day');
             if (pday) pday.value = data.peditDay ?? '1';
@@ -2116,7 +2127,9 @@
         
         if (split === 'split-2' && splitInfoEl && splitTextEl) {
             const volPerSyr = r1(fatVolWithPriming / 2);
-            splitTextEl.textContent = volPerSyr.toFixed(1) + ' ml × 2 syr';
+            // ✅ เงื่อนไข: <= 50 ml → syr, > 50 ml → ขวด
+            const unit = volPerSyr <= 50 ? 'syr' : 'ขวด';
+            splitTextEl.textContent = volPerSyr.toFixed(1) + ' ml × 2 ' + unit;
             splitInfoEl.style.display = 'block';
         } else if (splitInfoEl) {
             splitInfoEl.style.display = 'none';
