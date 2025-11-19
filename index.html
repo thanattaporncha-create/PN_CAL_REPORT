@@ -486,6 +486,13 @@
     background:#f0f9ff;
     border-color:#4facfe;
 }
+/* ✅ สีพื้นหลังตาม Route */
+.route-option:has(#route-central) {
+    background:#f0fdf4;
+}
+.route-option:has(#route-peripheral) {
+    background:#fff7ed;
+}
 .route-option input[type="radio"] {
     margin-right:10px;
     transform:scale(1.3);
@@ -1091,6 +1098,34 @@
                 </label>
             </div>
             
+            <!-- Summary Table -->
+            <div class="tpn-table">
+                <div class="table-header">
+                    <div class="table-cell header-cell">องค์ประกอบ</div>
+                    <div class="table-cell header-cell">ปริมาตร (ml)</div>
+                    <div class="table-cell header-cell">แคลอรี่ (kcal)</div>
+                    <div class="table-cell header-cell">mOsmol/L</div>
+                </div>
+                <div class="table-row">
+                    <div class="table-cell component-cell" id="protein-label">10% Aminoven® infant</div>
+                    <div class="table-cell result-cell volume-yellow" id="protein-volume">0</div>
+                    <div class="table-cell result-cell" id="protein-calories">0</div>
+                    <div class="table-cell result-cell osmol-purple" id="protein-osmol">0</div>
+                </div>
+                <div class="table-row">
+                    <div class="table-cell component-cell">50% Dextrose</div>
+                    <div class="table-cell result-cell volume-yellow" id="dextrose-volume">0</div>
+                    <div class="table-cell result-cell" id="dextrose-calories">0</div>
+                    <div class="table-cell result-cell osmol-purple" id="dextrose-osmol">0</div>
+                </div>
+                <div class="table-row">
+                    <div class="table-cell component-cell" id="fat-label">20% SMOF lipid</div>
+                    <div class="table-cell result-cell volume-yellow" id="fat-volume">0</div>
+                    <div class="table-cell result-cell" id="fat-calories">0</div>
+                    <div class="table-cell result-cell">-</div>
+                </div>
+            </div>
+            
             <!-- Fat Administration Options -->
             <div class="fat-admin-section">
                 <h3>💉 วิธีการให้ Fat</h3>
@@ -1107,6 +1142,9 @@
                             <input type="radio" name="fat-priming" value="priming" checked>
                             <span>+ 6 ml ไล่สาย</span>
                         </label>
+                    </div>
+                    <div class="fat-priming-volume" id="fat-priming-volume" style="margin-top:10px; padding:10px 16px; background:white; border-radius:8px; border:2px solid #c7d2fe; font-weight:600; color:#4338ca; font-size:0.95em;">
+                        <span id="fat-priming-text">= 0 ml</span>
                     </div>
                 </div>
                 
@@ -1127,6 +1165,9 @@
                         <span class="fat-rate-label">Fat rate:</span>
                         <span class="fat-rate-value" id="fat-rate-result">0 g/kg/hr</span>
                     </div>
+                    <div style="margin-top:8px; padding:0 16px; font-size:0.85em; color:#9ca3af; font-style:italic;">
+                        Fat rate ควร ≤ 0.11 g/kg/hr
+                    </div>
                 </div>
                 
                 <!-- แบ่งเตรียม -->
@@ -1146,34 +1187,6 @@
                         <span id="fat-split-text">0 ml × 2 syr</span>
                     </div>
                 </div>
-            </div>
-        </div>
-        
-        <!-- Summary Table -->
-        <div class="tpn-table">
-            <div class="table-header">
-                <div class="table-cell header-cell">องค์ประกอบ</div>
-                <div class="table-cell header-cell">ปริมาตร (ml)</div>
-                <div class="table-cell header-cell">แคลอรี่ (kcal)</div>
-                <div class="table-cell header-cell">mOsmol/L</div>
-            </div>
-            <div class="table-row">
-                <div class="table-cell component-cell" id="protein-label">10% Aminoven® infant</div>
-                <div class="table-cell result-cell volume-yellow" id="protein-volume">0</div>
-                <div class="table-cell result-cell" id="protein-calories">0</div>
-                <div class="table-cell result-cell osmol-purple" id="protein-osmol">0</div>
-            </div>
-            <div class="table-row">
-                <div class="table-cell component-cell">50% Dextrose</div>
-                <div class="table-cell result-cell volume-yellow" id="dextrose-volume">0</div>
-                <div class="table-cell result-cell" id="dextrose-calories">0</div>
-                <div class="table-cell result-cell osmol-purple" id="dextrose-osmol">0</div>
-            </div>
-            <div class="table-row">
-                <div class="table-cell component-cell" id="fat-label">20% SMOF lipid</div>
-                <div class="table-cell result-cell volume-yellow" id="fat-volume">0</div>
-                <div class="table-cell result-cell" id="fat-calories">0</div>
-                <div class="table-cell result-cell">-</div>
             </div>
         </div>
     </section>
@@ -1203,7 +1216,7 @@
                 </label>
                 <label class="source-option">
                     <input type="radio" name="na-source" value="nacl20" id="nacl20-radio">
-                    <span class="source-option-label">20%NaCl (3.4 mEq/ml)</span>
+                    <span class="source-option-label" style="color:#dc2626; font-weight:400;">20%NaCl (3.4 mEq/ml)</span>
                     <span class="source-option-value" id="nacl20-volume">0 ml</span>
                 </label>
                 <label class="source-option">
@@ -1290,7 +1303,7 @@
             <div class="calc-row" style="display:flex; flex-direction:column; align-items:stretch; 
                                           border-bottom:1px solid #f1f5f9; padding-bottom:15px;">
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-                    <div class="calc-label bold">Peditrace® (max 10 ml/day)</div>
+                    <div class="calc-label bold">Peditrace® (max 15 ml/day)</div>
                     <div class="calc-result" id="peditrace-volume" 
                          style="background:#dcfce7; color:#166534; border:1px solid #86efac;">
                         0 ml
@@ -1455,12 +1468,6 @@
                         </span>
                     </div>
                 </div>
-            </div>
-            <div class="additional-note" style="margin-top:10px; padding:10px; background:#fef3c7; 
-                 border-radius:8px; border:1px solid #fcd34d;">
-                <p style="margin:0; font-size:0.9em; color:#92400e;">
-                    <strong>หมายเหตุ:</strong> หากเลือกหน่วยเป็น <strong>ml</strong> ระบบจะหักลบปริมาตรนี้ออกจาก Sterile Water โดยอัตโนมัติ
-                </p>
             </div>
         </div>
     </section>
@@ -1882,8 +1889,8 @@
 
         let pedit_raw = 1 * bw;
         let peditExceeded = false;
-        if (pedit_raw > 10) {
-            pedit_raw = 10;
+        if (pedit_raw > 15) {
+            pedit_raw = 15;
             peditExceeded = true;
         }
         const pedit_1 = includePeditrace ? r1(pedit_raw) : 0;
@@ -2086,6 +2093,12 @@
         const priming = document.querySelector('input[name="fat-priming"]:checked')?.value || 'priming';
         const fatVolWithPriming = (priming === 'priming') ? baseFatVol + 6 : baseFatVol;
         
+        // ✅ Update fat priming volume display
+        const fatPrimingTextEl = document.getElementById('fat-priming-text');
+        if (fatPrimingTextEl) {
+            fatPrimingTextEl.textContent = '= ' + r1(fatVolWithPriming) + ' ml';
+        }
+        
         // Calculate fat rate
         const dripDuration = parseFloat(document.querySelector('input[name="fat-drip-duration"]:checked')?.value) || 24;
         const fatRate = (bw > 0 && dripDuration > 0) ? (fat / dripDuration) : 0;
@@ -2220,6 +2233,7 @@
         // Fat administration event listeners
         document.querySelectorAll('input[name="fat-priming"]').forEach(r => {
             r.addEventListener('change', () => {
+                calculateTPN();
                 updateFatDisplay();
             });
         });
