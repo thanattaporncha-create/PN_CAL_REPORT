@@ -2345,6 +2345,7 @@
             naFromGly: extractNumberString(dsel('na-from-glycophos')),
             naSource: document.querySelector('input[name="na-source"]:checked')?.value || '',
             naclVol: extractNumberString(dsel('nacl-volume')),
+            nacl20Vol: extractNumberString(dsel('nacl20-volume')),
             naAcVol: extractNumberString(dsel('na-acetate-volume')),
             kSource: document.querySelector('input[name="k-source"]:checked')?.value || '',
             kclVol: extractNumberString(dsel('kcl-volume')),
@@ -2369,7 +2370,11 @@
             totalCalKg: extractNumberString(dsel('breakdown-total')),
             pnCalKg: extractNumberString(dsel('breakdown-pn')),
             milkCalKg: extractNumberString(dsel('breakdown-milk')),
-            tfFromMilk: dsel('tf-from-milk')
+            tfFromMilk: dsel('tf-from-milk'),
+            // Fat administration options
+            fatPriming: document.querySelector('input[name="fat-priming"]:checked')?.value || 'priming',
+            fatDripDuration: document.querySelector('input[name="fat-drip-duration"]:checked')?.value || '24',
+            fatSplit: document.querySelector('input[name="fat-split"]:checked')?.value || 'no-split'
         };
 
         localStorage.setItem('tpnReportData', JSON.stringify(reportData));
