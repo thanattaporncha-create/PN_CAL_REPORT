@@ -138,6 +138,10 @@
             background:white;
             padding-left:8px;
         }
+        .unit select {
+            pointer-events:auto;
+            cursor:pointer;
+        }
         .date-warning {
             color:#dc2626;
             font-weight:700;
@@ -145,611 +149,641 @@
             margin-top:6px;
         }
 
-    /* Product Selection Styles */
-    .product-selection {
-        margin-top:20px;
-        padding-top:20px;
-        border-top:2px solid #e2e8f0;
-    }
-    .product-selection h3 {
-        color:#2d3748;
-        margin:0 0 15px 0;
-        font-size:1.05em;
-        font-weight:600;
-    }
-    .product-options {
-        display:flex;
-        flex-direction:column;
-        gap:10px;
-        margin-bottom:20px;
-    }
-    .product-option {
-        display:flex;
-        align-items:center;
-        padding:12px 15px;
-        border-radius:8px;
-        border:2px solid #e2e8f0;
-        background:white;
-        cursor:pointer;
-        transition:all .3s ease;
-    }
-    .product-option:hover {
-        background:#f0f9ff;
-        border-color:#4facfe;
-    }
-    .product-option.selected {
-        background:#e0f2fe;
-        border-color:#0284c7;
-        box-shadow:0 2px 8px rgba(2,132,199,0.2);
-    }
-    .product-option input[type="radio"] {
-        margin-right:12px;
-        transform:scale(1.2);
-        cursor:pointer;
-        accent-color:#4facfe;
-    }
-    .product-option-label {
-        flex:1;
-        cursor:pointer;
-    }
-    .product-name {
-        font-weight:600;
-        color:#2d3748;
-        font-size:0.95em;
-    }
-    .product-info {
+```
+/* Product Selection Styles */
+.product-selection {
+    margin-top:20px;
+    padding-top:20px;
+    border-top:2px solid #e2e8f0;
+}
+.product-selection h3 {
+    color:#2d3748;
+    margin:0 0 15px 0;
+    font-size:1.05em;
+    font-weight:600;
+}
+.product-options {
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    margin-bottom:20px;
+}
+.product-option {
+    display:flex;
+    align-items:center;
+    padding:12px 15px;
+    border-radius:8px;
+    border:2px solid #e2e8f0;
+    background:white;
+    cursor:pointer;
+    transition:all .3s ease;
+}
+.product-option:hover {
+    background:#f0f9ff;
+    border-color:#4facfe;
+}
+.product-option.selected {
+    background:#e0f2fe;
+    border-color:#0284c7;
+    box-shadow:0 2px 8px rgba(2,132,199,0.2);
+}
+.product-option input[type="radio"] {
+    margin-right:12px;
+    transform:scale(1.2);
+    cursor:pointer;
+    accent-color:#4facfe;
+}
+.product-option-label {
+    flex:1;
+    cursor:pointer;
+}
+.product-name {
+    font-weight:600;
+    color:#2d3748;
+    font-size:0.95em;
+}
+.product-info {
+    font-size:0.85em;
+    color:#64748b;
+    margin-top:2px;
+}
+
+/* Fat Administration Styles */
+.fat-admin-section {
+    margin-top:20px;
+    padding:20px;
+    background:#f0f9ff;
+    border-radius:10px;
+    border:2px solid #bfdbfe;
+}
+
+.fat-admin-section h3 {
+    color:#1e40af;
+    margin:0 0 15px 0;
+    font-size:1.05em;
+    font-weight:600;
+}
+
+.fat-admin-group {
+    margin-bottom:15px;
+    padding-bottom:15px;
+    border-bottom:1px solid #dbeafe;
+}
+
+.fat-admin-group:last-child {
+    border-bottom:none;
+    margin-bottom:0;
+    padding-bottom:0;
+}
+
+.fat-admin-label {
+    display:block;
+    font-weight:600;
+    color:#1e40af;
+    margin-bottom:10px;
+    font-size:0.95em;
+}
+
+.fat-admin-options {
+    display:flex;
+    flex-wrap:wrap;
+    gap:15px;
+    margin-bottom:10px;
+}
+
+.fat-admin-radio {
+    display:flex;
+    align-items:center;
+    cursor:pointer;
+    padding:8px 12px;
+    background:white;
+    border:2px solid #e0e7ff;
+    border-radius:8px;
+    transition:all 0.3s;
+}
+
+.fat-admin-radio:hover {
+    background:#eef2ff;
+    border-color:#818cf8;
+}
+
+.fat-admin-radio input[type="radio"] {
+    margin-right:8px;
+    cursor:pointer;
+    accent-color:#4f46e5;
+}
+
+.fat-admin-radio input[type="radio"]:checked + span {
+    font-weight:600;
+    color:#4f46e5;
+}
+
+.fat-rate-display {
+    background:white;
+    padding:12px 16px;
+    border-radius:8px;
+    border:2px solid #c7d2fe;
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.fat-rate-label {
+    font-weight:600;
+    color:#4338ca;
+    font-size:0.95em;
+}
+
+.fat-rate-value {
+    font-weight:700;
+    color:#4f46e5;
+    font-size:1.1em;
+}
+
+.fat-split-display {
+    background:white;
+    padding:12px 16px;
+    border-radius:8px;
+    border:2px solid #c7d2fe;
+    font-weight:600;
+    color:#4338ca;
+    font-size:1em;
+}
+
+/* TPN Table */
+.tpn-table {
+    background:white;
+    border-radius:12px;
+    overflow:hidden;
+    margin-top:20px;
+    border:2px solid #e2e8f0;
+    width:100%;
+    display:table;
+    table-layout:fixed;
+}
+.table-header {
+    display:table-row;
+    background:#f8fafc;
+    border-bottom:2px solid #e2e8f0;
+}
+.table-row {
+    display:table-row;
+    border-bottom:1px solid #f1f5f9;
+}
+.table-row:last-child {
+    border-bottom:none;
+}
+.table-cell {
+    display:table-cell;
+    padding:10px 8px;
+    text-align:center;
+    vertical-align:middle;
+    min-height:50px;
+    box-sizing:border-box;
+    border-right:1px solid #f1f5f9;
+}
+.table-cell:last-child {
+    border-right:none;
+}
+.header-cell {
+    font-weight:600;
+    color:#2d3748;
+    background:#f8fafc;
+    font-size:.9em;
+    width:25%;
+}
+.component-cell {
+    font-weight:500;
+    color:#2d3748;
+    text-align:left;
+    padding-left:16px;
+    font-size:.95em;
+    width:25%;
+}
+.result-cell {
+    font-weight:600;
+    color:#0369a1;
+    background:#f0f9ff;
+    font-size:.85em;
+    text-align:center;
+    width:25%;
+}
+.result-cell.volume-yellow {
+    background:#fef3c7;
+    color:#92400e;
+    border:1px solid #fcd34d;
+}
+.result-cell.osmol-purple {
+    background:#f3e8ff;
+    color:#7c3aed;
+    border:1px solid #c4b5fd;
+}
+
+/* GIR Display */
+.gir-display {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:white;
+    border-radius:8px;
+    padding:15px;
+    margin-top:15px;
+    border:2px solid #e2e8f0;
+}
+.gir-label {
+    font-weight:600;
+    color:#be185d;
+}
+.calc-result {
+    background:#f0f9ff;
+    padding:8px 12px;
+    border-radius:6px;
+    text-align:center;
+    font-weight:600;
+    color:#0369a1;
+    border:1px solid #bae6fd;
+}
+.calc-result.gir-pink {
+    background:#fce7f3;
+    color:#be185d;
+    border:1px solid #f9a8d4;
+}
+
+/* Calculation Section */
+.calculation-section {
+    background:white;
+    border-radius:12px;
+    padding:20px;
+    margin-top:15px;
+    border:2px solid #e2e8f0;
+}
+.calc-row {
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr;
+    gap:15px;
+    align-items:center;
+    padding:12px 0;
+    border-bottom:1px solid #f1f5f9;
+}
+.calc-row:last-child {
+    border-bottom:none;
+}
+.calc-label {
+    font-weight:500;
+    color:#2d3748;
+}
+.calc-label.bold {
+    font-weight:700;
+    color:#1e293b;
+}
+
+/* Total Section */
+.total-section {
+    background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);
+    color:white;
+    border-radius:12px;
+    padding:25px;
+    text-align:center;
+    margin-top:25px;
+}
+.total-section h2 {
+    margin:0 0 15px 0;
+    font-size:1.6em;
+}
+.total-calories {
+    font-size:2.5em;
+    font-weight:700;
+    margin:10px 0;
+}
+
+/* Route Selection */
+.route-selection {
+    margin-top:20px;
+}
+.route-selection h3 {
+    color:#2d3748;
+    margin:0 0 15px 0;
+    font-size:1.1em;
+    font-weight:600;
+}
+.route-options {
+    display:flex;
+    gap:15px;
+}
+.route-option {
+    flex:1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:15px;
+    border-radius:8px;
+    border:2px solid #e2e8f0;
+    background:#f8fafc;
+    cursor:pointer;
+    transition:all .3s ease;
+}
+.route-option:hover {
+    background:#f0f9ff;
+    border-color:#4facfe;
+}
+.route-option input[type="radio"] {
+    margin-right:10px;
+    transform:scale(1.3);
+    cursor:pointer;
+}
+.route-option label {
+    font-weight:500;
+    color:#2d3748;
+    cursor:pointer;
+    font-size:1em;
+}
+.route-option input[type="radio"]:checked + label {
+    color:#4facfe;
+    font-weight:600;
+}
+
+/* Electrolyte Styles */
+.electrolyte-item {
+    background:white;
+    border-radius:8px;
+    padding:20px;
+    margin-bottom:15px;
+    border:2px solid #e2e8f0;
+}
+.electrolyte-header {
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+    margin-bottom:15px;
+}
+.electrolyte-input {
+    display:flex;
+    flex-direction:column;
+}
+.electrolyte-input label {
+    color:#4a5568;
+    font-weight:600;
+    margin-bottom:8px;
+    font-size:1em;
+}
+.electrolyte-input input {
+    padding:12px 16px;
+    border:2px solid #e2e8f0;
+    border-radius:8px;
+    font-size:1em;
+    transition:all .3s ease;
+    background:white;
+    -webkit-appearance:none;
+    -moz-appearance:textfield;
+}
+.electrolyte-input input::-webkit-outer-spin-button,
+.electrolyte-input input::-webkit-inner-spin-button {
+    -webkit-appearance:none;
+    margin:0;
+}
+.electrolyte-input input:focus {
+    outline:none;
+    border-color:#4facfe;
+    box-shadow:0 0 0 3px rgba(79,172,254,.1);
+}
+.electrolyte-result {
+    background:#f0fdf4;
+    border:2px solid #86efac;
+    border-radius:8px;
+    padding:12px;
+    text-align:center;
+}
+.electrolyte-result-label {
+    font-size:0.85em;
+    color:#166534;
+    font-weight:500;
+    margin-bottom:4px;
+}
+.electrolyte-result-value {
+    font-size:1.3em;
+    color:#166534;
+    font-weight:700;
+}
+
+/* Source Selection */
+.source-selection {
+    margin-top:15px;
+    padding-top:15px;
+    border-top:1px solid #e2e8f0;
+}
+.source-selection h4 {
+    margin:0 0 12px 0;
+    color:#2d3748;
+    font-size:0.95em;
+    font-weight:600;
+}
+.source-option {
+    display:flex;
+    align-items:center;
+    padding:10px;
+    margin-bottom:8px;
+    border-radius:6px;
+    background:#f8fafc;
+    transition:all .2s ease;
+    cursor:pointer;
+}
+.source-option:hover {
+    background:#f0f9ff;
+}
+.source-option input[type="radio"] {
+    margin-right:12px;
+    transform:scale(1.3);
+    cursor:pointer;
+}
+.source-option-label {
+    flex:1;
+    font-weight:500;
+    color:#2d3748;
+}
+.source-option-value {
+    background:#dbeafe;
+    color:#1e40af;
+    padding:6px 12px;
+    border-radius:4px;
+    font-weight:600;
+    font-size:0.9em;
+    min-width:60px;
+    text-align:center;
+}
+
+/* Frequency Selection */
+.frequency-selection {
+    margin-top:15px;
+    padding-top:15px;
+    border-top:1px solid #e2e8f0;
+}
+.frequency-selection h4 {
+    margin:0 0 12px 0;
+    color:#2d3748;
+    font-size:0.95em;
+    font-weight:600;
+}
+.frequency-option {
+    display:flex;
+    align-items:center;
+    padding:10px;
+    margin-bottom:8px;
+    border-radius:6px;
+    background:#f8fafc;
+    transition:all .2s ease;
+    cursor:pointer;
+}
+.frequency-option:hover {
+    background:#f0f9ff;
+}
+.frequency-option input[type="radio"] {
+    margin-right:12px;
+    transform:scale(1.3);
+    cursor:pointer;
+}
+.frequency-option-label {
+    flex:1;
+    font-weight:500;
+    color:#2d3748;
+}
+.day-selector {
+    margin-left:30px;
+    margin-top:8px;
+    display:none;
+}
+.day-selector select {
+    padding:8px 12px;
+    border:2px solid #e2e8f0;
+    border-radius:6px;
+    font-size:0.95em;
+}
+
+/* Additional Section */
+.additional-section {
+    background:#f8fafc;
+    padding:20px;
+    border-radius:10px;
+    border:2px solid #e2e8f0;
+}
+
+.additional-note {
+    animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Submit Button */
+.submit-section {
+    text-align:center;
+    margin-top:30px;
+}
+.submit-btn {
+    background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);
+    color:white;
+    border:none;
+    padding:18px 50px;
+    font-size:1.2em;
+    border-radius:50px;
+    cursor:pointer;
+    box-shadow:0 4px 15px rgba(102,126,234,0.4);
+    transition:all 0.3s;
+    font-weight:600;
+}
+.submit-btn:hover {
+    transform:translateY(-2px);
+    box-shadow:0 6px 20px rgba(102,126,234,0.6);
+}
+.submit-btn:active {
+    transform:translateY(0);
+}
+
+/* Responsive Design */
+@media (max-width:768px) {
+    .clear-btn {
+        top:10px;
+        right:10px;
+        padding:8px 16px;
         font-size:0.85em;
-        color:#64748b;
-        margin-top:2px;
     }
-    
-    /* TPN Table */
-    .tpn-table {
-        background:white;
-        border-radius:12px;
-        overflow:hidden;
-        margin-top:20px;
-        border:2px solid #e2e8f0;
-        width:100%;
-        display:table;
-        table-layout:fixed;
+    .header {
+        padding-top:50px;
     }
-    .table-header {
-        display:table-row;
-        background:#f8fafc;
-        border-bottom:2px solid #e2e8f0;
-    }
-    .table-row {
-        display:table-row;
-        border-bottom:1px solid #f1f5f9;
-    }
-    .table-row:last-child {
-        border-bottom:none;
-    }
-    .table-cell {
-        display:table-cell;
-        padding:10px 8px;
-        text-align:center;
-        vertical-align:middle;
-        min-height:50px;
-        box-sizing:border-box;
-        border-right:1px solid #f1f5f9;
-    }
-    .table-cell:last-child {
-        border-right:none;
-    }
-    .header-cell {
-        font-weight:600;
-        color:#2d3748;
-        background:#f8fafc;
-        font-size:.9em;
-        width:25%;
-    }
-    .component-cell {
-        font-weight:500;
-        color:#2d3748;
-        text-align:left;
-        padding-left:16px;
-        font-size:.95em;
-        width:25%;
-    }
-    .result-cell {
-        font-weight:600;
-        color:#0369a1;
-        background:#f0f9ff;
-        font-size:.85em;
-        text-align:center;
-        width:25%;
-    }
-    .result-cell.volume-yellow {
-        background:#fef3c7;
-        color:#92400e;
-        border:1px solid #fcd34d;
-    }
-    .result-cell.osmol-purple {
-        background:#f3e8ff;
-        color:#7c3aed;
-        border:1px solid #c4b5fd;
-    }
-    
-    /* GIR Display */
-    .gir-display {
-        display:flex;
-        justify-content:space-between;
-        align-items:center;
-        background:white;
-        border-radius:8px;
-        padding:15px;
-        margin-top:15px;
-        border:2px solid #e2e8f0;
-    }
-    .gir-label {
-        font-weight:600;
-        color:#be185d;
-    }
-    .calc-result {
-        background:#f0f9ff;
-        padding:8px 12px;
-        border-radius:6px;
-        text-align:center;
-        font-weight:600;
-        color:#0369a1;
-        border:1px solid #bae6fd;
-    }
-    .calc-result.gir-pink {
-        background:#fce7f3;
-        color:#be185d;
-        border:1px solid #f9a8d4;
-    }
-    
-    /* Calculation Section */
-    .calculation-section {
-        background:white;
-        border-radius:12px;
-        padding:20px;
-        margin-top:15px;
-        border:2px solid #e2e8f0;
-    }
-    .calc-row {
-        display:grid;
-        grid-template-columns:2fr 1fr 1fr;
-        gap:15px;
-        align-items:center;
-        padding:12px 0;
-        border-bottom:1px solid #f1f5f9;
-    }
-    .calc-row:last-child {
-        border-bottom:none;
-    }
-    .calc-label {
-        font-weight:500;
-        color:#2d3748;
-    }
-    .calc-label.bold {
-        font-weight:700;
-        color:#1e293b;
-    }
-    
-    /* Total Section */
-    .total-section {
-        background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);
-        color:white;
-        border-radius:12px;
-        padding:25px;
-        text-align:center;
-        margin-top:25px;
-    }
-    .total-section h2 {
-        margin:0 0 15px 0;
-        font-size:1.6em;
-    }
-    .total-calories {
-        font-size:2.5em;
-        font-weight:700;
-        margin:10px 0;
-    }
-    
-    /* Route Selection */
-    .route-selection {
-        margin-top:20px;
-    }
-    .route-selection h3 {
-        color:#2d3748;
-        margin:0 0 15px 0;
-        font-size:1.1em;
-        font-weight:600;
+    .input-group {
+        grid-template-columns:1fr;
     }
     .route-options {
-        display:flex;
-        gap:15px;
-    }
-    .route-option {
-        flex:1;
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        padding:15px;
-        border-radius:8px;
-        border:2px solid #e2e8f0;
-        background:#f8fafc;
-        cursor:pointer;
-        transition:all .3s ease;
-    }
-    .route-option:hover {
-        background:#f0f9ff;
-        border-color:#4facfe;
-    }
-    .route-option input[type="radio"] {
-        margin-right:10px;
-        transform:scale(1.3);
-        cursor:pointer;
-    }
-    .route-option label {
-        font-weight:500;
-        color:#2d3748;
-        cursor:pointer;
-        font-size:1em;
-    }
-    .route-option input[type="radio"]:checked + label {
-        color:#4facfe;
-        font-weight:600;
-    }
-    
-    /* Electrolyte Styles */
-    .electrolyte-item {
-        background:white;
-        border-radius:8px;
-        padding:20px;
-        margin-bottom:15px;
-        border:2px solid #e2e8f0;
-    }
-    .electrolyte-header {
-        display:grid;
-        grid-template-columns:1fr 1fr;
-        gap:15px;
-        margin-bottom:15px;
-    }
-    .electrolyte-input {
-        display:flex;
         flex-direction:column;
     }
-    .electrolyte-input label {
-        color:#4a5568;
-        font-weight:600;
-        margin-bottom:8px;
-        font-size:1em;
+    .electrolyte-header {
+        grid-template-columns:1fr;
     }
-    .electrolyte-input input {
-        padding:12px 16px;
-        border:2px solid #e2e8f0;
+    .tpn-table {
+        font-size:.85em;
         border-radius:8px;
-        font-size:1em;
-        transition:all .3s ease;
-        background:white;
-        -webkit-appearance:none;
-        -moz-appearance:textfield;
     }
-    .electrolyte-input input::-webkit-outer-spin-button,
-    .electrolyte-input input::-webkit-inner-spin-button {
-        -webkit-appearance:none;
-        margin:0;
+    .table-cell {
+        padding:8px 4px;
+        min-height:45px;
     }
-    .electrolyte-input input:focus {
-        outline:none;
-        border-color:#4facfe;
-        box-shadow:0 0 0 3px rgba(79,172,254,.1);
+    .component-cell {
+        padding-left:8px;
+        font-size:.85em;
     }
-    .electrolyte-result {
-        background:#f0fdf4;
-        border:2px solid #86efac;
-        border-radius:8px;
-        padding:12px;
+    .result-cell {
+        font-size:.8em;
+    }
+    .header-cell {
+        font-size:.8em;
+        padding:8px 4px;
+    }
+    .gir-display {
+        flex-direction:column;
+        gap:10px;
         text-align:center;
     }
-    .electrolyte-result-label {
-        font-size:0.85em;
-        color:#166534;
-        font-weight:500;
-        margin-bottom:4px;
+    .container {
+        margin:10px;
+        border-radius:12px;
     }
-    .electrolyte-result-value {
+    .content {
+        padding:20px;
+    }
+    .total-section {
+        padding:20px;
+    }
+    .total-section h2 {
         font-size:1.3em;
-        color:#166534;
-        font-weight:700;
     }
-    
-    /* Source Selection */
-    .source-selection {
-        margin-top:15px;
-        padding-top:15px;
-        border-top:1px solid #e2e8f0;
+    .total-calories {
+        font-size:2em;
     }
-    .source-selection h4 {
-        margin:0 0 12px 0;
-        color:#2d3748;
-        font-size:0.95em;
-        font-weight:600;
+    .product-options {
+        gap:8px;
     }
-    .source-option {
-        display:flex;
-        align-items:center;
-        padding:10px;
-        margin-bottom:8px;
-        border-radius:6px;
-        background:#f8fafc;
-        transition:all .2s ease;
-        cursor:pointer;
+    .fat-admin-section {
+        padding:15px;
     }
-    .source-option:hover {
-        background:#f0f9ff;
+    .fat-admin-options {
+        flex-direction:column;
+        gap:10px;
     }
-    .source-option input[type="radio"] {
-        margin-right:12px;
-        transform:scale(1.3);
-        cursor:pointer;
+    .fat-admin-radio {
+        width:100%;
     }
-    .source-option-label {
-        flex:1;
-        font-weight:500;
-        color:#2d3748;
-    }
-    .source-option-value {
-        background:#dbeafe;
-        color:#1e40af;
-        padding:6px 12px;
-        border-radius:4px;
-        font-weight:600;
+    .fat-rate-display,
+    .fat-split-display {
         font-size:0.9em;
-        min-width:60px;
-        text-align:center;
     }
-    
-    /* Frequency Selection */
-    .frequency-selection {
-        margin-top:15px;
-        padding-top:15px;
-        border-top:1px solid #e2e8f0;
+    .product-option {
+        padding:10px 12px;
     }
-    .frequency-selection h4 {
-        margin:0 0 12px 0;
-        color:#2d3748;
-        font-size:0.95em;
-        font-weight:600;
-    }
-    .frequency-option {
-        display:flex;
-        align-items:center;
-        padding:10px;
-        margin-bottom:8px;
-        border-radius:6px;
-        background:#f8fafc;
-        transition:all .2s ease;
-        cursor:pointer;
-    }
-    .frequency-option:hover {
-        background:#f0f9ff;
-    }
-    .frequency-option input[type="radio"] {
-        margin-right:12px;
-        transform:scale(1.3);
-        cursor:pointer;
-    }
-    .frequency-option-label {
-        flex:1;
-        font-weight:500;
-        color:#2d3748;
-    }
-    .day-selector {
-        margin-left:30px;
-        margin-top:8px;
-        display:none;
-    }
-    .day-selector select {
-        padding:8px 12px;
-        border:2px solid #e2e8f0;
-        border-radius:6px;
-        font-size:0.95em;
-    }
-    
-    /* Submit Button */
-    .submit-section {
-        text-align:center;
-        margin-top:30px;
-    }
-    .submit-btn {
-        background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);
-        color:white;
-        border:none;
-        padding:18px 50px;
-        font-size:1.2em;
-        border-radius:50px;
-        cursor:pointer;
-        box-shadow:0 4px 15px rgba(102,126,234,0.4);
-        transition:all 0.3s;
-        font-weight:600;
-    }
-    .submit-btn:hover {
-        transform:translateY(-2px);
-        box-shadow:0 6px 20px rgba(102,126,234,0.6);
-    }
-    .submit-btn:active {
-        transform:translateY(0);
-    }
-    
-    /* Responsive Design */
-    @media (max-width:768px) {
-        .clear-btn {
-            top:10px;
-            right:10px;
-            padding:8px 16px;
-            font-size:0.85em;
-        }
-        .header {
-            padding-top:50px;
-        }
-        .input-group {
-            grid-template-columns:1fr;
-        }
-        .route-options {
-            flex-direction:column;
-        }
-        .electrolyte-header {
-            grid-template-columns:1fr;
-        }
-        .tpn-table {
-            font-size:.85em;
-            border-radius:8px;
-        }
-        .table-cell {
-            padding:8px 4px;
-            min-height:45px;
-        }
-        .component-cell {
-            padding-left:8px;
-            font-size:.85em;
-        }
-        .result-cell {
-            font-size:.8em;
-        }
-        .header-cell {
-            font-size:.8em;
-            padding:8px 4px;
-        }
-        .gir-display {
-            flex-direction:column;
-            gap:10px;
-            text-align:center;
-        }
-        .container {
-            margin:10px;
-            border-radius:12px;
-        }
-        .content {
-            padding:20px;
-        }
-        .total-section {
-            padding:20px;
-        }
-        .total-section h2 {
-            font-size:1.3em;
-        }
-        .total-calories {
-            font-size:2em;
-        }
-        .product-options {
-            gap:8px;
-        }
-        .product-option {
-            padding:10px 12px;
-        }
-    }
+}
+```
 
-        /* ✅ Real-time Display */
-        .realtime-display {
-            background:#e0f2fe;
-            border:2px solid #0ea5e9;
-            border-radius:8px;
-            padding:12px 16px;
-            margin-top:10px;
-            display:none;
-        }
-        .realtime-display.active {
-            display:block;
-        }
-        .realtime-label {
-            font-size:0.85em;
-            color:#0369a1;
-            font-weight:600;
-            margin-bottom:6px;
-        }
-        .realtime-values {
-            display:flex;
-            gap:15px;
-            flex-wrap:wrap;
-        }
-        .realtime-item {
-            display:flex;
-            flex-direction:column;
-        }
-        .realtime-item-label {
-            font-size:0.75em;
-            color:#64748b;
-            font-weight:500;
-        }
-        .realtime-item-value {
-            font-size:1.1em;
-            color:#0369a1;
-            font-weight:700;
-        }
-        
-        /* ✅ Fat Options */
-        .fat-options-container {
-            margin-top:20px;
-            padding:20px;
-            background:#fef3c7;
-            border-radius:8px;
-            border:2px solid #fbbf24;
-        }
-        .fat-option-group {
-            margin-bottom:20px;
-        }
-        .fat-option-group:last-child {
-            margin-bottom:0;
-        }
-        .fat-option-group h4 {
-            color:#92400e;
-            font-size:0.95em;
-            font-weight:600;
-            margin:0 0 10px 0;
-        }
-        .fat-option-item {
-            display:flex;
-            align-items:center;
-            padding:10px 12px;
-            background:white;
-            border-radius:6px;
-            margin-bottom:8px;
-            border:2px solid #fde68a;
-            cursor:pointer;
-            transition:all .2s ease;
-        }
-        .fat-option-item:hover {
-            background:#fffbeb;
-            border-color:#fbbf24;
-        }
-        .fat-option-item.selected {
-            background:#fef3c7;
-            border-color:#f59e0b;
-            box-shadow:0 2px 6px rgba(245,158,11,0.3);
-        }
-        .fat-option-item.warning {
-            border-color:#dc2626;
-            background:#fee2e2;
-        }
-        .fat-option-item.warning .fat-option-label {
-            color:#dc2626;
-            font-weight:700;
-        }
-        .fat-option-item input[type="radio"] {
-            margin-right:10px;
-            transform:scale(1.2);
-            cursor:pointer;
-        }
-        .fat-option-label {
-            flex:1;
-            font-weight:500;
-            color:#2d3748;
-        }
-        .fat-option-result {
-            background:#dcfce7;
-            color:#166534;
-            padding:6px 12px;
-            border-radius:4px;
-            font-weight:600;
-            font-size:0.9em;
-        }
-
-    </style>
+</style>
 <style>
     @view-transition {
         navigation: auto;
@@ -758,7 +792,6 @@
 <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
 <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
 
-
 </head>
 
 <body>
@@ -766,775 +799,768 @@
         <!-- Clear Data Button -->
         <button id="clearBtn" class="clear-btn">🗑️ Clear data</button>
 
+```
+<!-- Header -->
+<header class="header">
+    <h1 id="app-title">TPN Calculator</h1>
+    <p id="subtitle">สำหรับเด็ก</p>
+</header>
 
-    <!-- Header -->
-    <header class="header">
-        <h1 id="app-title">TPN Calculator</h1>
-        <p id="subtitle">สำหรับเด็ก</p>
-    </header>
+<div class="content">
+    <!-- Order Date Section -->
+    <section class="section">
+        <h2>วันที่ Order TPN</h2>
+        <div class="input-group">
+            <div class="input-field">
+                <label for="order-date">วันที่</label>
+                <div class="input-with-unit">
+                    <input type="date" id="order-date" style="padding-right:16px;">
+                </div>
+                <div class="date-warning">⚠️ เลือกวันที่ให้ถูกต้องทุกครั้ง</div>
+            </div>
+            <div class="input-field"><!-- spacer --></div>
+        </div>
+    </section>
     
-    <div class="content">
-        <!-- Order Date Section -->
-        <section class="section">
-            <h2>วันที่ Order TPN</h2>
-            <div class="input-group">
-                <div class="input-field">
-                    <label for="order-date">วันที่</label>
-                    <div class="input-with-unit">
-                        <input type="date" id="order-date" style="padding-right:16px;">
-                    </div>
-                    <div class="date-warning">⚠️ เลือกวันที่ให้ถูกต้องทุกครั้ง</div>
-                </div>
-                <div class="input-field"><!-- spacer --></div>
-            </div>
-        </section>
+    <!-- Patient Info Section -->
+    <section class="section">
+        <h2>ข้อมูลผู้ป่วย</h2>
         
-        <!-- Patient Info Section -->
-        <section class="section">
-            <h2>ข้อมูลผู้ป่วย</h2>
+        <!-- Camera Section for Patient Sticker -->
+        <div style="margin-bottom: 20px;">
+            <h3 style="color: #2d3748; font-size: 1.05em; font-weight: 600; margin-bottom: 12px;">
+                📸 ถ่ายรูป Patient Sticker
+            </h3>
             
-            <!-- Camera Section for Patient Sticker -->
-            <div style="margin-bottom: 20px;">
-                <h3 style="color: #2d3748; font-size: 1.05em; font-weight: 600; margin-bottom: 12px;">
-                    📸 ถ่ายรูป Patient Sticker
-                </h3>
-                
-                <!-- Camera Buttons -->
-                <div style="display: flex; gap: 10px; margin-bottom: 15px; flex-wrap: wrap;">
-                    <button type="button" id="openCameraBtn" class="btn" 
-                            style="background: #10b981; padding: 12px 20px; border-radius: 8px; 
-                                   display: inline-flex; align-items: center; gap: 8px; 
-                                   box-shadow: 0 4px 12px rgba(16,185,129,0.4); color: white; 
-                                   border: none; cursor: pointer; font-weight: 600;">
-                        📷 เปิดกล้องถ่ายรูป
-                    </button>
-                    <button type="button" id="clearStickerBtn" class="btn" 
-                            style="background: #ef4444; padding: 12px 20px; border-radius: 8px; 
-                                   display: none; box-shadow: 0 4px 12px rgba(239,68,68,0.4); 
-                                   color: white; border: none; cursor: pointer; font-weight: 600;">
-                        🗑️ ลบรูป
-                    </button>
-                </div>
-                
-                <!-- Sticker Preview -->
-                <div id="stickerPreviewContainer" 
-                     style="display: none; border: 2px dashed #4facfe; border-radius: 8px; 
-                            padding: 15px; background: #f0f9ff; text-align: center;">
-                    <p style="margin-bottom: 10px; font-weight: 600; color: #0369a1;">
-                        ✅ รูป Patient Sticker:
-                    </p>
-                    <img id="stickerPreview" src="" alt="Patient Sticker" 
-                         style="max-width: 200px; max-height: 160px; border: 2px solid #e2e8f0; 
-                                border-radius: 4px; background: white;
-                                image-rendering: -webkit-optimize-contrast;
-                                image-rendering: crisp-edges;">
-                </div>
-                
-                <!-- Camera Modal -->
-                <div id="cameraModal" 
-                     style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); 
-                            z-index: 9999; justify-content: center; align-items: center; padding: 20px;">
-                    <div style="background: white; border-radius: 12px; padding: 20px; 
-                                max-width: 90%; max-height: 90%; overflow: auto;">
-                        <h3 style="margin-bottom: 15px; text-align: center; color: #2d3748;">
-                            📸 ถ่ายรูป Patient Sticker
-                        </h3>
-                        <p style="text-align: center; color: #64748b; margin-bottom: 15px; font-size: 0.9em;">
-                            วางสติกเกอร์ให้อยู่ในกรอบแล้วกดถ่ายรูป
-                        </p>
-                        
-                        <!-- Camera Frame (5cm x 3cm) -->
-                        <div id="cameraFrame" 
-                             style="width: 5cm; height: 3cm; border: 2px solid #e2e8f0; 
-                                    border-radius: 8px; margin: 0 auto 15px auto; position: relative; 
-                                    overflow: hidden; background: #000;">
-                            <video id="cameraVideo" autoplay playsinline 
-                                   style="position: absolute; top: 50%; left: 50%; 
-                                          transform: translate(-50%, -50%); min-width: 100%; 
-                                          min-height: 100%; object-fit: cover;">
-                            </video>
-                        </div>
-                        
-                        <canvas id="cameraCanvas" style="display: none;"></canvas>
-                        
-                        <!-- Camera Action Buttons -->
-                        <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
-                            <button type="button" id="captureBtn" class="btn" 
-                                    style="background: #10b981; padding: 12px 24px; border-radius: 8px; 
-                                           font-weight: 600; color: white; border: none; cursor: pointer;">
-                                📷 ถ่ายรูป
-                            </button>
-                            <button type="button" id="closeCameraBtn" class="btn secondary" 
-                                    style="padding: 12px 24px; border-radius: 8px; font-weight: 600; 
-                                           background: #6b7280; color: white; border: none; cursor: pointer;">
-                                ❌ ยกเลิก
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Manual Input Section (Collapsible) -->
-            <div style="margin-top: 20px; border-top: 1px solid #e2e8f0; padding-top: 15px;">
-                <button type="button" id="toggleManualInputBtn" 
-                        style="background: #f8fafc; border: 2px solid #e2e8f0; padding: 10px 16px; 
-                               border-radius: 8px; cursor: pointer; font-weight: 600; color: #4a5568; 
-                               width: 100%; text-align: left; display: flex; justify-content: space-between; 
-                               align-items: center; transition: all 0.3s; 
-                               font-family: 'Sarabun', 'Noto Sans Thai', Arial, sans-serif;">
-                    <span>📝 หรือกรอกข้อมูลเอง (ไม่ใช้รูป Sticker)</span>
-                    <span id="toggleIcon" style="font-size: 0.8em;">▼</span>
+            <!-- Camera Buttons -->
+            <div style="display: flex; gap: 10px; margin-bottom: 15px; flex-wrap: wrap;">
+                <button type="button" id="openCameraBtn" class="btn" 
+                        style="background: #10b981; padding: 12px 20px; border-radius: 8px; 
+                               display: inline-flex; align-items: center; gap: 8px; 
+                               box-shadow: 0 4px 12px rgba(16,185,129,0.4); color: white; 
+                               border: none; cursor: pointer; font-weight: 600;">
+                    📷 เปิดกล้องถ่ายรูป
                 </button>
-                
-                <div id="manualInputSection" 
-                     style="display: none; margin-top: 15px; padding: 15px; background: #f8fafc; 
-                            border-radius: 8px; border: 2px solid #e2e8f0;">
-                    <div class="input-group">
-                        <div class="input-field">
-                            <label for="patient-hn">HN</label>
-                            <div class="input-with-unit">
-                                <input type="text" id="patient-hn" placeholder="กรอก HN" 
-                                       style="padding-right:16px;">
-                            </div>
-                        </div>
-                        <div class="input-field">
-                            <label for="patient-name">ชื่อ-นามสกุล</label>
-                            <div class="input-with-unit">
-                                <input type="text" id="patient-name" placeholder="กรอกชื่อผู้ป่วย" 
-                                       style="padding-right:16px;">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="input-group">
-                        <div class="input-field">
-                            <label for="patient-ward">Ward</label>
-                            <div class="input-with-unit">
-                                <input type="text" id="patient-ward" placeholder="กรอก Ward" 
-                                       style="padding-right:16px;">
-                            </div>
-                        </div>
-                        <div class="input-field"><!-- spacer --></div>
-                    </div>
-                </div>
+                <button type="button" id="clearStickerBtn" class="btn" 
+                        style="background: #ef4444; padding: 12px 20px; border-radius: 8px; 
+                               display: none; box-shadow: 0 4px 12px rgba(239,68,68,0.4); 
+                               color: white; border: none; cursor: pointer; font-weight: 600;">
+                    🗑️ ลบรูป
+                </button>
             </div>
             
-            <!-- Route Selection -->
-            <div class="route-selection">
-                <h3>Route การให้ TPN</h3>
-                <div class="route-options">
-                    <label class="route-option">
-                        <input type="radio" name="tpn-route" value="central" id="route-central" checked />
-                        <label for="route-central">Central Line</label>
-                    </label>
-                    <label class="route-option">
-                        <input type="radio" name="tpn-route" value="peripheral" id="route-peripheral" />
-                        <label for="route-peripheral">Peripheral Line</label>
-                    </label>
+            <!-- Sticker Preview -->
+            <div id="stickerPreviewContainer" 
+                 style="display: none; border: 2px dashed #4facfe; border-radius: 8px; 
+                        padding: 15px; background: #f0f9ff; text-align: center;">
+                <p style="margin-bottom: 10px; font-weight: 600; color: #0369a1;">
+                    ✅ รูป Patient Sticker:
+                </p>
+                <img id="stickerPreview" src="" alt="Patient Sticker" 
+                     style="max-width: 200px; max-height: 160px; border: 2px solid #e2e8f0; 
+                            border-radius: 4px; background: white;
+                            image-rendering: -webkit-optimize-contrast;
+                            image-rendering: crisp-edges;">
+            </div>
+            
+            <!-- Camera Modal -->
+            <div id="cameraModal" 
+                 style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9); 
+                        z-index: 9999; justify-content: center; align-items: center; padding: 20px;">
+                <div style="background: white; border-radius: 12px; padding: 20px; 
+                            max-width: 90%; max-height: 90%; overflow: auto;">
+                    <h3 style="margin-bottom: 15px; text-align: center; color: #2d3748;">
+                        📸 ถ่ายรูป Patient Sticker
+                    </h3>
+                    <p style="text-align: center; color: #64748b; margin-bottom: 15px; font-size: 0.9em;">
+                        วางสติกเกอร์ให้อยู่ในกรอบแล้วกดถ่ายรูป
+                    </p>
+                    
+                    <!-- Camera Frame (5cm x 3cm) -->
+                    <div id="cameraFrame" 
+                         style="width: 5cm; height: 3cm; border: 2px solid #e2e8f0; 
+                                border-radius: 8px; margin: 0 auto 15px auto; position: relative; 
+                                overflow: hidden; background: #000;">
+                        <video id="cameraVideo" autoplay playsinline 
+                               style="position: absolute; top: 50%; left: 50%; 
+                                      transform: translate(-50%, -50%); min-width: 100%; 
+                                      min-height: 100%; object-fit: cover;">
+                        </video>
+                    </div>
+                    
+                    <canvas id="cameraCanvas" style="display: none;"></canvas>
+                    
+                    <!-- Camera Action Buttons -->
+                    <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+                        <button type="button" id="captureBtn" class="btn" 
+                                style="background: #10b981; padding: 12px 24px; border-radius: 8px; 
+                                       font-weight: 600; color: white; border: none; cursor: pointer;">
+                            📷 ถ่ายรูป
+                        </button>
+                        <button type="button" id="closeCameraBtn" class="btn secondary" 
+                                style="padding: 12px 24px; border-radius: 8px; font-weight: 600; 
+                                       background: #6b7280; color: white; border: none; cursor: pointer;">
+                            ❌ ยกเลิก
+                        </button>
+                    </div>
                 </div>
             </div>
-        </section>
+        </div>
         
-        <!-- Basic Information Section -->
-        <section class="section">
-            <h2>ข้อมูลพื้นฐาน</h2>
-            <div class="input-group">
-                <div class="input-field">
-                    <label for="bw">น้ำหนักตัว (BW)</label>
-                    <div class="input-with-unit">
-                        <input type="number" inputmode="decimal" id="bw" step="0.01" 
-                               placeholder="กรอกน้ำหนักตัว"/>
-                        <span class="unit">kg</span>
+        <!-- Manual Input Section (Collapsible) -->
+        <div style="margin-top: 20px; border-top: 1px solid #e2e8f0; padding-top: 15px;">
+            <button type="button" id="toggleManualInputBtn" 
+                    style="background: #f8fafc; border: 2px solid #e2e8f0; padding: 10px 16px; 
+                           border-radius: 8px; cursor: pointer; font-weight: 600; color: #4a5568; 
+                           width: 100%; text-align: left; display: flex; justify-content: space-between; 
+                           align-items: center; transition: all 0.3s; 
+                           font-family: 'Sarabun', 'Noto Sans Thai', Arial, sans-serif;">
+                <span>📝 หรือกรอกข้อมูลเอง (ไม่ใช้รูป Sticker)</span>
+                <span id="toggleIcon" style="font-size: 0.8em;">▼</span>
+            </button>
+            
+            <div id="manualInputSection" 
+                 style="display: none; margin-top: 15px; padding: 15px; background: #f8fafc; 
+                        border-radius: 8px; border: 2px solid #e2e8f0;">
+                <div class="input-group">
+                    <div class="input-field">
+                        <label for="patient-hn">HN</label>
+                        <div class="input-with-unit">
+                            <input type="text" id="patient-hn" placeholder="กรอก HN" 
+                                   style="padding-right:16px;">
+                        </div>
+                    </div>
+                    <div class="input-field">
+                        <label for="patient-name">ชื่อ-นามสกุล</label>
+                        <div class="input-with-unit">
+                            <input type="text" id="patient-name" placeholder="กรอกชื่อผู้ป่วย" 
+                                   style="padding-right:16px;">
+                        </div>
                     </div>
                 </div>
-                <div class="input-field">
-                    <label for="rate">Rate TPN</label>
-                    <div class="input-with-unit">
-                        <input type="number" inputmode="decimal" id="rate" step="0.1" 
-                               placeholder="กรอกอัตราการให้"/>
-                        <span class="unit">ml/hr</span>
+                <div class="input-group">
+                    <div class="input-field">
+                        <label for="patient-ward">Ward</label>
+                        <div class="input-with-unit">
+                            <input type="text" id="patient-ward" placeholder="กรอก Ward" 
+                                   style="padding-right:16px;">
+                        </div>
                     </div>
+                    <div class="input-field"><!-- spacer --></div>
                 </div>
             </div>
-            <div class="input-group">
-                <div class="input-field">
-                    <label for="bag">ปริมาตร Bag TPN (คำนวนอัตโนมัติ)</label>
-                    <div class="input-with-unit">
-                        <input type="number" inputmode="numeric" id="bag" step="1" 
-                               placeholder="คำนวนจาก Rate"/>
-                        <span class="unit">ml</span>
-                    </div>
-                </div>
-                <div class="input-field"><!-- spacer --></div>
-            </div>
-        </section>
+        </div>
         
-        <!-- Macronutrients Section -->
-        <section class="section">
-            <h2>Macronutrients</h2>
-            
-            <!-- Macronutrient Inputs -->
-            <div class="input-group">
-                <div class="input-field">
-                    <label for="protein">Protein</label>
-                    <div class="input-with-unit">
-                        <input type="number" inputmode="decimal" id="protein" step="0.1" 
-                               placeholder="กรอกปริมาณโปรตีน"/>
-                        <span class="unit">g/kg/day</span>
-                    </div>
-                <div class="realtime-display" id="protein-realtime">
-                    
-                    <div class="realtime-values">
-                        <div class="realtime-item">
-                            <span class="realtime-item-label">Volume</span>
-                            <span class="realtime-item-value" id="protein-vol-rt">0 ml</span>
-                        </div>
-                        <div class="realtime-item">
-                            <span class="realtime-item-label">Calories</span>
-                            <span class="realtime-item-value" id="protein-cal-rt">0 kcal</span>
-                        </div>
-                        <div class="realtime-item">
-                            <span class="realtime-item-label">mOsmol/L</span>
-                            <span class="realtime-item-value" id="protein-osm-rt">0</span>
-                        </div>
-                    </div>
-                </div>
-                </div>
-                <div class="input-field">
-                    <label for="fat">Fat</label>
-                    <div class="input-with-unit">
-                        <input type="number" inputmode="decimal" id="fat" step="0.1" 
-                               placeholder="กรอกปริมาณไขมัน"/>
-                        <span class="unit">g/kg/day</span>
-                    </div>
-                <div class="realtime-display" id="fat-realtime">
-                    
-                    <div class="realtime-values">
-                        <div class="realtime-item">
-                            <span class="realtime-item-label">Volume</span>
-                            <span class="realtime-item-value" id="fat-vol-rt">0 ml</span>
-                        </div>
-                        <div class="realtime-item">
-                            <span class="realtime-item-label">Calories</span>
-                            <span class="realtime-item-value" id="fat-cal-rt">0 kcal</span>
-                        </div>
-                    </div>
-                </div>
+        <!-- Route Selection -->
+        <div class="route-selection">
+            <h3>Route การให้ TPN</h3>
+            <div class="route-options">
+                <label class="route-option">
+                    <input type="radio" name="tpn-route" value="central" id="route-central" checked />
+                    <label for="route-central">Central Line</label>
+                </label>
+                <label class="route-option">
+                    <input type="radio" name="tpn-route" value="peripheral" id="route-peripheral" />
+                    <label for="route-peripheral">Peripheral Line</label>
+                </label>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Basic Information Section -->
+    <section class="section">
+        <h2>ข้อมูลพื้นฐาน</h2>
+        <div class="input-group">
+            <div class="input-field">
+                <label for="bw">น้ำหนักตัว (BW)</label>
+                <div class="input-with-unit">
+                    <input type="number" inputmode="decimal" id="bw" step="0.01" 
+                           placeholder="กรอกน้ำหนักตัว"/>
+                    <span class="unit">kg</span>
                 </div>
             </div>
-            
-            <div class="input-group">
-                <div class="input-field">
-                    <label for="dextrose">%Dextrose</label>
-                    <div class="input-with-unit">
-                        <input type="number" inputmode="decimal" id="dextrose" step="0.1" 
-                               placeholder="กรอกเปอร์เซ็นต์ Dextrose"/>
-                        <span class="unit">%</span>
+            <div class="input-field">
+                <label for="rate">Rate TPN</label>
+                <div class="input-with-unit">
+                    <input type="number" inputmode="decimal" id="rate" step="0.1" 
+                           placeholder="กรอกอัตราการให้"/>
+                    <span class="unit">ml/hr</span>
+                </div>
+            </div>
+        </div>
+        <div class="input-group">
+            <div class="input-field">
+                <label for="bag">ปริมาตร Bag TPN (คำนวนอัตโนมัติ)</label>
+                <div class="input-with-unit">
+                    <input type="number" inputmode="numeric" id="bag" step="1" 
+                           placeholder="คำนวนจาก Rate"/>
+                    <span class="unit">ml</span>
+                </div>
+            </div>
+            <div class="input-field"><!-- spacer --></div>
+        </div>
+    </section>
+    
+    <!-- Macronutrients Section -->
+    <section class="section">
+        <h2>Macronutrients</h2>
+        
+        <!-- Macronutrient Inputs -->
+        <div class="input-group">
+            <div class="input-field">
+                <label for="protein">Protein</label>
+                <div class="input-with-unit">
+                    <input type="number" inputmode="decimal" id="protein" step="0.1" 
+                           placeholder="กรอกปริมาณโปรตีน"/>
+                    <span class="unit">g/kg/day</span>
+                </div>
+            </div>
+            <div class="input-field">
+                <label for="fat">Fat</label>
+                <div class="input-with-unit">
+                    <input type="number" inputmode="decimal" id="fat" step="0.1" 
+                           placeholder="กรอกปริมาณไขมัน"/>
+                    <span class="unit">g/kg/day</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="input-group">
+            <div class="input-field">
+                <label for="dextrose">%Dextrose</label>
+                <div class="input-with-unit">
+                    <input type="number" inputmode="decimal" id="dextrose" step="0.1" 
+                           placeholder="กรอกเปอร์เซ็นต์ Dextrose"/>
+                    <span class="unit">%</span>
+                </div>
+            </div>
+            <div class="input-field"><!-- spacer --></div>
+        </div>
+        
+        <!-- ✅ GIR Display - Moved here under %Dextrose -->
+        <div class="gir-display">
+            <div class="gir-label">GIR (Glucose Infusion Rate)</div>
+            <div class="calc-result gir-pink" id="gir-result">0 mg/kg/min</div>
+        </div>
+        
+        <!-- Protein Product Selection -->
+        <div class="product-selection">
+            <h3>🧬 เลือก Protein Product</h3>
+            <div class="product-options">
+                <label class="product-option" data-product="protein">
+                    <input type="radio" name="protein-product" value="aminoven" checked>
+                    <div class="product-option-label">
+                        <div class="product-name">10% Aminoven® infant</div>
+                        <div class="product-info">สำหรับอายุ 0-1 เดือน</div>
                     </div>
-                <div class="realtime-display" id="dextrose-realtime">
-                    
-                    <div class="realtime-values">
-                        <div class="realtime-item">
-                            <span class="realtime-item-label">Volume</span>
-                            <span class="realtime-item-value" id="dextrose-vol-rt">0 ml</span>
-                        </div>
-                        <div class="realtime-item">
-                            <span class="realtime-item-label">Calories</span>
-                            <span class="realtime-item-value" id="dextrose-cal-rt">0 kcal</span>
-                        </div>
-                        <div class="realtime-item">
-                            <span class="realtime-item-label">mOsmol/L</span>
-                            <span class="realtime-item-value" id="dextrose-osm-rt">0</span>
-                        </div>
+                </label>
+                <label class="product-option" data-product="protein">
+                    <input type="radio" name="protein-product" value="amiparen">
+                    <div class="product-option-label">
+                        <div class="product-name">10% Amiparen®</div>
+                        <div class="product-info">สำหรับอายุมากกว่า 1 เดือน</div>
                     </div>
-                </div>
-                </div>
-                <div class="input-field"><!-- spacer --></div>
+                </label>
+                <label class="product-option" data-product="protein">
+                    <input type="radio" name="protein-product" value="aminoplasmal">
+                    <div class="product-option-label">
+                        <div class="product-name">15% Aminoplasmal®</div>
+                        <div class="product-info">ความเข้มข้นสูง (ปริมาตรน้อยกว่า)</div>
+                    </div>
+                </label>
+            </div>
+        </div>
+        
+        <!-- Fat Product Selection -->
+        <div class="product-selection">
+            <h3>💧 เลือก Fat Product</h3>
+            <div class="product-options">
+                <label class="product-option" data-product="fat">
+                    <input type="radio" name="fat-product" value="smof" checked>
+                    <div class="product-option-label">
+                        <div class="product-name">20% SMOF lipid</div>
+                        <div class="product-info">Mixed lipid emulsion</div>
+                    </div>
+                </label>
+                <label class="product-option" data-product="fat">
+                    <input type="radio" name="fat-product" value="intralipid">
+                    <div class="product-option-label">
+                        <div class="product-name">20% Intralipid</div>
+                        <div class="product-info">Soybean oil emulsion</div>
+                    </div>
+                </label>
             </div>
             
-            <!-- ✅ GIR Display - Moved here under %Dextrose -->
-            <div class="gir-display">
-                <div class="gir-label">GIR (Glucose Infusion Rate)</div>
-                <div class="calc-result gir-pink" id="gir-result">0 mg/kg/min</div>
-            </div>
-            
-            <!-- Protein Product Selection -->
-            <div class="product-selection">
-                <h3>🧬 เลือก Protein Product</h3>
-                <div class="product-options">
-                    <label class="product-option" data-product="protein">
-                        <input type="radio" name="protein-product" value="aminoven" checked>
-                        <div class="product-option-label">
-                            <div class="product-name">10% Aminoven® infant</div>
-                            <div class="product-info">สำหรับอายุ 0-1 เดือน</div>
-                        </div>
-                    </label>
-                    <label class="product-option" data-product="protein">
-                        <input type="radio" name="protein-product" value="amiparen">
-                        <div class="product-option-label">
-                            <div class="product-name">10% Amiparen®</div>
-                            <div class="product-info">สำหรับอายุมากกว่า 1 เดือน</div>
-                        </div>
-                    </label>
-                    <label class="product-option" data-product="protein">
-                        <input type="radio" name="protein-product" value="aminoplasmal">
-                        <div class="product-option-label">
-                            <div class="product-name">15% Aminoplasmal®</div>
-                            <div class="product-info">ความเข้มข้นสูง (ปริมาตรน้อยกว่า)</div>
-                        </div>
-                    </label>
-                </div>
-            </div>
-            
-            <!-- Fat Product Selection -->
-            <div class="product-selection">
-                <h3>💧 เลือก Fat Product</h3>
-                <div class="product-options">
-                    <label class="product-option" data-product="fat">
-                        <input type="radio" name="fat-product" value="smof" checked>
-                        <div class="product-option-label">
-                            <div class="product-name">20% SMOF lipid</div>
-                            <div class="product-info">Mixed lipid emulsion</div>
-                        </div>
-                    </label>
-                    <label class="product-option" data-product="fat">
-                        <input type="radio" name="fat-product" value="intralipid">
-                        <div class="product-option-label">
-                            <div class="product-name">20% Intralipid</div>
-                            <div class="product-info">Soybean oil emulsion</div>
-                        </div>
-                    </label>
-                </div>
-            </div>
-            
-            
-            
-            <!-- ✅ Fat Options -->
-            <div class="fat-options-container">
-                <h3 style="margin:0 0 15px 0; color:#92400e; font-size:1.05em;">📦 วิธีการให้ Fat</h3>
+            <!-- Fat Administration Options -->
+            <div class="fat-admin-section">
+                <h3>💉 วิธีการให้ Fat</h3>
                 
                 <!-- การไล่สาย -->
-                <div class="fat-option-group">
-                    <h4>การไล่สาย:</h4>
-                    <label class="fat-option-item warning" data-fat-option="flush">
-                        <input type="radio" name="fat-flush" value="none">
-                        <span class="fat-option-label">⚠️ ไม่ไล่สาย</span>
-                    </label>
-                    <label class="fat-option-item selected" data-fat-option="flush">
-                        <input type="radio" name="fat-flush" value="+6ml" checked>
-                        <span class="fat-option-label">+ 6 ml ไล่สาย</span>
-                    </label>
+                <div class="fat-admin-group">
+                    <label class="fat-admin-label">การไล่สาย:</label>
+                    <div class="fat-admin-options">
+                        <label class="fat-admin-radio">
+                            <input type="radio" name="fat-priming" value="no-priming">
+                            <span style="color: #dc2626; font-weight: 600;">ไม่ไล่สาย</span>
+                        </label>
+                        <label class="fat-admin-radio">
+                            <input type="radio" name="fat-priming" value="priming" checked>
+                            <span>+ 6 ml ไล่สาย</span>
+                        </label>
+                    </div>
                 </div>
                 
-                <!-- IV Drip Duration -->
-                <div class="fat-option-group">
-                    <h4>IV Drip in:</h4>
-                    <label class="fat-option-item" data-fat-option="duration">
-                        <input type="radio" name="fat-duration" value="12">
-                        <span class="fat-option-label">12 hr</span>
-                        <span class="fat-option-result" id="fat-rate-12">0.167 g/kg/hr</span>
-                    </label>
-                    <label class="fat-option-item selected" data-fat-option="duration">
-                        <input type="radio" name="fat-duration" value="24" checked>
-                        <span class="fat-option-label">24 hr</span>
-                        <span class="fat-option-result" id="fat-rate-24">0.083 g/kg/hr</span>
-                    </label>
+                <!-- IV drip in -->
+                <div class="fat-admin-group">
+                    <label class="fat-admin-label">IV drip in:</label>
+                    <div class="fat-admin-options">
+                        <label class="fat-admin-radio">
+                            <input type="radio" name="fat-drip-duration" value="12">
+                            <span>12 hr</span>
+                        </label>
+                        <label class="fat-admin-radio">
+                            <input type="radio" name="fat-drip-duration" value="24" checked>
+                            <span>24 hr</span>
+                        </label>
+                    </div>
+                    <div class="fat-rate-display">
+                        <span class="fat-rate-label">Fat rate:</span>
+                        <span class="fat-rate-value" id="fat-rate-result">0 g/kg/hr</span>
+                    </div>
                 </div>
                 
-                <!-- การแบ่งเตรียม -->
-                <div class="fat-option-group">
-                    <h4>การแบ่งเตรียม:</h4>
-                    <label class="fat-option-item selected" data-fat-option="split">
-                        <input type="radio" name="fat-split" value="no" checked>
-                        <span class="fat-option-label">ไม่แบ่ง</span>
-                    </label>
-                    <label class="fat-option-item" data-fat-option="split">
-                        <input type="radio" name="fat-split" value="yes">
-                        <span class="fat-option-label">แบ่งเตรียม 2 syr</span>
-                        <span class="fat-option-result" id="fat-split-display">0 ml × 2 syr</span>
-                    </label>
-                </div>
-            </div>
-            
-            <!-- Electrolytes Section -->
-        <section class="section">
-            <h2>Electrolytes</h2>
-            
-            <!-- Sodium (Na) -->
-            <div class="electrolyte-item">
-                <div class="electrolyte-header">
-                    <div class="electrolyte-input">
-                        <label for="na">Na (mEq/kg/day)</label>
-                        <input type="text" inputmode="decimal" id="na" placeholder="กรอกปริมาณ Na">
+                <!-- แบ่งเตรียม -->
+                <div class="fat-admin-group">
+                    <label class="fat-admin-label">ตัวเลือกแบ่งเตรียม:</label>
+                    <div class="fat-admin-options">
+                        <label class="fat-admin-radio">
+                            <input type="radio" name="fat-split" value="no-split" checked>
+                            <span>ไม่แบ่ง</span>
+                        </label>
+                        <label class="fat-admin-radio">
+                            <input type="radio" name="fat-split" value="split-2">
+                            <span>แบ่งเตรียม 2 syr</span>
+                        </label>
                     </div>
-                    <div class="electrolyte-result">
-                        <div class="electrolyte-result-label">Na จาก Glycophos®</div>
-                        <div class="electrolyte-result-value" id="na-from-glycophos">0 mEq</div>
-                    </div>
-                </div>
-                <div class="source-selection">
-                    <h4>เลือกแหล่ง Na ที่ต้องการ:</h4>
-                    <label class="source-option">
-                        <input type="radio" name="na-source" value="nacl" id="nacl-radio">
-                        <span class="source-option-label">3%NaCl (0.5 mEq/ml)</span>
-                        <span class="source-option-value" id="nacl-volume">0 ml</span>
-                    </label>
-                    <label class="source-option">
-                        <input type="radio" name="na-source" value="na-acetate" id="na-acetate-radio">
-                        <span class="source-option-label">Na acetate (3 mEq/ml)</span>
-                        <span class="source-option-value" id="na-acetate-volume">0 ml</span>
-                    </label>
-                    <label class="source-option">
-                        <input type="radio" name="na-source" value="nacl-20" id="nacl20-radio">
-                        <span class="source-option-label">20% NaCl (3.4 mEq/ml)</span>
-                        <span class="source-option-value" id="nacl20-volume">0 ml</span>
-                    </label>
-                </div>
-            </div>
-            
-            <!-- Phosphorus (P) -->
-            <div class="electrolyte-item">
-                <div class="electrolyte-header">
-                    <div class="electrolyte-input">
-                        <label for="p">P (Glycophos®) (mmol/kg/day)</label>
-                        <input type="text" inputmode="decimal" id="p" placeholder="กรอกปริมาณ P">
-                    </div>
-                    <div class="electrolyte-result">
-                        <div class="electrolyte-result-label">P Volume</div>
-                        <div class="electrolyte-result-value" id="p-volume">0 ml</div>
+                    <div class="fat-split-display" id="fat-split-info" style="display: none;">
+                        <span id="fat-split-text">0 ml × 2 syr</span>
                     </div>
                 </div>
             </div>
-            
-            <!-- Calcium (Ca) -->
-            <div class="electrolyte-item">
-                <div class="electrolyte-header">
-                    <div class="electrolyte-input">
-                        <label for="ca">Ca (mmol/kg/day)</label>
-                        <input type="text" inputmode="decimal" id="ca" placeholder="กรอกปริมาณ Ca">
-                    </div>
-                    <div class="electrolyte-result">
-                        <div class="electrolyte-result-label">Ca Volume</div>
-                        <div class="electrolyte-result-value" id="ca-volume">0 ml</div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Magnesium (Mg) -->
-            <div class="electrolyte-item">
-                <div class="electrolyte-header">
-                    <div class="electrolyte-input">
-                        <label for="mg">Mg (mmol/kg/day)</label>
-                        <input type="text" inputmode="decimal" id="mg" placeholder="กรอกปริมาณ Mg">
-                    </div>
-                    <div class="electrolyte-result">
-                        <div class="electrolyte-result-label">Mg Volume</div>
-                        <div class="electrolyte-result-value" id="mg-volume">0 ml</div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Potassium (K) -->
-            <div class="electrolyte-item">
-                <div class="electrolyte-header">
-                    <div class="electrolyte-input">
-                        <label for="k">K (mEq/kg/day)</label>
-                        <input type="text" inputmode="decimal" id="k" placeholder="กรอกปริมาณ K">
-                    </div>
-                    <div style="display:grid; grid-template-columns:1fr; gap:0;"></div>
-                </div>
-                <div class="source-selection">
-                    <h4>เลือกแหล่ง K ที่ต้องการ:</h4>
-                    <label class="source-option">
-                        <input type="radio" name="k-source" value="kcl" id="kcl-radio">
-                        <span class="source-option-label">15% KCl (2 mEq/ml)</span>
-                        <span class="source-option-value" id="kcl-volume">0 ml</span>
-                    </label>
-                    <label class="source-option">
-                        <input type="radio" name="k-source" value="k-acetate" id="k-acetate-radio">
-                        <span class="source-option-label">K acetate (3 mEq/ml)</span>
-                        <span class="source-option-value" id="k-acetate-volume">0 ml</span>
-                    </label>
-                </div>
-            </div>
-        </section>
+        </div>
         
-        <!-- Micronutrients Section -->
-        <section class="section">
-            <h2>Micronutrients</h2>
-            <div class="calculation-section" style="background:#f0fdf4; border:2px solid #bbf7d0;">
-                
-                <!-- Peditrace -->
-                <div class="calc-row" style="display:flex; flex-direction:column; align-items:stretch; 
-                                              border-bottom:1px solid #f1f5f9; padding-bottom:15px;">
-                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-                        <div class="calc-label bold">Peditrace® (max 10 ml/day)</div>
-                        <div class="calc-result" id="peditrace-volume" 
-                             style="background:#dcfce7; color:#166534; border:1px solid #86efac;">
-                            0 ml
-                        </div>
-                    </div>
-                    <div class="frequency-selection">
-                        <h4>ความถี่ในการให้:</h4>
-                        <label class="frequency-option">
-                            <input type="radio" name="peditrace-freq" value="daily" checked>
-                            <span class="frequency-option-label">Per day</span>
-                        </label>
-                        <label class="frequency-option">
-                            <input type="radio" name="peditrace-freq" value="mwf">
-                            <span class="frequency-option-label">Mon Wed Fri</span>
-                        </label>
-                        <label class="frequency-option">
-                            <input type="radio" name="peditrace-freq" value="weekly">
-                            <span class="frequency-option-label">Per week</span>
-                        </label>
-                        <div class="day-selector" id="peditrace-day-selector">
-                            <select id="peditrace-day">
-                                <option value="1">Monday</option>
-                                <option value="2">Tuesday</option>
-                                <option value="3">Wednesday</option>
-                                <option value="4">Thursday</option>
-                                <option value="5">Friday</option>
-                                <option value="6">Saturday</option>
-                                <option value="0">Sunday</option>
-                            </select>
-                        </div>
+        <!-- Summary Table -->
+        <div class="tpn-table">
+            <div class="table-header">
+                <div class="table-cell header-cell">องค์ประกอบ</div>
+                <div class="table-cell header-cell">ปริมาตร (ml)</div>
+                <div class="table-cell header-cell">แคลอรี่ (kcal)</div>
+                <div class="table-cell header-cell">mOsmol/L</div>
+            </div>
+            <div class="table-row">
+                <div class="table-cell component-cell" id="protein-label">10% Aminoven® infant</div>
+                <div class="table-cell result-cell volume-yellow" id="protein-volume">0</div>
+                <div class="table-cell result-cell" id="protein-calories">0</div>
+                <div class="table-cell result-cell osmol-purple" id="protein-osmol">0</div>
+            </div>
+            <div class="table-row">
+                <div class="table-cell component-cell">50% Dextrose</div>
+                <div class="table-cell result-cell volume-yellow" id="dextrose-volume">0</div>
+                <div class="table-cell result-cell" id="dextrose-calories">0</div>
+                <div class="table-cell result-cell osmol-purple" id="dextrose-osmol">0</div>
+            </div>
+            <div class="table-row">
+                <div class="table-cell component-cell" id="fat-label">20% SMOF lipid</div>
+                <div class="table-cell result-cell volume-yellow" id="fat-volume">0</div>
+                <div class="table-cell result-cell" id="fat-calories">0</div>
+                <div class="table-cell result-cell">-</div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Electrolytes Section -->
+    <section class="section">
+        <h2>Electrolytes</h2>
+        
+        <!-- Sodium (Na) -->
+        <div class="electrolyte-item">
+            <div class="electrolyte-header">
+                <div class="electrolyte-input">
+                    <label for="na">Na (mEq/kg/day)</label>
+                    <input type="text" inputmode="decimal" id="na" placeholder="กรอกปริมาณ Na">
+                </div>
+                <div class="electrolyte-result">
+                    <div class="electrolyte-result-label">Na จาก Glycophos®</div>
+                    <div class="electrolyte-result-value" id="na-from-glycophos">0 mEq</div>
+                </div>
+            </div>
+            <div class="source-selection">
+                <h4>เลือกแหล่ง Na ที่ต้องการ:</h4>
+                <label class="source-option">
+                    <input type="radio" name="na-source" value="nacl" id="nacl-radio">
+                    <span class="source-option-label">3%NaCl (0.5 mEq/ml)</span>
+                    <span class="source-option-value" id="nacl-volume">0 ml</span>
+                </label>
+                <label class="source-option">
+                    <input type="radio" name="na-source" value="nacl20" id="nacl20-radio">
+                    <span class="source-option-label">20%NaCl (3.4 mEq/ml)</span>
+                    <span class="source-option-value" id="nacl20-volume">0 ml</span>
+                </label>
+                <label class="source-option">
+                    <input type="radio" name="na-source" value="na-acetate" id="na-acetate-radio">
+                    <span class="source-option-label">Na acetate (3 mEq/ml)</span>
+                    <span class="source-option-value" id="na-acetate-volume">0 ml</span>
+                </label>
+            </div>
+        </div>
+        
+        <!-- Phosphorus (P) -->
+        <div class="electrolyte-item">
+            <div class="electrolyte-header">
+                <div class="electrolyte-input">
+                    <label for="p">P (Glycophos®) (mmol/kg/day)</label>
+                    <input type="text" inputmode="decimal" id="p" placeholder="กรอกปริมาณ P">
+                </div>
+                <div class="electrolyte-result">
+                    <div class="electrolyte-result-label">P Volume</div>
+                    <div class="electrolyte-result-value" id="p-volume">0 ml</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Calcium (Ca) -->
+        <div class="electrolyte-item">
+            <div class="electrolyte-header">
+                <div class="electrolyte-input">
+                    <label for="ca">Ca (mmol/kg/day)</label>
+                    <input type="text" inputmode="decimal" id="ca" placeholder="กรอกปริมาณ Ca">
+                </div>
+                <div class="electrolyte-result">
+                    <div class="electrolyte-result-label">Ca Volume</div>
+                    <div class="electrolyte-result-value" id="ca-volume">0 ml</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Magnesium (Mg) -->
+        <div class="electrolyte-item">
+            <div class="electrolyte-header">
+                <div class="electrolyte-input">
+                    <label for="mg">Mg (mmol/kg/day)</label>
+                    <input type="text" inputmode="decimal" id="mg" placeholder="กรอกปริมาณ Mg">
+                </div>
+                <div class="electrolyte-result">
+                    <div class="electrolyte-result-label">Mg Volume</div>
+                    <div class="electrolyte-result-value" id="mg-volume">0 ml</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Potassium (K) -->
+        <div class="electrolyte-item">
+            <div class="electrolyte-header">
+                <div class="electrolyte-input">
+                    <label for="k">K (mEq/kg/day)</label>
+                    <input type="text" inputmode="decimal" id="k" placeholder="กรอกปริมาณ K">
+                </div>
+                <div style="display:grid; grid-template-columns:1fr; gap:0;"></div>
+            </div>
+            <div class="source-selection">
+                <h4>เลือกแหล่ง K ที่ต้องการ:</h4>
+                <label class="source-option">
+                    <input type="radio" name="k-source" value="kcl" id="kcl-radio">
+                    <span class="source-option-label">15% KCl (2 mEq/ml)</span>
+                    <span class="source-option-value" id="kcl-volume">0 ml</span>
+                </label>
+                <label class="source-option">
+                    <input type="radio" name="k-source" value="k-acetate" id="k-acetate-radio">
+                    <span class="source-option-label">K acetate (3 mEq/ml)</span>
+                    <span class="source-option-value" id="k-acetate-volume">0 ml</span>
+                </label>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Micronutrients Section -->
+    <section class="section">
+        <h2>Micronutrients</h2>
+        <div class="calculation-section" style="background:#f0fdf4; border:2px solid #bbf7d0;">
+            
+            <!-- Peditrace -->
+            <div class="calc-row" style="display:flex; flex-direction:column; align-items:stretch; 
+                                          border-bottom:1px solid #f1f5f9; padding-bottom:15px;">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                    <div class="calc-label bold">Peditrace® (max 10 ml/day)</div>
+                    <div class="calc-result" id="peditrace-volume" 
+                         style="background:#dcfce7; color:#166534; border:1px solid #86efac;">
+                        0 ml
                     </div>
                 </div>
-                
-                <!-- Cernevit -->
-                <div class="calc-row" style="display:flex; flex-direction:column; align-items:stretch; 
-                                              border-bottom:1px solid #f1f5f9; padding-bottom:15px;">
-                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-                        <div class="calc-label bold">Cernevit® (max 3 ml/day)</div>
-                        <div class="calc-result" id="cernevit-volume" 
-                             style="background:#dcfce7; color:#166534; border:1px solid #86efac;">
-                            0 ml
-                        </div>
-                    </div>
-                    <div class="frequency-selection">
-                        <h4>ความถี่ในการให้:</h4>
-                        <label class="frequency-option">
-                            <input type="radio" name="cernevit-freq" value="daily" checked>
-                            <span class="frequency-option-label">Per day</span>
-                        </label>
-                        <label class="frequency-option">
-                            <input type="radio" name="cernevit-freq" value="mwf">
-                            <span class="frequency-option-label">Mon Wed Fri</span>
-                        </label>
-                        <label class="frequency-option">
-                            <input type="radio" name="cernevit-freq" value="weekly">
-                            <span class="frequency-option-label">Per week</span>
-                        </label>
-                        <div class="day-selector" id="cernevit-day-selector">
-                            <select id="cernevit-day">
-                                <option value="1">Monday</option>
-                                <option value="2">Tuesday</option>
-                                <option value="3">Wednesday</option>
-                                <option value="4">Thursday</option>
-                                <option value="5">Friday</option>
-                                <option value="6">Saturday</option>
-                                <option value="0">Sunday</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Vitamin K -->
-                <div class="calc-row" style="display:flex; flex-direction:column; align-items:stretch;">
-                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-                        <div class="calc-label bold">Vitamin K (max 0.5 ml/day)</div>
-                    </div>
-                    <div class="frequency-selection">
-                        <h4>เลือกวิธีการให้:</h4>
-                        <label class="frequency-option" id="vitamin-k-daily-option">
-                            <input type="radio" name="vitamin-k-choice" value="daily">
-                            <span class="frequency-option-label">Per day</span>
-                            <span class="source-option-value" id="vitamin-k-daily" style="margin-left:10px;">
-                                0 ml
-                            </span>
-                        </label>
-                        <label class="frequency-option">
-                            <input type="radio" name="vitamin-k-choice" value="weekly">
-                            <span class="frequency-option-label">Per week</span>
-                            <span class="source-option-value" id="vitamin-k-weekly" style="margin-left:10px;">
-                                0 ml
-                            </span>
-                        </label>
-                        <div class="day-selector" id="vitamin-k-day-selector">
-                            <select id="vitamin-k-day">
-                                <option value="1">Monday</option>
-                                <option value="2">Tuesday</option>
-                                <option value="3">Wednesday</option>
-                                <option value="4">Thursday</option>
-                                <option value="5">Friday</option>
-                                <option value="6">Saturday</option>
-                                <option value="0">Sunday</option>
-                            </select>
-                        </div>
-                        <label class="frequency-option">
-                            <input type="radio" name="vitamin-k-choice" value="none" checked>
-                            <span class="frequency-option-label" style="color: #dc2626; font-weight: 600;">ไม่เติม</span>
-                        </label>
+                <div class="frequency-selection">
+                    <h4>ความถี่ในการให้:</h4>
+                    <label class="frequency-option">
+                        <input type="radio" name="peditrace-freq" value="daily" checked>
+                        <span class="frequency-option-label">Per day</span>
+                    </label>
+                    <label class="frequency-option">
+                        <input type="radio" name="peditrace-freq" value="mwf">
+                        <span class="frequency-option-label">Mon Wed Fri</span>
+                    </label>
+                    <label class="frequency-option">
+                        <input type="radio" name="peditrace-freq" value="weekly">
+                        <span class="frequency-option-label">Per week</span>
+                    </label>
+                    <div class="day-selector" id="peditrace-day-selector">
+                        <select id="peditrace-day">
+                            <option value="1">Monday</option>
+                            <option value="2">Tuesday</option>
+                            <option value="3">Wednesday</option>
+                            <option value="4">Thursday</option>
+                            <option value="5">Friday</option>
+                            <option value="6">Saturday</option>
+                            <option value="0">Sunday</option>
+                        </select>
                     </div>
                 </div>
             </div>
-        </section>
-        
-        <!-- Heparin Section -->
-        <section class="section">
-            <h2>Add Heparin</h2>
-            <div class="calculation-section">
-                <div class="calc-row">
-                    <div class="calc-label">มี PICC-line หรือไม่?</div>
+            
+            <!-- Cernevit -->
+            <div class="calc-row" style="display:flex; flex-direction:column; align-items:stretch; 
+                                          border-bottom:1px solid #f1f5f9; padding-bottom:15px;">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                    <div class="calc-label bold">Cernevit® (max 3 ml/day)</div>
+                    <div class="calc-result" id="cernevit-volume" 
+                         style="background:#dcfce7; color:#166534; border:1px solid #86efac;">
+                        0 ml
+                    </div>
+                </div>
+                <div class="frequency-selection">
+                    <h4>ความถี่ในการให้:</h4>
+                    <label class="frequency-option">
+                        <input type="radio" name="cernevit-freq" value="daily" checked>
+                        <span class="frequency-option-label">Per day</span>
+                    </label>
+                    <label class="frequency-option">
+                        <input type="radio" name="cernevit-freq" value="mwf">
+                        <span class="frequency-option-label">Mon Wed Fri</span>
+                    </label>
+                    <label class="frequency-option">
+                        <input type="radio" name="cernevit-freq" value="weekly">
+                        <span class="frequency-option-label">Per week</span>
+                    </label>
+                    <div class="day-selector" id="cernevit-day-selector">
+                        <select id="cernevit-day">
+                            <option value="1">Monday</option>
+                            <option value="2">Tuesday</option>
+                            <option value="3">Wednesday</option>
+                            <option value="4">Thursday</option>
+                            <option value="5">Friday</option>
+                            <option value="6">Saturday</option>
+                            <option value="0">Sunday</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Vitamin K -->
+            <div class="calc-row" style="display:flex; flex-direction:column; align-items:stretch;">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                    <div class="calc-label bold">Vitamin K (max 0.5 ml/day)</div>
+                </div>
+                <div class="frequency-selection">
+                    <h4>เลือกวิธีการให้:</h4>
+                    <label class="frequency-option" id="vitamin-k-daily-option">
+                        <input type="radio" name="vitamin-k-choice" value="daily">
+                        <span class="frequency-option-label">Per day</span>
+                        <span class="source-option-value" id="vitamin-k-daily" style="margin-left:10px;">
+                            0 ml
+                        </span>
+                    </label>
+                    <label class="frequency-option">
+                        <input type="radio" name="vitamin-k-choice" value="weekly">
+                        <span class="frequency-option-label">Per week</span>
+                        <span class="source-option-value" id="vitamin-k-weekly" style="margin-left:10px;">
+                            0 ml
+                        </span>
+                    </label>
+                    <div class="day-selector" id="vitamin-k-day-selector">
+                        <select id="vitamin-k-day">
+                            <option value="1">Monday</option>
+                            <option value="2">Tuesday</option>
+                            <option value="3">Wednesday</option>
+                            <option value="4">Thursday</option>
+                            <option value="5">Friday</option>
+                            <option value="6">Saturday</option>
+                            <option value="0">Sunday</option>
+                        </select>
+                    </div>
+                    <label class="frequency-option">
+                        <input type="radio" name="vitamin-k-choice" value="none" checked>
+                        <span class="frequency-option-label" style="color: #dc2626; font-weight: 600;">ไม่เติม</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Heparin Section -->
+    <section class="section">
+        <h2>Add Heparin</h2>
+        <div class="calculation-section">
+            <div class="calc-row">
+                <div class="calc-label">มี PICC-line หรือไม่?</div>
+                <div style="display:flex; align-items:center; gap:10px;">
+                    <label style="display:flex; align-items:center; gap:8px; cursor:pointer;">
+                        <input type="checkbox" id="picc-line-checkbox" style="transform:scale(1.2);">
+                        <span style="font-weight:500;">มี PICC-line</span>
+                    </label>
+                </div>
+                <div></div>
+            </div>
+            <div class="calc-row">
+                <div class="calc-label">Heparin</div>
+                <div style="display:flex; flex-direction:column; gap:8px;">
                     <div style="display:flex; align-items:center; gap:10px;">
-                        <label style="display:flex; align-items:center; gap:8px; cursor:pointer;">
-                            <input type="checkbox" id="picc-line-checkbox" style="transform:scale(1.2);">
-                            <span style="font-weight:500;">มี PICC-line</span>
-                        </label>
+                        <span class="calc-result" id="heparin-volume" style="margin-left:5px;">0 ml</span>
                     </div>
-                    <div></div>
                 </div>
-                <div class="calc-row">
-                    <div class="calc-label">Heparin</div>
-                    <div style="display:flex; flex-direction:column; gap:8px;">
-                        <div style="display:flex; align-items:center; gap:10px;">
-                            <span class="calc-result" id="heparin-volume" style="margin-left:5px;">0 ml</span>
-                        </div>
-                    </div>
-                    <div></div>
-                </div>
+                <div></div>
             </div>
-        </section>
-        
-        
-        
-        <!-- ✅ Additional Section -->
-        <section class="section">
-            <h2>💊 Additional</h2>
-            
+        </div>
+    </section>
+    
+    <!-- Additional Section -->
+    <section class="section">
+        <h2>Additional</h2>
+        <div class="additional-section">
             <div class="input-group">
                 <div class="input-field">
-                    <label for="additional-name">ชื่อสาร</label>
-                    <input type="text" id="additional-name" placeholder="กรอกชื่อสาร" />
+                    <label for="additional-name">กรอกเอง</label>
+                    <input type="text" id="additional-name" placeholder="ระบุชื่อยา/สาร" 
+                           style="padding-right:16px;">
                 </div>
-                
                 <div class="input-field">
                     <label for="additional-amount">จำนวน</label>
-                    <input type="number" inputmode="decimal" id="additional-amount" step="0.1" placeholder="กรอกจำนวน" />
-                </div>
-            </div>
-            
-            <div class="route-selection">
-                <h3>เลือกหน่วย:</h3>
-                <div class="route-options">
-                    <label class="route-option">
-                        <input type="radio" name="additional-unit" value="mg" checked>
-                        <label>mg</label>
-                    </label>
-                    <label class="route-option">
-                        <input type="radio" name="additional-unit" value="ml">
-                        <label>ml</label>
-                    </label>
-                </div>
-            </div>
-            
-            
-        </section>
-        
-        <!-- Milk Calories Section -->
-        <section class="section">
-            <h2>คำนวน Calories จากนม (feed)</h2>
-            <div class="input-group">
-                <div class="input-field">
-                    <label for="milk">ปริมาตรนม</label>
                     <div class="input-with-unit">
-                        <input type="number" inputmode="numeric" id="milk" step="1" 
-                               placeholder="กรอกปริมาตรนม"/>
-                        <span class="unit">ml</span>
-                    </div>
-                </div>
-                <div class="input-field">
-                    <label for="total-milk">x 8 feed =</label>
-                    <div class="input-with-unit">
-                        <input type="number" inputmode="numeric" id="total-milk" step="1" 
-                               placeholder="รวมปริมาตรนม"/>
-                        <span class="unit">ml</span>
-                    </div>
-                </div>
-            </div>
-            <div class="calculation-section">
-                <div class="calc-row">
-                    <div class="calc-label">TF จากการกินนม</div>
-                    <div class="calc-result" id="tf-from-milk">0 ml/kg/day</div>
-                    <div></div>
-                </div>
-                <div class="calc-row">
-                    <div class="calc-label">Calories จากนม</div>
-                    <div class="calc-result" id="milk-calories-kg">0 kcal/kg/day</div>
-                    <div></div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Sterile Water Section -->
-        <section class="total-section" id="sterile-water-section" 
-                 style="background:linear-gradient(135deg,#06b6d4 0%,#0891b2 100%);">
-            <h2>💧 Sterile Water Volume</h2>
-            <div class="total-calories" id="sterile-water-volume">0</div>
-            <p>ml</p>
-        </section>
-        
-        <!-- Total Calories Section -->
-        <section class="total-section">
-            <h2>🎯 Total calories</h2>
-            <p style="font-size:.9em; opacity:.9; margin-bottom:15px;">
-                (Full calories = 90-120 kcal/kg/day)
-            </p>
-            <div style="text-align:center; margin-bottom:20px;">
-                <h3 style="margin:0 0 10px 0; font-size:1.3em;">Total Calories/day (PN + กิน)</h3>
-                <div class="total-calories" id="total-calories-day">0</div>
-                <p>kcal/day</p>
-            </div>
-            <div style="background:#fef3c7; border-radius:12px; padding:20px; margin-top:15px; border:2px solid #fbbf24;">
-                <h4 style="margin:0 0 15px 0; font-size:1.1em; text-align:center; color:#92400e;">
-                    รายละเอียด Calories (kcal/kg/day)
-                </h4>
-                <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:15px; text-align:center;">
-                    <div>
-                        <p style="margin:0 0 5px 0; font-size:.9em; color:#92400e; font-weight:600;">จาก PN</p>
-                        <div style="font-size:1.3em; font-weight:700; color:#92400e;" id="breakdown-pn">0</div>
-                        <p style="margin:5px 0 0 0; font-size:.8em; color:#92400e;">kcal/kg/day</p>
-                    </div>
-                    <div>
-                        <p style="margin:0 0 5px 0; font-size:.9em; color:#92400e; font-weight:600;">จากนม</p>
-                        <div style="font-size:1.3em; font-weight:700; color:#92400e;" id="breakdown-milk">0</div>
-                        <p style="margin:5px 0 0 0; font-size:.8em; color:#92400e;">kcal/kg/day</p>
-                    </div>
-                    <div>
-                        <p style="margin:0 0 5px 0; font-size:.9em; color:#92400e; font-weight:600;">รวมทั้งหมด</p>
-                        <div style="font-size:1.3em; font-weight:700; color:#92400e;" id="breakdown-total">0</div>
-                        <p style="margin:5px 0 0 0; font-size:.8em; color:#92400e;">kcal/kg/day</p>
+                        <input type="number" inputmode="decimal" id="additional-amount" 
+                               step="0.01" placeholder="กรอกจำนวน"/>
+                        <span class="unit">
+                            <select id="additional-unit" style="border:1px solid #cbd5e1; 
+                                    background:white; padding:4px 8px; border-radius:4px;
+                                    font-weight:500; color:#475569; cursor:pointer;
+                                    outline:none;">
+                                <option value="ml">ml</option>
+                                <option value="mg">mg</option>
+                            </select>
+                        </span>
                     </div>
                 </div>
             </div>
-        </section>
-        
-        <!-- Total mOsmol Section -->
-        <section class="total-section" id="osmol-section" 
-                 style="background:linear-gradient(135deg,#10b981 0%,#059669 100%);">
-            <h2>Total mOsmol/L</h2>
-            <p style="font-size:.9em; opacity:.9; margin-bottom:15px;">
-                (&lt; 900 mOsmol/L ถ้าให้ทาง peripheral)
-            </p>
-            <div class="total-calories" id="total-osmol">0</div>
-            <p>mOsmol/L</p>
-        </section>
-        
-        <!-- Submit Button -->
-        <section class="submit-section">
-            <button id="submitBtn" class="submit-btn">📄 สร้าง TPN Report</button>
-        </section>
-    </div>
+            <div class="additional-note" style="margin-top:10px; padding:10px; background:#fef3c7; 
+                 border-radius:8px; border:1px solid #fcd34d;">
+                <p style="margin:0; font-size:0.9em; color:#92400e;">
+                    <strong>หมายเหตุ:</strong> หากเลือกหน่วยเป็น <strong>ml</strong> ระบบจะหักลบปริมาตรนี้ออกจาก Sterile Water โดยอัตโนมัติ
+                </p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Milk Calories Section -->
+    <section class="section">
+        <h2>คำนวน Calories จากนม (feed)</h2>
+        <div class="input-group">
+            <div class="input-field">
+                <label for="milk">ปริมาตรนม</label>
+                <div class="input-with-unit">
+                    <input type="number" inputmode="numeric" id="milk" step="1" 
+                           placeholder="กรอกปริมาตรนม"/>
+                    <span class="unit">ml</span>
+                </div>
+            </div>
+            <div class="input-field">
+                <label for="total-milk">x 8 feed =</label>
+                <div class="input-with-unit">
+                    <input type="number" inputmode="numeric" id="total-milk" step="1" 
+                           placeholder="รวมปริมาตรนม"/>
+                    <span class="unit">ml</span>
+                </div>
+            </div>
+        </div>
+        <div class="calculation-section">
+            <div class="calc-row">
+                <div class="calc-label">TF จากการกินนม</div>
+                <div class="calc-result" id="tf-from-milk">0 ml/kg/day</div>
+                <div></div>
+            </div>
+            <div class="calc-row">
+                <div class="calc-label">Calories จากนม</div>
+                <div class="calc-result" id="milk-calories-kg">0 kcal/kg/day</div>
+                <div></div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Sterile Water Section -->
+    <section class="total-section" id="sterile-water-section" 
+             style="background:linear-gradient(135deg,#06b6d4 0%,#0891b2 100%);">
+        <h2>💧 Sterile Water Volume</h2>
+        <div class="total-calories" id="sterile-water-volume">0</div>
+        <p>ml</p>
+    </section>
+    
+    <!-- Total Calories Section -->
+    <section class="total-section">
+        <h2>🎯 Total calories</h2>
+        <p style="font-size:.9em; opacity:.9; margin-bottom:15px;">
+            (Full calories = 90-120 kcal/kg/day)
+        </p>
+        <div style="text-align:center; margin-bottom:20px;">
+            <h3 style="margin:0 0 10px 0; font-size:1.3em;">Total Calories/day (PN + กิน)</h3>
+            <div class="total-calories" id="total-calories-day">0</div>
+            <p>kcal/day</p>
+        </div>
+        <div style="background:#fef3c7; border-radius:12px; padding:20px; margin-top:15px; border:2px solid #fbbf24;">
+            <h4 style="margin:0 0 15px 0; font-size:1.1em; text-align:center; color:#92400e;">
+                รายละเอียด Calories (kcal/kg/day)
+            </h4>
+            <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:15px; text-align:center;">
+                <div>
+                    <p style="margin:0 0 5px 0; font-size:.9em; color:#92400e; font-weight:600;">จาก PN</p>
+                    <div style="font-size:1.3em; font-weight:700; color:#92400e;" id="breakdown-pn">0</div>
+                    <p style="margin:5px 0 0 0; font-size:.8em; color:#92400e;">kcal/kg/day</p>
+                </div>
+                <div>
+                    <p style="margin:0 0 5px 0; font-size:.9em; color:#92400e; font-weight:600;">จากนม</p>
+                    <div style="font-size:1.3em; font-weight:700; color:#92400e;" id="breakdown-milk">0</div>
+                    <p style="margin:5px 0 0 0; font-size:.8em; color:#92400e;">kcal/kg/day</p>
+                </div>
+                <div>
+                    <p style="margin:0 0 5px 0; font-size:.9em; color:#92400e; font-weight:600;">รวมทั้งหมด</p>
+                    <div style="font-size:1.3em; font-weight:700; color:#92400e;" id="breakdown-total">0</div>
+                    <p style="margin:5px 0 0 0; font-size:.8em; color:#92400e;">kcal/kg/day</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Total mOsmol Section -->
+    <section class="total-section" id="osmol-section" 
+             style="background:linear-gradient(135deg,#10b981 0%,#059669 100%);">
+        <h2>Total mOsmol/L</h2>
+        <p style="font-size:.9em; opacity:.9; margin-bottom:15px;">
+            (&lt; 900 mOsmol/L ถ้าให้ทาง peripheral)
+        </p>
+        <div class="total-calories" id="total-osmol">0</div>
+        <p>mOsmol/L</p>
+    </section>
+    
+    <!-- Submit Button -->
+    <section class="submit-section">
+        <button id="submitBtn" class="submit-btn">📄 สร้าง TPN Report</button>
+    </section>
+</div>
+```
+
 </main>
 
 <script>
@@ -1791,91 +1817,6 @@
     }
 
     // ===== Main TPN Calculation Function =====
-    // ✅ Real-time Display Update
-    function updateRealtimeDisplays() {
-        const bw = parseFloat(document.getElementById('bw').value) || 0;
-        const bag = parseFloat(document.getElementById('bag').value) || 0;
-        const protein = parseFloat(document.getElementById('protein').value) || 0;
-        const dextrose = parseFloat(document.getElementById('dextrose').value) || 0;
-        const fat = parseFloat(document.getElementById('fat').value) || 0;
-        
-        // Protein
-        const proteinDisplay = document.getElementById('protein-realtime');
-        if (bw > 0 && protein > 0) {
-            const proteinProduct = document.querySelector('input[name="protein-product"]:checked')?.value || 'aminoven';
-            let proteinVol = proteinProduct === 'aminoplasmal' 
-                ? (bw * protein) / 0.15 
-                : (bw * protein * 100) / 10;
-            const proteinCal = bw * protein * 4;
-            const proteinOsm = bag > 0 ? (protein * bw * 1000 * 10) / bag : 0;
-            
-            document.getElementById('protein-vol-rt').textContent = r1(proteinVol).toFixed(1) + ' ml';
-            document.getElementById('protein-cal-rt').textContent = r1(proteinCal).toFixed(1) + ' kcal';
-            document.getElementById('protein-osm-rt').textContent = r1(proteinOsm).toFixed(1);
-            proteinDisplay.classList.add('active');
-        } else {
-            proteinDisplay.classList.remove('active');
-        }
-        
-        // Fat
-        const fatDisplay = document.getElementById('fat-realtime');
-        if (bw > 0 && fat > 0) {
-            const fatVol = fat * bw * 5;
-            const fatCal = fat * bw * 10;
-            
-            document.getElementById('fat-vol-rt').textContent = r1(fatVol).toFixed(1) + ' ml';
-            document.getElementById('fat-cal-rt').textContent = r1(fatCal).toFixed(1) + ' kcal';
-            fatDisplay.classList.add('active');
-            
-            // Update fat rate
-            updateFatRate();
-        } else {
-            fatDisplay.classList.remove('active');
-        }
-        
-        // Dextrose
-        const dextroseDisplay = document.getElementById('dextrose-realtime');
-        if (bag > 0 && dextrose > 0) {
-            const dextroseVol = ((dextrose * bag) / 100) * 2;
-            const dextroseCal = (dextrose * bag * 3.4) / 100;
-            const dextroseOsm = (dextrose * 1000 * 5) / 100;
-            
-            document.getElementById('dextrose-vol-rt').textContent = r1(dextroseVol).toFixed(1) + ' ml';
-            document.getElementById('dextrose-cal-rt').textContent = r1(dextroseCal).toFixed(1) + ' kcal';
-            document.getElementById('dextrose-osm-rt').textContent = r1(dextroseOsm).toFixed(1);
-            dextroseDisplay.classList.add('active');
-        } else {
-            dextroseDisplay.classList.remove('active');
-        }
-    }
-
-    // ✅ Update Fat Rate
-    function updateFatRate() {
-        const fat = parseFloat(document.getElementById('fat').value) || 0;
-        const bw = parseFloat(document.getElementById('bw').value) || 0;
-        const duration12 = 12;
-        const duration24 = 24;
-        
-        if (fat > 0) {
-            const rate12 = fat / duration12;
-            const rate24 = fat / duration24;
-            
-            document.getElementById('fat-rate-12').textContent = rate12.toFixed(3) + ' g/kg/hr';
-            document.getElementById('fat-rate-24').textContent = rate24.toFixed(3) + ' g/kg/hr';
-            
-            // Update split display
-            if (bw > 0) {
-                const fatVol = fat * bw * 5;
-                const flush = document.querySelector('input[name="fat-flush"]:checked')?.value || '+6ml';
-                let totalVol = fatVol;
-                if (flush === '+6ml') totalVol += 6;
-                
-                const splitVol = totalVol / 2;
-                document.getElementById('fat-split-display').textContent = r1(splitVol).toFixed(1) + ' ml × 2 syr';
-            }
-        }
-    }
-
     function calculateTPN() {
         const bw = parseFloat(document.getElementById('bw').value) || 0;
         const rate = parseFloat(document.getElementById('rate').value) || 0;
@@ -1921,8 +1862,8 @@
         const naReq_raw = na * bw;
         const rNa_raw = Math.max(0, naReq_raw - naFromGly);
         const naclVol_1 = rNa_raw > 0 ? r1(rNa_raw / 0.5) : 0;
+        const nacl20Vol_1 = rNa_raw > 0 ? r1(rNa_raw / 3.4) : 0;
         const naAcVol_1 = rNa_raw > 0 ? r1(rNa_raw / 3.0) : 0;
-        const nacl20Vol_1 = rNa_raw > 0 ? r1(rNa_raw / 3.4) : 0; // ✅ 20% NaCl
 
         const totalK_raw = k * bw;
         const kclVol_1 = totalK_raw > 0 ? r1(totalK_raw / 2.0) : 0;
@@ -1973,6 +1914,11 @@
         const picc = document.getElementById('picc-line-checkbox')?.checked || false;
         const hep_calc_1 = r1(bag > 0 ? bag / 50 : 0);
         const hep_disp_1 = picc ? hep_calc_1 : 0;
+        
+        // Get additional values
+        const additionalAmount = parseFloat(document.getElementById('additional-amount').value) || 0;
+        const additionalUnit = document.getElementById('additional-unit').value;
+        const additionalVolume = (additionalUnit === 'ml') ? additionalAmount : 0;
 
         let totalUsed = 0;
         totalUsed += proteinVol_raw;
@@ -1983,11 +1929,12 @@
         totalUsed += pedit_1;
         totalUsed += cern_1;
         totalUsed += hep_disp_1;
+        totalUsed += additionalVolume;
 
         const naSource = document.querySelector('input[name="na-source"]:checked')?.value;
         if (naSource === 'nacl') totalUsed += naclVol_1;
+        if (naSource === 'nacl20') totalUsed += nacl20Vol_1;
         if (naSource === 'na-acetate') totalUsed += naAcVol_1;
-            if (naSource === 'nacl-20') totalUsed += nacl20Vol_1; // ✅ 20% NaCl
 
         const kSource = document.querySelector('input[name="k-source"]:checked')?.value;
         if (kSource === 'kcl') totalUsed += kclVol_1;
@@ -2031,8 +1978,8 @@
         document.getElementById('p-volume').textContent = pVol_1.toFixed(1) + ' ml';
         document.getElementById('na-from-glycophos').textContent = r1(naFromGly).toFixed(1) + ' mEq';
         document.getElementById('nacl-volume').textContent = naclVol_1.toFixed(1) + ' ml';
+        document.getElementById('nacl20-volume').textContent = nacl20Vol_1.toFixed(1) + ' ml';
         document.getElementById('na-acetate-volume').textContent = naAcVol_1.toFixed(1) + ' ml';
-        document.getElementById('nacl20-volume').textContent = nacl20Vol_1.toFixed(1) + ' ml'; // ✅ 20% NaCl
         document.getElementById('kcl-volume').textContent = kclVol_1.toFixed(1) + ' ml';
         document.getElementById('k-acetate-volume').textContent = kAcVol_1.toFixed(1) + ' ml';
         document.getElementById('ca-volume').textContent = caVol_1.toFixed(1) + ' ml';
@@ -2126,6 +2073,42 @@
 
         autosaveCollect();
     }
+    
+    // Fat Administration Display Update
+    function updateFatDisplay() {
+        const bw = parseFloat(document.getElementById('bw').value) || 0;
+        const fat = parseFloat(document.getElementById('fat').value) || 0;
+        
+        // Get fat volume (base)
+        const baseFatVol = fat * bw * 5;
+        
+        // Check priming option
+        const priming = document.querySelector('input[name="fat-priming"]:checked')?.value || 'priming';
+        const fatVolWithPriming = (priming === 'priming') ? baseFatVol + 6 : baseFatVol;
+        
+        // Calculate fat rate
+        const dripDuration = parseFloat(document.querySelector('input[name="fat-drip-duration"]:checked')?.value) || 24;
+        const fatRate = (bw > 0 && dripDuration > 0) ? (fat / dripDuration) : 0;
+        
+        // Update fat rate display
+        const fatRateEl = document.getElementById('fat-rate-result');
+        if (fatRateEl) {
+            fatRateEl.textContent = fatRate.toFixed(3) + ' g/kg/hr';
+        }
+        
+        // Check split option
+        const split = document.querySelector('input[name="fat-split"]:checked')?.value || 'no-split';
+        const splitInfoEl = document.getElementById('fat-split-info');
+        const splitTextEl = document.getElementById('fat-split-text');
+        
+        if (split === 'split-2' && splitInfoEl && splitTextEl) {
+            const volPerSyr = r1(fatVolWithPriming / 2);
+            splitTextEl.textContent = volPerSyr.toFixed(1) + ' ml × 2 syr';
+            splitInfoEl.style.display = 'block';
+        } else if (splitInfoEl) {
+            splitInfoEl.style.display = 'none';
+        }
+    }
 
     function extractNumberString(text) {
         if (text === undefined || text === null) return '0';
@@ -2165,52 +2148,6 @@
         initProductSelection();
         autosaveRestore();
 
-        // ✅ Real-time Display Event Listeners
-        ['bw', 'bag', 'protein', 'dextrose', 'fat'].forEach(id => {
-            const el = document.getElementById(id);
-            if (el) {
-                el.addEventListener('input', () => {
-                    updateRealtimeDisplays();
-                });
-            }
-        });
-        
-        // ✅ Product change triggers real-time update
-        document.querySelectorAll('input[name="protein-product"]').forEach(radio => {
-            radio.addEventListener('change', () => {
-                updateRealtimeDisplays();
-            });
-        });
-        
-        // ✅ Fat Options Event Listeners
-        document.querySelectorAll('[data-fat-option="flush"]').forEach(item => {
-            item.addEventListener('click', function() {
-                document.querySelectorAll('[data-fat-option="flush"]').forEach(i => i.classList.remove('selected'));
-                this.classList.add('selected');
-                const radio = this.querySelector('input[type="radio"]');
-                if (radio) radio.checked = true;
-                updateFatRate();
-            });
-        });
-        
-        document.querySelectorAll('[data-fat-option="duration"]').forEach(item => {
-            item.addEventListener('click', function() {
-                document.querySelectorAll('[data-fat-option="duration"]').forEach(i => i.classList.remove('selected'));
-                this.classList.add('selected');
-                const radio = this.querySelector('input[type="radio"]');
-                if (radio) radio.checked = true;
-            });
-        });
-        
-        document.querySelectorAll('[data-fat-option="split"]').forEach(item => {
-            item.addEventListener('click', function() {
-                document.querySelectorAll('[data-fat-option="split"]').forEach(i => i.classList.remove('selected'));
-                this.classList.add('selected');
-                const radio = this.querySelector('input[type="radio"]');
-                if (radio) radio.checked = true;
-            });
-        });
-
         const setSelectorDisplay = () => {
             const pf = document.querySelector('input[name="peditrace-freq"]:checked')?.value || 'daily';
             document.getElementById('peditrace-day-selector').style.display = (pf === 'weekly') ? 'block' : 'none';
@@ -2237,11 +2174,14 @@
             });
         }
 
-        ['bw','bag','protein','dextrose','fat','p','na','k','ca','mg','order-date','additional-amount'].forEach(id => {
+        ['bw','bag','protein','dextrose','fat','p','na','k','ca','mg','order-date'].forEach(id => {
             const el = document.getElementById(id);
             if (el) {
                 el.addEventListener('input', () => {
                     calculateTPN();
+                    if (id === 'bw' || id === 'fat') {
+                        updateFatDisplay();
+                    }
                 });
             }
         });
@@ -2276,6 +2216,39 @@
                 calculateTPN();
             });
         }
+        
+        // Fat administration event listeners
+        document.querySelectorAll('input[name="fat-priming"]').forEach(r => {
+            r.addEventListener('change', () => {
+                updateFatDisplay();
+            });
+        });
+        
+        document.querySelectorAll('input[name="fat-drip-duration"]').forEach(r => {
+            r.addEventListener('change', () => {
+                updateFatDisplay();
+            });
+        });
+        
+        document.querySelectorAll('input[name="fat-split"]').forEach(r => {
+            r.addEventListener('change', () => {
+                updateFatDisplay();
+            });
+        });
+        
+        // Additional inputs event listeners
+        const additionalAmountEl = document.getElementById('additional-amount');
+        const additionalUnitEl = document.getElementById('additional-unit');
+        if (additionalAmountEl) {
+            additionalAmountEl.addEventListener('input', () => {
+                calculateTPN();
+            });
+        }
+        if (additionalUnitEl) {
+            additionalUnitEl.addEventListener('change', () => {
+                calculateTPN();
+            });
+        }
 
         document.querySelectorAll('input[name="peditrace-freq"]').forEach(r => {
             r.addEventListener('change', function() {
@@ -2296,20 +2269,6 @@
                 document.getElementById('vitamin-k-day-selector').style.display = this.value === 'weekly' ? 'block' : 'none';
                 calculateTPN();
             });
-
-        // ✅ Additional listeners
-        const additionalName = document.getElementById('additional-name');
-        if (additionalName) {
-            additionalName.addEventListener('input', () => {
-                calculateTPN();
-            });
-        }
-        
-        document.querySelectorAll('input[name="additional-unit"]').forEach(r => {
-            r.addEventListener('change', () => {
-                calculateTPN();
-            });
-        });
         });
 
         document.getElementById('peditrace-day')?.addEventListener('change', () => {
@@ -2323,6 +2282,7 @@
         });
 
         calculateTPN();
+        updateFatDisplay();
     });
 
     // ===== Submit Button Handler =====
@@ -2386,17 +2346,6 @@
             naSource: document.querySelector('input[name="na-source"]:checked')?.value || '',
             naclVol: extractNumberString(dsel('nacl-volume')),
             naAcVol: extractNumberString(dsel('na-acetate-volume')),
-            nacl20Vol: extractNumberString(dsel('nacl20-volume')), // ✅ 20% NaCl
-            fatFlush: document.querySelector('input[name="fat-flush"]:checked')?.value || '+6ml',
-            fatDuration: document.querySelector('input[name="fat-duration"]:checked')?.value || '24',
-            fatRate: document.querySelector('input[name="fat-duration"]:checked')?.value === '12' 
-                ? document.getElementById('fat-rate-12')?.textContent || '0.167 g/kg/hr'
-                : document.getElementById('fat-rate-24')?.textContent || '0.083 g/kg/hr',
-            fatSplit: document.querySelector('input[name="fat-split"]:checked')?.value === 'yes',
-            fatSplitDisplay: document.getElementById('fat-split-display')?.textContent || '',
-            additionalName: document.getElementById('additional-name')?.value || '',
-            additionalAmount: document.getElementById('additional-amount')?.value || '0',
-            additionalUnit: document.querySelector('input[name="additional-unit"]:checked')?.value || 'mg',
             kSource: document.querySelector('input[name="k-source"]:checked')?.value || '',
             kclVol: extractNumberString(dsel('kcl-volume')),
             kAcVol: extractNumberString(dsel('k-acetate-volume')),
@@ -2642,5 +2591,6 @@ if (captureBtn) {
         window.clearStickerImage = clearStickerImage;
     })();
 </script>
+
 </body>
 </html>
