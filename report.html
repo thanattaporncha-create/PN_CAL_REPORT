@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="th">
 <head>
     <meta charset="UTF-8">
@@ -10,335 +11,335 @@
             size: A4;
         }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+```
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-    body {
-        font-family: 'Sarabun', 'Noto Sans Thai', Arial, sans-serif;
-        font-size: 10pt;
-        line-height: 1.3;
-        color: #000;
-        background: #f1f5f9;
-        padding: 0;
-    }
+body {
+    font-family: 'Sarabun', 'Noto Sans Thai', Arial, sans-serif;
+    font-size: 10pt;
+    line-height: 1.3;
+    color: #000;
+    background: #f1f5f9;
+    padding: 0;
+}
 
-    .report-container {
-        width: 820px;
-        min-width: 820px;
-        margin: 0 auto;
-        background: white;
-        padding: 16px 18px;
-    }
+.report-container {
+    width: 820px;
+    min-width: 820px;
+    margin: 0 auto;
+    background: white;
+    padding: 16px 18px;
+}
 
-    .scale-wrap {
-        position: relative;
-        width: 100%;
-        overflow-x: auto;
-    }
+.scale-wrap {
+    position: relative;
+    width: 100%;
+    overflow-x: auto;
+}
 
-    .scale-80 { transform: scale(0.8); transform-origin: top left; }
+.scale-80 { transform: scale(0.8); transform-origin: top left; }
 
-    .header {
-        text-align: left;
-        margin-bottom: 12px;
-        border-bottom: 3px solid #4facfe;
-        padding-bottom: 8px;
-        position: relative;
-        padding-top: 6px;
-    }
-    .header h1 {
-        font-size: 18pt;
-        color: #2d3748;
-        margin-bottom: 4px;
-        font-weight: 700;
-    }
+.header {
+    text-align: left;
+    margin-bottom: 12px;
+    border-bottom: 3px solid #4facfe;
+    padding-bottom: 8px;
+    position: relative;
+    padding-top: 6px;
+}
+.header h1 {
+    font-size: 18pt;
+    color: #2d3748;
+    margin-bottom: 4px;
+    font-weight: 700;
+}
 
-    .section { margin-bottom: 10px; }
-    .section-title {
-        background: #4facfe;
-        color: white;
-        padding: 5px 10px;
-        font-size: 10pt;
-        font-weight: 600;
-        border-radius: 4px;
-        margin-bottom: 6px;
-    }
+.section { margin-bottom: 10px; }
+.section-title {
+    background: #4facfe;
+    color: white;
+    padding: 5px 10px;
+    font-size: 10pt;
+    font-weight: 600;
+    border-radius: 4px;
+    margin-bottom: 6px;
+}
 
-    .info-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 6px 12px;
-        margin-bottom: 8px;
-    }
-    .info-item { display: flex; align-items: baseline; gap: 6px; }
-    .info-label { font-weight: 600; color: #2d3748; min-width: 90px; flex-shrink: 0; }
-    .info-value { color: #000000; flex: 1; }
+.info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px 12px;
+    margin-bottom: 8px;
+}
+.info-item { display: flex; align-items: baseline; gap: 6px; }
+.info-label { font-weight: 600; color: #2d3748; min-width: 90px; flex-shrink: 0; }
+.info-value { color: #000000; flex: 1; }
 
-    .order-date-special {
-        background: #f0f9ff;
-        border: 2px solid #4facfe;
-        padding: 6px 10px;
-        border-radius: 6px;
-        display: inline-flex;
-        gap: 8px;
-        align-items: center;
-        position: absolute;
-        right: 0;
-        top: 6px;
-    }
-    .order-date-special .date-info {
-        font-size: 10pt; font-weight: 600; color: #0369a1; white-space: nowrap;
-    }
-    .order-date-special .day-badge {
-        background: #0369a1; color: white; padding: 3px 10px; border-radius: 20px;
-        font-size: 9pt; font-weight: 600; white-space: nowrap;
-    }
+.order-date-special {
+    background: #f0f9ff;
+    border: 2px solid #4facfe;
+    padding: 6px 10px;
+    border-radius: 6px;
+    display: inline-flex;
+    gap: 8px;
+    align-items: center;
+    position: absolute;
+    right: 0;
+    top: 6px;
+}
+.order-date-special .date-info {
+    font-size: 10pt; font-weight: 600; color: #0369a1; white-space: nowrap;
+}
+.order-date-special .day-badge {
+    background: #0369a1; color: white; padding: 3px 10px; border-radius: 20px;
+    font-size: 9pt; font-weight: 600; white-space: nowrap;
+}
 
-    .route-badge {
-        display: inline-block;
-        background: #10b981;
-        color: white;
-        padding: 4px 12px;
-        border-radius: 20px;
-        font-size: 10pt;
-        font-weight: 600;
-    }
-    .route-badge.peripheral { background: #f59e0b; }
+.route-badge {
+    display: inline-block;
+    background: #10b981;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 10pt;
+    font-weight: 600;
+}
+.route-badge.peripheral { background: #f59e0b; }
 
-    
+.composition-table { width: 100%; border-collapse: collapse; margin-bottom: 10px; font-size: 9pt; }
+.composition-table th {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    padding: 5px 6px;
+    text-align: left;
+    font-weight: 600;
+    color: #2d3748;
+}
+.composition-table td {
+    border: 1px solid #e2e8f0;
+    padding: 4px 6px;
+    color: #000000;
+}
+.composition-table td:nth-child(3) {
+    font-size: 10pt;
+}
 
-    .composition-table { width: 100%; border-collapse: collapse; margin-bottom: 10px; font-size: 9pt; }
-    .composition-table th {
-        background: #f8fafc;
-        border: 1px solid #e2e8f0;
-        padding: 5px 6px;
-        text-align: left;
-        font-weight: 600;
-        color: #2d3748;
-    }
-    .composition-table td {
-        border: 1px solid #e2e8f0;
-        padding: 4px 6px;
-        color: #000000;
-    }
-    .composition-table td:nth-child(3) {
-        font-size: 10pt;
-    }
+.composition-table tr:nth-child(even) { background: #f8fafc; }
+.highlight-row { background: #fef3c7 !important; font-weight: 600; }
+.input-badge {
+    background: #e0f2fe;
+    color: #0369a1;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 8pt;
+    font-weight: 600;
+    display: inline-block;
+}
 
-    .composition-table tr:nth-child(even) { background: #f8fafc; }
-    .highlight-row { background: #fef3c7 !important; font-weight: 600; }
-    .input-badge {
-        background: #e0f2fe;
-        color: #0369a1;
-        padding: 2px 6px;
-        border-radius: 3px;
-        font-size: 8pt;
-        font-weight: 600;
-        display: inline-block;
-    }
+.top-actions {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    gap: 10px;
+    z-index: 1000;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+.btn {
+    background: #4facfe;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(79, 172, 254, 0.4);
+}
+.btn:hover { background: #3b8ad6; }
+.btn.secondary {
+    background: #718096;
+    box-shadow: 0 4px 12px rgba(113, 128, 150, 0.4);
+}
+.btn.secondary:hover { background: #4a5568; }
 
+@media print {
+    body { padding: 0; margin: 0; background: #fff; }
+    .top-actions { display: none; }
+    .report-container { box-shadow: none; padding: 0; width: 100%; min-width: 0; }
+    #report-root.scale-80-print { transform: scale(0.8); transform-origin: top left; }
+    .header { margin-bottom: 10px; padding-bottom: 6px; }
+    .section { margin-bottom: 8px; }
+}
+
+.summary-table { width: 100%; border-collapse: collapse; font-size: 9pt; }
+.summary-table th, .summary-table td { border: 1px solid #e2e8f0; padding: 6px 8px; }
+.summary-table th {
+    background: #f8fafc;
+    text-align: left;
+    font-weight: 600;
+    color: #2d3748;
+    width: 50%;
+}
+.summary-table td {
+    color: #000000;
+}
+.summary-value-strong {
+    font-weight: 700;
+    font-size: 10pt;
+}
+#display-osmol {
+    font-weight: 700;
+    font-size: 10pt;
+}
+.osmol-ok { color: #166534; font-weight: 700; }
+.osmol-high { color: #991b1b; font-weight: 700; }
+
+@media (max-width: 480px) {
     .top-actions {
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        display: flex;
-        gap: 10px;
-        z-index: 1000;
-        flex-wrap: wrap;
-        justify-content: flex-end;
-    }
-    .btn {
-        background: #4facfe;
-        color: white;
-        border: none;
-        padding: 10px 16px;
-        border-radius: 25px;
-        cursor: pointer;
-        font-size: 12px;
-        font-weight: 600;
-        box-shadow: 0 4px 12px rgba(79, 172, 254, 0.4);
-    }
-    .btn:hover { background: #3b8ad6; }
-    .btn.secondary {
-        background: #718096;
-        box-shadow: 0 4px 12px rgba(113, 128, 150, 0.4);
-    }
-    .btn.secondary:hover { background: #4a5568; }
-
-    @media print {
-        body { padding: 0; margin: 0; background: #fff; }
-        .top-actions { display: none; }
-        .report-container { box-shadow: none; padding: 0; width: 100%; min-width: 0; }
-        #report-root.scale-80-print { transform: scale(0.8); transform-origin: top left; }
-        .header { margin-bottom: 10px; padding-bottom: 6px; }
-        .section { margin-bottom: 8px; }
-    }
-
-    .summary-table { width: 100%; border-collapse: collapse; font-size: 9pt; }
-    .summary-table th, .summary-table td { border: 1px solid #e2e8f0; padding: 6px 8px; }
-    .summary-table th {
-        background: #f8fafc;
-        text-align: left;
-        font-weight: 600;
-        color: #2d3748;
-        width: 50%;
-    }
-    .summary-table td {
-        color: #000000;
-    }
-    .summary-value-strong {
-        font-weight: 700;
-        font-size: 10pt;
-    }
-    #display-osmol {
-        font-weight: 700;
-        font-size: 10pt;
-    }
-    .osmol-ok { color: #166534; font-weight: 700; }
-    .osmol-high { color: #991b1b; font-weight: 700; }
-
-    @media (max-width: 480px) {
-        .top-actions {
-            left: 10px;
-            right: 10px;
-            top: 10px;
-            gap: 8px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        .btn {
-            padding: 8px 12px;
-            font-size: 11px;
-        }
-    }
-
-    #report-root.exporting .header {
-        display: flex;
-        align-items: flex-start;
-        gap: 10px;
-    }
-    #report-root.exporting .order-date-special {
-        position: static;
-        margin-left: auto;
-    }
-
-    .image-viewer {
-        position: fixed;
-        inset: 0;
-        background: #000;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: flex-start;
-        padding-top: 70px;
-        z-index: 1200;
-        overflow-y: auto;
-    }
-    .image-viewer-header {
-        position: fixed;
-        top: 10px;
         left: 10px;
         right: 10px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        z-index: 1300;
-    }
-    .image-viewer-btn {
-        background: rgba(15,23,42,0.9);
-        color: #f9fafb;
-        border: none;
-        padding: 8px 14px;
-        border-radius: 999px;
-        font-size: 12px;
-        font-weight: 600;
-        cursor: pointer;
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-    }
-    .image-viewer-btn:hover {
-        background: rgba(15,23,42,1);
-    }
-    .image-viewer-note {
-        color: #e5e7eb;
-        font-size: 11px;
-        text-align: right;
-    }
-
-    .image-viewer img {
-        max-width: 100%;
-        height: auto;
-        display: block;
-        margin: 0 auto 40px auto;
-        object-fit: contain;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-        background: #fff;
-    }
-
-    .hidden { display: none !important; }
-
-    .footer {
-        margin-top: 10px;
-        font-size: 8.5pt;
-        color: #4b5563;
-        text-align: left;
-    }
-
-    #sticker-container {
-        display: none;
-        text-align: center;
-        padding: 12px;
-        background: #f8fafc;
-        border-radius: 8px;
-        border: 2px solid #4facfe;
-    }
-
-    .sticker-inner {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+        top: 10px;
         gap: 8px;
+        justify-content: center;
+        flex-wrap: wrap;
     }
+    .btn {
+        padding: 8px 12px;
+        font-size: 11px;
+    }
+}
 
-    .sticker-label {
-        font-weight: 600;
-        color: #2d3748;
-        font-size: 0.9em;
-    }
+#report-root.exporting .header {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+#report-root.exporting .order-date-special {
+    position: static;
+    margin-left: auto;
+}
 
-    .sticker-frame {
-        width: 200px;
-        height: 160px;
-        border: 2px solid #e2e8f0;
-        border-radius: 4px;
-        background-color: #ffffff;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
-        overflow: hidden;
-        image-rendering: -webkit-optimize-contrast;
-        image-rendering: crisp-edges;
-    }
+.image-viewer {
+    position: fixed;
+    inset: 0;
+    background: #000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 70px;
+    z-index: 1200;
+    overflow-y: auto;
+}
+.image-viewer-header {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1300;
+}
+.image-viewer-btn {
+    background: rgba(15,23,42,0.9);
+    color: #f9fafb;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+.image-viewer-btn:hover {
+    background: rgba(15,23,42,1);
+}
+.image-viewer-note {
+    color: #e5e7eb;
+    font-size: 11px;
+    text-align: right;
+}
 
-    #sticker-full-size {
-        display: none;
-        max-width: 100%;
-        height: auto;
-        border: 2px solid #e2e8f0;
-        border-radius: 4px;
-        image-rendering: -webkit-optimize-contrast;
-        image-rendering: crisp-edges;
-    }
+.image-viewer img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto 40px auto;
+    object-fit: contain;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+    background: #fff;
+}
 
-    #report-root.exporting .sticker-frame {
-        display: none !important;
-    }
-    #report-root.exporting #sticker-full-size {
-        display: block !important;
-        width: 200px;
-        height: auto;
-    }
-    </style>
+.hidden { display: none !important; }
+
+.footer {
+    margin-top: 10px;
+    font-size: 8.5pt;
+    color: #4b5563;
+    text-align: left;
+}
+
+#sticker-container {
+    display: none;
+    text-align: center;
+    padding: 12px;
+    background: #f8fafc;
+    border-radius: 8px;
+    border: 2px solid #4facfe;
+}
+
+.sticker-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.sticker-label {
+    font-weight: 600;
+    color: #2d3748;
+    font-size: 0.9em;
+}
+
+.sticker-frame {
+    width: 200px;
+    height: 160px;
+    border: 2px solid #e2e8f0;
+    border-radius: 4px;
+    background-color: #ffffff;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+}
+
+#sticker-full-size {
+    display: none;
+    max-width: 100%;
+    height: auto;
+    border: 2px solid #e2e8f0;
+    border-radius: 4px;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+}
+
+#report-root.exporting .sticker-frame {
+    display: none !important;
+}
+#report-root.exporting #sticker-full-size {
+    display: block !important;
+    width: 200px;
+    height: auto;
+}
+</style>
+```
 
 </head>
 <body>
@@ -347,7 +348,6 @@
         <button class="btn" onclick="saveAsImage()">🖼️ Save Image</button>
         <button class="btn" onclick="printScaled()">🖨️ พิมพ์รายงาน</button>
     </div>
-
 
 <div id="image-viewer" class="image-viewer hidden">
     <div class="image-viewer-header">
@@ -371,99 +371,88 @@
           </div>
       </div>
 
-      <div class="section">
-        <div class="section-title">👤 Patient Information</div>
-        <div style="display: grid; grid-template-columns: 1fr auto; gap: 20px; align-items: flex-start;">
-          <div class="info-grid" id="patient-info-text">
-              <div class="info-item"><span class="info-label">HN:</span><span class="info-value" id="display-hn"></span></div>
-              <div class="info-item"><span class="info-label">Name:</span><span class="info-value" id="display-name"></span></div>
-              <div class="info-item"><span class="info-label">Ward:</span><span class="info-value" id="display-ward"></span></div>
-              <div class="info-item"><span class="info-label">Body Weight:</span><span class="info-value" id="display-bw"></span></div>
-              <div class="info-item"><span class="info-label">Route:</span><span class="info-value"><span class="route-badge" id="display-route"></span></span></div>
-          </div>
+```
+  <div class="section">
+    <div class="section-title">👤 Patient Information</div>
+    <div style="display: grid; grid-template-columns: 1fr auto; gap: 20px; align-items: flex-start;">
+      <div class="info-grid" id="patient-info-text">
+          <div class="info-item"><span class="info-label">HN:</span><span class="info-value" id="display-hn"></span></div>
+          <div class="info-item"><span class="info-label">Name:</span><span class="info-value" id="display-name"></span></div>
+          <div class="info-item"><span class="info-label">Ward:</span><span class="info-value" id="display-ward"></span></div>
+          <div class="info-item"><span class="info-label">Body Weight:</span><span class="info-value" id="display-bw"></span></div>
+          <div class="info-item"><span class="info-label">Route:</span><span class="info-value"><span class="route-badge" id="display-route"></span></span></div>
+      </div>
 
-          <div id="sticker-container">
-            <div class="sticker-inner">
-              <p class="sticker-label">📋 Patient Sticker</p>
-              <div class="sticker-frame" id="sticker-frame"></div>
-              <img id="sticker-full-size" src="" alt="Patient Sticker">
-            </div>
-          </div>
+      <div id="sticker-container">
+        <div class="sticker-inner">
+          <p class="sticker-label">📋 Patient Sticker</p>
+          <div class="sticker-frame" id="sticker-frame"></div>
+          <img id="sticker-full-size" src="" alt="Patient Sticker">
         </div>
       </div>
+    </div>
+  </div>
 
-      <div class="section">
-          <div class="section-title">💊 TPN Configuration</div>
-          <div class="info-grid">
-              <div class="info-item"><span class="info-label">Bag Volume:</span><span class="info-value" id="display-bag"></span></div>
-              <div class="info-item"><span class="info-label">Rate:</span><span class="info-value" id="display-rate"></span></div>
-          </div>
+  <div class="section">
+      <div class="section-title">💊 TPN Configuration</div>
+      <div class="info-grid">
+          <div class="info-item"><span class="info-label">Bag Volume:</span><span class="info-value" id="display-bag"></span></div>
+          <div class="info-item"><span class="info-label">Rate:</span><span class="info-value" id="display-rate"></span></div>
       </div>
+  </div>
 
-      
-          <table class="tpn-summary-table">
-              <thead>
-                  <tr>
-                      <th>องค์ประกอบ</th>
-                      <th>ปริมาตร (ml)</th>
-                      <th>แคลอรี่ (kcal)</th>
-                      <th>mOsmol/L</th>
-                  </tr>
-              </thead>
-              <tbody id="tpn-summary-body"></tbody>
-          </table>
-      </div>
+  <div class="section">
+      <div class="section-title">🧪 TPN Composition</div>
+      <table class="composition-table" id="composition-table">
+          <thead>
+              <tr>
+                  <th style="width: 35%;">Component</th>
+                  <th style="width: 20%; text-align: center;">Dosage</th>
+                  <th style="width: 20%; text-align: center;">Volume (ml)</th>
+                  <th style="width: 25%; text-align: center;">Note</th>
+              </tr>
+          </thead>
+          <tbody id="composition-body"></tbody>
+      </table>
+  </div>
 
-      <div class="section">
-          <div class="section-title">🧪 TPN Composition</div>
-          <table class="composition-table" id="composition-table">
-              <thead>
-                  <tr>
-                      <th style="width: 35%;">Component</th>
-                      <th style="width: 20%; text-align: center;">Dosage</th>
-                      <th style="width: 20%; text-align: center;">Volume (ml)</th>
-                      <th style="width: 25%; text-align: center;">Note</th>
-                  </tr>
-              </thead>
-              <tbody id="composition-body"></tbody>
-          </table>
-      </div>
+  <div class="section">
+      <div class="section-title">📊 Summary</div>
+      <table class="summary-table">
+          <tbody>
+              <tr>
+                  <th>Total PN calories per day</th>
+                  <td><span class="summary-value-strong" id="display-pn-cal">0</span> kcal/day</td>
+              </tr>
+              <tr>
+                  <th>Total mOsmol/L</th>
+                  <td>
+                      <span id="display-osmol">~0</span>
+                      <span id="osmol-note" class="osmol-ok" style="margin-left:8px;">✓ &lt; 900 (เหมาะสำหรับ Peripheral)</span>
+                  </td>
+              </tr>
+              <tr>
+                  <th>From PN</th>
+                  <td><span class="summary-value-strong" id="display-pn-total">0</span> kcal/kg/day</td>
+              </tr>
+              <tr>
+                  <th>From Milk</th>
+                  <td><span class="summary-value-strong" id="display-milk-total">0</span> kcal/kg/day</td>
+              </tr>
+              <tr>
+                  <th>Total</th>
+                  <td><span class="summary-value-strong" id="display-grand-total">0</span> kcal/kg/day</td>
+              </tr>
+          </tbody>
+      </table>
+  </div>
 
-      <div class="section">
-          <div class="section-title">📊 Summary</div>
-          <table class="summary-table">
-              <tbody>
-                  <tr>
-                      <th>Total PN calories per day</th>
-                      <td><span class="summary-value-strong" id="display-pn-cal">0</span> kcal/day</td>
-                  </tr>
-                  <tr>
-                      <th>Total mOsmol/L</th>
-                      <td>
-                          <span id="display-osmol">~0</span>
-                          <span id="osmol-note" class="osmol-ok" style="margin-left:8px;">✓ &lt; 900 (เหมาะสำหรับ Peripheral)</span>
-                      </td>
-                  </tr>
-                  <tr>
-                      <th>From PN</th>
-                      <td><span class="summary-value-strong" id="display-pn-total">0</span> kcal/kg/day</td>
-                  </tr>
-                  <tr>
-                      <th>From Milk</th>
-                      <td><span class="summary-value-strong" id="display-milk-total">0</span> kcal/kg/day</td>
-                  </tr>
-                  <tr>
-                      <th>Total</th>
-                      <td><span class="summary-value-strong" id="display-grand-total">0</span> kcal/kg/day</td>
-                  </tr>
-              </tbody>
-          </table>
-      </div>
+  <div class="footer">
+      <p>Generated on <span id="generated-date"></span></p>
+      <p style="margin-top: 5px;">โรงพยาบาลขอนแก่น TPN Calculator for Pediatrics © 2025</p>
+  </div>
+```
 
-      <div class="footer">
-          <p>Generated on <span id="generated-date"></span></p>
-          <p style="margin-top: 5px;">โรงพยาบาลขอนแก่น TPN Calculator for Pediatrics © 2025</p>
-      </div>
   </div>
 </div>
 
@@ -529,8 +518,6 @@
     document.getElementById('display-bag').textContent = data.bag ? `${data.bag} ml` : '-';
     document.getElementById('display-rate').textContent = data.rate ? `${data.rate} ml/hr` : '-';
 
-    
-
     const tbody = document.getElementById('composition-body');
     const compositions = [];
 
@@ -564,7 +551,7 @@
         });
     }
 
-    // ✅ Na source - รองรับ 20% NaCl
+    // Handle 20% NaCl
     if (data.naSource === 'nacl' && parseFloat(data.naclVol) > 0) {
         compositions.push({
             name: '3% NaCl',
@@ -572,18 +559,18 @@
             volume: parseFloat(String(data.naclVol).replace(/[^0-9.]/g, '')).toFixed(1),
             note: ''
         });
+    } else if (data.naSource === 'nacl20' && parseFloat(data.nacl20Vol) > 0) {
+        compositions.push({
+            name: '20% NaCl',
+            input: `${data.na || '0'} mEq/kg/day`,
+            volume: parseFloat(String(data.nacl20Vol).replace(/[^0-9.]/g, '')).toFixed(1),
+            note: ''
+        });
     } else if (data.naSource === 'na-acetate' && parseFloat(data.naAcVol) > 0) {
         compositions.push({
             name: 'Na Acetate',
             input: `${data.na || '0'} mEq/kg/day`,
             volume: parseFloat(String(data.naAcVol).replace(/[^0-9.]/g, '')).toFixed(1),
-            note: ''
-        });
-    } else if (data.naSource === 'nacl-20' && parseFloat(data.nacl20Vol) > 0) {
-        compositions.push({
-            name: '20% NaCl',
-            input: `${data.na || '0'} mEq/kg/day`,
-            volume: parseFloat(String(data.nacl20Vol).replace(/[^0-9.]/g, '')).toFixed(1),
             note: ''
         });
     }
@@ -697,51 +684,40 @@
         }
     }
 
-    // ✅ Fat - แสดงข้อมูลใหม่ทั้งหมด
+    // Handle Fat with administration options
     const fatVolNum = data.fatVol ? parseFloat(String(data.fatVol).replace(/[^0-9.]/g, '')) : 0;
     if (fatVolNum > 0) {
-        const fatFlush = data.fatFlush || '+6ml';
-        const fatDuration = data.fatDuration || '24';
-        const fatRate = data.fatRate || '0.083 g/kg/hr';
-        const fatSplit = data.fatSplit || false;
-        const fatSplitDisplay = data.fatSplitDisplay || '';
+        const fatPriming = data.fatPriming || 'priming';
+        const fatDripDuration = data.fatDripDuration || '24';
+        const fatSplit = data.fatSplit || 'no-split';
         
-        let fatVolDisplay = fatVolNum;
-        let fatNote = '';
-        
-        // การไล่สาย
-        if (fatFlush === '+6ml') {
-            fatVolDisplay = fatVolNum + 6;
-            fatNote += '+ 6ml ไล่สาย';
-        } else {
-            fatNote += 'ไม่ไล่สาย';
+        // Calculate display volume
+        let displayFatVol = fatVolNum;
+        if (fatPriming === 'priming') {
+            displayFatVol = fatVolNum + 6;
         }
         
-        // IV Drip
-        fatNote += ` | IV drip in ${fatDuration} hr`;
-        fatNote += ` | Rate: ${fatRate}`;
+        // Build note
+        let fatNote = '';
+        if (fatPriming === 'priming') {
+            fatNote = 'รวม +6 ml ไล่สายแล้ว ';
+        } else {
+            fatNote = 'ไม่บวกไล่สาย ';
+        }
         
-        // การแบ่งเตรียม
-        if (fatSplit && fatSplitDisplay) {
-            fatNote += ` | แบ่งเตรียม: ${fatSplitDisplay}`;
+        fatNote += `IV drip in ${fatDripDuration} hr`;
+        
+        if (fatSplit === 'split-2') {
+            const volPerSyr = (displayFatVol / 2).toFixed(1);
+            fatNote += ` แบ่งเตรียม = ${volPerSyr} ml × 2 syr`;
         }
         
         compositions.push({
             name: data.fatProduct || '20% SMOF lipid',
             input: `${data.fat || '0'} g/kg/day`,
-            volume: fatVolDisplay.toFixed(1),
+            volume: displayFatVol.toFixed(1),
             note: fatNote,
             fat: true
-        });
-    }
-
-    // ✅ Additional
-    if (data.additionalName && parseFloat(data.additionalAmount) > 0) {
-        compositions.push({
-            name: 'Additional: ' + data.additionalName,
-            input: '-',
-            volume: parseFloat(data.additionalAmount).toFixed(1),
-            note: data.additionalUnit || 'mg'
         });
     }
 
@@ -863,7 +839,6 @@
     window.closeImageViewer = closeImageViewer;
     window.printScaled = printScaled;
 </script>
-
 
 </body>
 </html>
