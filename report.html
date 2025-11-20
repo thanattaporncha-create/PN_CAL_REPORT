@@ -11,6 +11,7 @@
             size: A4;
         }
 
+```
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
@@ -338,7 +339,7 @@ body {
     height: auto;
 }
 </style>
-
+```
 
 </head>
 <body>
@@ -370,7 +371,7 @@ body {
           </div>
       </div>
 
-
+```
   <div class="section">
     <div class="section-title">👤 Patient Information</div>
     <div style="display: grid; grid-template-columns: 1fr auto; gap: 20px; align-items: flex-start;">
@@ -450,7 +451,7 @@ body {
       <p>Generated on <span id="generated-date"></span></p>
       <p style="margin-top: 5px;">โรงพยาบาลขอนแก่น TPN Calculator for Pediatrics © 2025</p>
   </div>
-
+```
 
   </div>
 </div>
@@ -696,6 +697,18 @@ body {
         }
     }
 
+    // ✅ แสดง Heparin เมื่อมี PICC line (อยู่ก่อน Fat)
+    if (data.hasPicc) {
+        const heparinVol = data.heparinVol || '0';
+        compositions.push({
+            name: 'Heparin (1 unit/ml)',
+            input: '-',
+            volume: heparinVol,
+            note: 'สำหรับ PICC line',
+            highlight: false
+        });
+    }
+
     // Handle Fat with administration options
     const fatVolNum = data.fatVol ? parseFloat(String(data.fatVol).replace(/[^0-9.]/g, '')) : 0;
     if (fatVolNum > 0) {
@@ -732,18 +745,6 @@ body {
             volume: displayFatVol.toFixed(1),
             note: fatNote,
             fat: true
-        });
-    }
-
-    // ✅ แสดง Heparin เมื่อมี PICC line
-    if (data.hasPicc) {
-        const heparinVol = data.heparinVol || '0';
-        compositions.push({
-            name: 'Heparin (1,000 units/ml)',
-            input: '-',
-            volume: heparinVol,
-            note: 'สำหรับ PICC line',
-            highlight: false
         });
     }
 
