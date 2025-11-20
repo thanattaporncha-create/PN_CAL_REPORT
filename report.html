@@ -11,7 +11,6 @@
             size: A4;
         }
 
-
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
@@ -339,7 +338,7 @@ body {
     height: auto;
 }
 </style>
-    
+
 
 </head>
 <body>
@@ -736,15 +735,26 @@ body {
         });
     }
 
-    if (parseFloat(data.sterileWater) > 0) {
+    // ✅ แสดง Heparin เมื่อมี PICC line
+    if (data.hasPicc) {
+        const heparinVol = data.heparinVol || '0';
         compositions.push({
-            name: 'Sterile Water',
+            name: 'Heparin (1,000 units/ml)',
             input: '-',
-            volume: data.sterileWater,
-            note: '',
-            highlight: true
+            volume: heparinVol,
+            note: 'สำหรับ PICC line',
+            highlight: false
         });
     }
+
+    // ✅ แสดง Sterile Water เสมอ (แม้ค่าเป็น 0)
+    compositions.push({
+        name: 'Sterile Water',
+        input: '-',
+        volume: data.sterileWater || '0',
+        note: '',
+        highlight: true
+    });
 
     compositions.forEach(comp => {
         const row = document.createElement('tr');
