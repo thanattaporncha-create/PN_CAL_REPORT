@@ -1646,9 +1646,9 @@
     const AUTOSAVE_KEY = 'tpnFormAutosave';
 
     function autosaveCollect() {
-        const ids = ['order-date','patient-hn','patient-name','patient-ward','bw','rate','bag',
-                     'protein','dextrose','fat','milk','total-milk','p','na','k','ca','mg','additional-name',
-    'additional-amount','additional-unit'];
+        const ids = ['order-date','patient-hn','patient-name','patient-ward','bw','rate','bag',
+                     'protein','dextrose','fat','milk','total-milk','p','na','k','ca','mg','additional-name',
+    'additional-amount','additional-unit'];
         
         const data = {};
         ids.forEach(id => {
@@ -1688,10 +1688,11 @@
         if (!raw) return;
         try {
             const data = JSON.parse(raw);
-            Object.entries(data).forEach(([k,v]) => {
-                if (['order-date','patient-hn','patient-name','patient-ward','bw','rate','bag',
-                     'protein','dextrose','fat','milk','total-milk','p','na','k','ca','mg'].includes(k)) {
-                    const el = document.getElementById(k);
+            Object.entries(data).forEach(([k,v]) => {
+                if (['order-date','patient-hn','patient-name','patient-ward','bw','rate','bag',
+                     'protein','dextrose','fat','milk','total-milk','p','na','k','ca','mg','additional-name', // << เพิ่ม 3 ช่อง
+    'additional-amount','additional-unit'].includes(k)) { // << เพิ่ม 3 ช่อง
+                    const el = document.getElementById(k);
                     if (el) el.value = v;
                 }
             });
@@ -2176,17 +2177,6 @@
         initProductSelection();
         autosaveRestore();
 
-        // ← เพิ่ม block นี้
-    const SAVED = JSON.parse(localStorage.getItem(AUTOSAVE_KEY) || '{}');
-    if (SAVED['additional-name']) {
-      document.getElementById('additional-name').value = SAVED['additional-name'];
-    }
-    if (SAVED['additional-amount']) {
-      document.getElementById('additional-amount').value = SAVED['additional-amount'];
-    }
-    if (SAVED['additional-unit']) {
-      document.getElementById('additional-unit').value = SAVED['additional-unit'];
-    }
         const setSelectorDisplay = () => {
             const pf = document.querySelector('input[name="peditrace-freq"]:checked')?.value || 'daily';
             document.getElementById('peditrace-day-selector').style.display = (pf === 'weekly') ? 'block' : 'none';
