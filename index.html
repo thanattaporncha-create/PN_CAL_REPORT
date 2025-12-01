@@ -2280,9 +2280,8 @@ function validateKMeqInput(inputEl, maxAllowed) {
         
        // ===== Sodium Calculation V2 =====
 const naReq = na * bw;
-const pVol = r1(p * bw);
-const naFromGly = pVol * 2;
 
+document.getElementById('p-volume').textContent = pVol_1.toFixed(1) + ' ml';
 document.getElementById('na-from-glycophos').textContent = r1(naFromGly).toFixed(1) + ' mEq';
 
 // Update Na sources (will be called by checkbox events)
@@ -2392,13 +2391,6 @@ totalUsed += kResults.kclVol + kResults.kAcVol;
         const dispTotalKg = dispPN + dispMilk;
         document.getElementById('tf-from-milk').textContent = r0(tfMilk_raw) + ' ml/kg/day';
         document.getElementById('milk-calories-kg').textContent = dispMilk + ' kcal/kg/day';
-        document.getElementById('p-volume').textContent = pVol_1.toFixed(1) + ' ml';
-        document.getElementById('na-from-glycophos').textContent = r1(naFromGly).toFixed(1) + ' mEq';
-        document.getElementById('nacl-volume').textContent = naclVol_1.toFixed(1) + ' ml';
-        document.getElementById('nacl20-volume').textContent = nacl20Vol_1.toFixed(1) + ' ml';
-        document.getElementById('na-acetate-volume').textContent = naAcVol_1.toFixed(1) + ' ml';
-        document.getElementById('kcl-volume').textContent = kclVol_1.toFixed(1) + ' ml';
-        document.getElementById('k-acetate-volume').textContent = kAcVol_1.toFixed(1) + ' ml';
         document.getElementById('ca-volume').textContent = caVol_1.toFixed(1) + ' ml';
         document.getElementById('mg-volume').textContent = mgVol_2.toFixed(2) + ' ml';
 
@@ -2669,17 +2661,10 @@ document.getElementById('k-acetate-meq-input')?.addEventListener('input', functi
         });
     }
 });
-                calculateTPN();
-            });
-        }
 
-        ['bw','bag','protein','dextrose','fat','p','na','k','ca','mg','order-date'].forEach(id => {
-            const el = document.getElementById(id);
-            if (el) {
-                el.addEventListener('input', () => {
-                    calculateTPN();
-                    if (id === 'bw' || id === 'fat') {
-                        updateFatDisplay();
+calculateTPN();
+updateFatDisplay();
+              
                     }
                 });
             }
