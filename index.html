@@ -2407,7 +2407,22 @@
             fatDripDuration: document.querySelector('input[name="fat-drip-duration"]:checked')?.value || '24',
             fatSplit: document.querySelector('input[name="fat-split"]:checked')?.value || 'no-split'
         };
-
+// — สร้าง list ของ Additional —
+const additionalList = [];
+if (reportData.additionalName) {
+  additionalList.push({
+    name: reportData.additionalName,
+    input: '-',   // ถ้าอยากโชว์ input badge แทน ให้แก้เป็น addl.input
+    volume: reportData.additionalUnit === 'ml'
+             ? reportData.additionalAmount
+             : '',
+    note:   reportData.additionalUnit === 'mg'
+             ? reportData.additionalAmount + ' mg'
+             : ''
+  });
+}
+// ผนึกลง reportData
+reportData.additionalList = additionalList;
         localStorage.setItem('tpnReportData', JSON.stringify(reportData));
         autosaveCollect();
         console.log('✅ Report data saved, redirecting...');
