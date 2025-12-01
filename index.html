@@ -784,135 +784,12 @@
     .fat-split-display {
         font-size:0.9em;
     }
-    /* ===== ส่วนสุดท้ายของ CSS เดิม ===== */
-@media (max-width:768px) {
     .product-option {
         padding:10px 12px;
     }
 }
 
-/* ===== Na/K Source Selection V2 ===== */
-.source-option-v2 {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    padding: 12px;
-    margin-bottom: 10px;
-    border-radius: 8px;
-    background: #f8fafc;
-    border: 2px solid #e2e8f0;
-    transition: all 0.2s ease;
-    cursor: pointer;
-}
 
-.source-option-v2:hover {
-    background: #f0f9ff;
-    border-color: #4facfe;
-}
-
-.source-checkbox-row {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.source-checkbox-row input[type="checkbox"] {
-    transform: scale(1.3);
-    cursor: pointer;
-    accent-color: #4facfe;
-}
-
-.source-input-row {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-left: 32px;
-}
-
-.meq-input-v2 {
-    width: 80px;
-    padding: 8px 10px;
-    border: 2px solid #e2e8f0;
-    border-radius: 6px;
-    font-size: 0.95em;
-    font-weight: 600;
-    text-align: center;
-    background: white;
-    transition: all 0.2s ease;
-    -webkit-appearance: none;
-    -moz-appearance: textfield;
-    font-family: 'Sarabun', 'Noto Sans Thai', Arial, sans-serif;
-}
-
-.meq-input-v2::-webkit-outer-spin-button,
-.meq-input-v2::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-
-.meq-input-v2:hover {
-    border-color: #4facfe;
-}
-
-.meq-input-v2:focus {
-    outline: none;
-    border-color: #4facfe;
-    box-shadow: 0 0 0 3px rgba(79, 172, 254, 0.15);
-}
-
-.meq-input-v2:disabled {
-    background: #f1f5f9;
-    cursor: not-allowed;
-    opacity: 0.6;
-}
-
-.meq-input-v2.error {
-    border-color: #ef4444;
-    background: #fef2f2;
-}
-
-.unit-text {
-    font-size: 0.9em;
-    color: #64748b;
-    font-weight: 500;
-    min-width: 30px;
-}
-
-.arrow-icon {
-    font-size: 1.1em;
-    color: #94a3b8;
-    font-weight: 600;
-}
-
-.ml-display {
-    min-width: 50px;
-    padding: 8px 10px;
-    background: #dbeafe;
-    color: #1e40af;
-    border-radius: 6px;
-    font-weight: 700;
-    font-size: 0.95em;
-    text-align: center;
-    border: 2px solid #bfdbfe;
-}
-
-@media (max-width: 768px) {
-    .source-input-row {
-        margin-left: 0;
-        flex-wrap: wrap;
-    }
-    
-    .meq-input-v2 {
-        width: 70px;
-        font-size: 0.9em;
-    }
-    
-    .ml-display {
-        min-width: 45px;
-        font-size: 0.85em;
-    }
-}
-    
 </style>
 <style>
     @view-transition {
@@ -1331,83 +1208,38 @@
                 </div>
             </div>
         </div>
+        
         <!-- Sodium (Na) -->
-<div class="electrolyte-item">
-    <div class="electrolyte-header">
-        <div class="electrolyte-input">
-            <label for="na">Na (mEq/kg/day)</label>
-            <input type="text" inputmode="decimal" id="na" placeholder="กรอกปริมาณ Na">
-        </div>
-        <div class="electrolyte-result">
-            <div class="electrolyte-result-label">Na จาก Glycophos®</div>
-            <div class="electrolyte-result-value" id="na-from-glycophos">0 mEq</div>
-        </div>
-    </div>
-    <div class="source-selection">
-        <h4>เลือกแหล่ง Na ที่ต้องการ (เลือกได้หลายตัวเลือก - แบ่งเท่าๆ กัน):</h4>
-        
-        <!-- 3% NaCl -->
-        <label class="source-option-v2">
-            <div class="source-checkbox-row">
-                <input type="checkbox" name="na-source" value="nacl" id="nacl-checkbox">
-                <span class="source-option-label">3% NaCl (0.5 mEq/ml)</span>
+        <div class="electrolyte-item">
+            <div class="electrolyte-header">
+                <div class="electrolyte-input">
+                    <label for="na">Na (mEq/kg/day)</label>
+                    <input type="text" inputmode="decimal" id="na" placeholder="กรอกปริมาณ Na">
+                </div>
+                <div class="electrolyte-result">
+                    <div class="electrolyte-result-label">Na จาก Glycophos®</div>
+                    <div class="electrolyte-result-value" id="na-from-glycophos">0 mEq</div>
+                </div>
             </div>
-            <div class="source-input-row">
-                <input type="number" class="meq-input-v2" id="nacl-meq-input" 
-                       value="0" step="0.01" inputmode="decimal" 
-                       placeholder="0.00">
-                <span class="unit-text">mEq</span>
-                <span class="arrow-icon">→</span>
-                <span class="ml-display" id="nacl-volume">0.0</span>
-                <span class="unit-text">ml</span>
-            </div>
-        </label>
-        
-        <!-- 20% NaCl -->
-        <label class="source-option-v2">
-            <div class="source-checkbox-row">
-                <input type="checkbox" name="na-source" value="nacl20" id="nacl20-checkbox">
-                <span class="source-option-label" style="color:#dc2626; font-weight:500;">
-                    20% NaCl (3.4 mEq/ml)
-                </span>
-            </div>
-            <div class="source-input-row">
-                <input type="number" class="meq-input-v2" id="nacl20-meq-input" 
-                       value="0" step="0.01" inputmode="decimal" 
-                       placeholder="0.00">
-                <span class="unit-text">mEq</span>
-                <span class="arrow-icon">→</span>
-                <span class="ml-display" id="nacl20-volume">0.0</span>
-                <span class="unit-text">ml</span>
-            </div>
-        </label>
-        
-        <!-- Na Acetate -->
-        <label class="source-option-v2">
-            <div class="source-checkbox-row">
-                <input type="checkbox" name="na-source" value="na-acetate" id="na-acetate-checkbox">
-                <span class="source-option-label">Na acetate (3 mEq/ml)</span>
-            </div>
-            <div class="source-input-row">
-                <input type="number" class="meq-input-v2" id="na-acetate-meq-input" 
-                       value="0" step="0.01" inputmode="decimal" 
-                       placeholder="0.00">
-                <span class="unit-text">mEq</span>
-                <span class="arrow-icon">→</span>
-                <span class="ml-display" id="na-acetate-volume">0.0</span>
-                <span class="unit-text">ml</span>
-            </div>
-        </label>
-        
-        <!-- Remaining Na Display -->
-        <div style="margin-top:12px; padding:12px; background:#fef3c7; border-radius:8px; 
-                    border:2px solid #fbbf24;">
-            <div style="font-size:0.95em; color:#92400e; font-weight:600;">
-                💡 Na ที่เหลือต้องการ: <span id="remaining-na">0.00 mEq</span>
+            <div class="source-selection">
+                <h4>เลือกแหล่ง Na ที่ต้องการ:</h4>
+                <label class="source-option">
+                    <input type="radio" name="na-source" value="nacl" id="nacl-radio">
+                    <span class="source-option-label">3%NaCl (0.5 mEq/ml)</span>
+                    <span class="source-option-value" id="nacl-volume">0 ml</span>
+                </label>
+                <label class="source-option">
+                    <input type="radio" name="na-source" value="nacl20" id="nacl20-radio">
+                    <span class="source-option-label" style="color:#dc2626; font-weight:400;">20%NaCl (3.4 mEq/ml)</span>
+                    <span class="source-option-value" id="nacl20-volume">0 ml</span>
+                </label>
+                <label class="source-option">
+                    <input type="radio" name="na-source" value="na-acetate" id="na-acetate-radio">
+                    <span class="source-option-label">Na acetate (3 mEq/ml)</span>
+                    <span class="source-option-value" id="na-acetate-volume">0 ml</span>
+                </label>
             </div>
         </div>
-    </div>
-</div>
         
         <!-- Calcium (Ca) -->
         <div class="electrolyte-item">
@@ -1437,61 +1269,29 @@
             </div>
         </div>
         
-       <!-- Potassium (K) -->
-<div class="electrolyte-item">
-    <div class="electrolyte-header">
-        <div class="electrolyte-input">
-            <label for="k">K (mEq/kg/day)</label>
-            <input type="text" inputmode="decimal" id="k" placeholder="กรอกปริมาณ K">
-        </div>
-        <div style="display:grid; grid-template-columns:1fr; gap:0;"></div>
-    </div>
-    <div class="source-selection">
-        <h4>เลือกแหล่ง K ที่ต้องการ (เลือกได้หลายตัวเลือก - แบ่งเท่าๆ กัน):</h4>
-        
-        <!-- KCl -->
-        <label class="source-option-v2">
-            <div class="source-checkbox-row">
-                <input type="checkbox" name="k-source" value="kcl" id="kcl-checkbox">
-                <span class="source-option-label">15% KCl (2 mEq/ml)</span>
+        <!-- Potassium (K) -->
+        <div class="electrolyte-item">
+            <div class="electrolyte-header">
+                <div class="electrolyte-input">
+                    <label for="k">K (mEq/kg/day)</label>
+                    <input type="text" inputmode="decimal" id="k" placeholder="กรอกปริมาณ K">
+                </div>
+                <div style="display:grid; grid-template-columns:1fr; gap:0;"></div>
             </div>
-            <div class="source-input-row">
-                <input type="number" class="meq-input-v2" id="kcl-meq-input" 
-                       value="0" step="0.01" inputmode="decimal" 
-                       placeholder="0.00">
-                <span class="unit-text">mEq</span>
-                <span class="arrow-icon">→</span>
-                <span class="ml-display" id="kcl-volume">0.0</span>
-                <span class="unit-text">ml</span>
-            </div>
-        </label>
-        
-        <!-- K Acetate -->
-        <label class="source-option-v2">
-            <div class="source-checkbox-row">
-                <input type="checkbox" name="k-source" value="k-acetate" id="k-acetate-checkbox">
-                <span class="source-option-label">K acetate (3 mEq/ml)</span>
-            </div>
-            <div class="source-input-row">
-                <input type="number" class="meq-input-v2" id="k-acetate-meq-input" 
-                       value="0" step="0.01" inputmode="decimal" 
-                       placeholder="0.00">
-                <span class="unit-text">mEq</span>
-                <span class="arrow-icon">→</span>
-                <span class="ml-display" id="k-acetate-volume">0.0</span>
-                <span class="unit-text">ml</span>
-            </div>
-        </label>
-        
-        <!-- Remaining K Display -->
-        <div style="margin-top:12px; padding:12px; background:#fef3c7; border-radius:8px; 
-                    border:2px solid #fbbf24;">
-            <div style="font-size:0.95em; color:#92400e; font-weight:600;">
-                💡 K ที่เหลือต้องการ: <span id="remaining-k">0.00 mEq</span>
+            <div class="source-selection">
+                <h4>เลือกแหล่ง K ที่ต้องการ:</h4>
+                <label class="source-option">
+                    <input type="radio" name="k-source" value="kcl" id="kcl-radio">
+                    <span class="source-option-label">15% KCl (2 mEq/ml)</span>
+                    <span class="source-option-value" id="kcl-volume">0 ml</span>
+                </label>
+                <label class="source-option">
+                    <input type="radio" name="k-source" value="k-acetate" id="k-acetate-radio">
+                    <span class="source-option-label">K acetate (3 mEq/ml)</span>
+                    <span class="source-option-value" id="k-acetate-volume">0 ml</span>
+                </label>
             </div>
         </div>
-    </div>
-</div>
     </section>
     
     <!-- Micronutrients Section -->
@@ -1616,52 +1416,31 @@
         </div>
     </section>
     
-   <!-- Heparin Section -->
-<section class="section">
-    <h2>Add Heparin</h2>
-    <div class="calculation-section">
-        
-        <!-- ROW 1: PICC-line checkbox -->
-        <div class="calc-row">
-            <div class="calc-label">มี PICC-line หรือไม่?</div>
-            <div style="display:flex; align-items:center; gap:10px;">
-                <label style="display:flex; align-items:center; gap:8px; cursor:pointer;">
-                    <input type="checkbox" id="picc-line-checkbox" style="transform:scale(1.2);">
-                    <span style="font-weight:500;">มี PICC-line</span>
-                </label>
-            </div>
-            <div></div>
-        </div>
-        
-        <!-- ROW 2: Heparin Concentration (ส่วนที่เพิ่มใหม่) -->
-        <div class="calc-row" id="heparin-concentration-row" style="display:none;">
-            <div class="calc-label">Heparin Concentration</div>
-            <div style="display:flex; flex-direction:column; gap:8px;">
-                <label style="display:flex; align-items:center; gap:8px; cursor:pointer;">
-                    <input type="radio" name="heparin-conc" value="1" checked style="transform:scale(1.2);">
-                    <span>1 unit/ml (bag ÷ 50)</span>
-                </label>
-                <label style="display:flex; align-items:center; gap:8px; cursor:pointer;">
-                    <input type="radio" name="heparin-conc" value="0.5" style="transform:scale(1.2);">
-                    <span>0.5 unit/ml (bag ÷ 100)</span>
-                </label>
-            </div>
-            <div></div>
-        </div>
-        
-        <!-- ROW 3: Heparin Volume -->
-        <div class="calc-row">
-            <div class="calc-label">Heparin</div>
-            <div style="display:flex; flex-direction:column; gap:8px;">
+    <!-- Heparin Section -->
+    <section class="section">
+        <h2>Add Heparin</h2>
+        <div class="calculation-section">
+            <div class="calc-row">
+                <div class="calc-label">มี PICC-line หรือไม่?</div>
                 <div style="display:flex; align-items:center; gap:10px;">
-                    <span class="calc-result" id="heparin-volume" style="margin-left:5px;">0 ml</span>
+                    <label style="display:flex; align-items:center; gap:8px; cursor:pointer;">
+                        <input type="checkbox" id="picc-line-checkbox" style="transform:scale(1.2);">
+                        <span style="font-weight:500;">มี PICC-line</span>
+                    </label>
                 </div>
+                <div></div>
             </div>
-            <div></div>
+            <div class="calc-row">
+                <div class="calc-label">Heparin</div>
+                <div style="display:flex; flex-direction:column; gap:8px;">
+                    <div style="display:flex; align-items:center; gap:10px;">
+                        <span class="calc-result" id="heparin-volume" style="margin-left:5px;">0 ml</span>
+                    </div>
+                </div>
+                <div></div>
+            </div>
         </div>
-        
-    </div>
-</section>
+    </section>
     
     <!-- Additional Section -->
     <section class="section">
@@ -2013,10 +1792,6 @@
         localStorage.removeItem(AUTOSAVE_KEY);
         updateProteinLabel();
         updateFatLabel();
-        // ✅ Reset Na/K checkboxes and inputs (V2)
-document.querySelectorAll('input[name="na-source"]').forEach(cb => cb.checked = false);
-document.querySelectorAll('input[name="k-source"]').forEach(cb => cb.checked = false);
-document.querySelectorAll('.meq-input-v2').forEach(input => input.value = '0');
         calculateTPN();
         alert('✅ ล้างข้อมูลเรียบร้อยแล้ว');
     }
@@ -2059,181 +1834,6 @@ document.querySelectorAll('.meq-input-v2').forEach(input => input.value = '0');
         return d1 === 9 ? Math.ceil(v) : Math.floor(v);
     }
 
-    // ===== Na/K Management System V2 =====
-
-// Get max available mEq
-function getMaxNaMeq() {
-    const bw = parseFloat(document.getElementById('bw').value) || 0;
-    const na = parseFloat(document.getElementById('na').value) || 0;
-    const p = parseFloat(document.getElementById('p').value) || 0;
-    const naFromGly = (p * bw) * 2;
-    return Math.max(0, (na * bw) - naFromGly);
-}
-
-function getMaxKMeq() {
-    const bw = parseFloat(document.getElementById('bw').value) || 0;
-    const k = parseFloat(document.getElementById('k').value) || 0;
-    return Math.max(0, k * bw);
-}
-
-// Calculate Na sources with validation
-function calculateNaSources() {
-    const maxNa = getMaxNaMeq();
-    
-    // Get checked sources
-    const naclChecked = document.getElementById('nacl-checkbox')?.checked;
-    const nacl20Checked = document.getElementById('nacl20-checkbox')?.checked;
-    const naAcChecked = document.getElementById('na-acetate-checkbox')?.checked;
-    
-    const checkedCount = [naclChecked, nacl20Checked, naAcChecked].filter(Boolean).length;
-    
-    // Calculate mEq distribution
-    let naclMeq = 0, nacl20Meq = 0, naAcMeq = 0;
-    
-    if (checkedCount > 0) {
-        const perSource = maxNa / checkedCount;
-        if (naclChecked) naclMeq = perSource;
-        if (nacl20Checked) nacl20Meq = perSource;
-        if (naAcChecked) naAcMeq = perSource;
-    }
-    
-    // Update inputs
-    document.getElementById('nacl-meq-input').value = naclMeq.toFixed(2);
-    document.getElementById('nacl20-meq-input').value = nacl20Meq.toFixed(2);
-    document.getElementById('na-acetate-meq-input').value = naAcMeq.toFixed(2);
-    
-    // Calculate ml
-    updateNaMl();
-}
-
-// Calculate K sources with validation
-function calculateKSources() {
-    const maxK = getMaxKMeq();
-    
-    // Get checked sources
-    const kclChecked = document.getElementById('kcl-checkbox')?.checked;
-    const kAcChecked = document.getElementById('k-acetate-checkbox')?.checked;
-    
-    const checkedCount = [kclChecked, kAcChecked].filter(Boolean).length;
-    
-    // Calculate mEq distribution
-    let kclMeq = 0, kAcMeq = 0;
-    
-    if (checkedCount > 0) {
-        const perSource = maxK / checkedCount;
-        if (kclChecked) kclMeq = perSource;
-        if (kAcChecked) kAcMeq = perSource;
-    }
-    
-    // Update inputs
-    document.getElementById('kcl-meq-input').value = kclMeq.toFixed(2);
-    document.getElementById('k-acetate-meq-input').value = kAcMeq.toFixed(2);
-    
-    // Calculate ml
-    updateKMl();
-}
-
-// Update Na ml displays and validate
-function updateNaMl() {
-    const naclMeq = parseFloat(document.getElementById('nacl-meq-input').value) || 0;
-    const nacl20Meq = parseFloat(document.getElementById('nacl20-meq-input').value) || 0;
-    const naAcMeq = parseFloat(document.getElementById('na-acetate-meq-input').value) || 0;
-    
-    // Calculate ml
-    const naclVol = r1(naclMeq / 0.5);
-    const nacl20Vol = r1(nacl20Meq / 3.4);
-    const naAcVol = r1(naAcMeq / 3.0);
-    
-    // Update displays
-    document.getElementById('nacl-volume').textContent = naclVol.toFixed(1);
-    document.getElementById('nacl20-volume').textContent = nacl20Vol.toFixed(1);
-    document.getElementById('na-acetate-volume').textContent = naAcVol.toFixed(1);
-    
-    // Calculate remaining
-    const maxNa = getMaxNaMeq();
-    const usedNa = naclMeq + nacl20Meq + naAcMeq;
-    const remainingNa = maxNa - usedNa;
-    
-    // Update remaining display
-    const remainingEl = document.getElementById('remaining-na');
-    remainingEl.textContent = r2(remainingNa).toFixed(2) + ' mEq';
-    
-    // Color coding
-    if (remainingNa < -0.01) {
-        remainingEl.style.color = '#dc2626';
-        remainingEl.style.fontWeight = '700';
-    } else if (remainingNa > 0.1) {
-        remainingEl.style.color = '#f59e0b';
-        remainingEl.style.fontWeight = '600';
-    } else {
-        remainingEl.style.color = '#059669';
-        remainingEl.style.fontWeight = '600';
-    }
-    
-    return { naclVol, nacl20Vol, naAcVol, remainingNa };
-}
-
-// Update K ml displays and validate
-function updateKMl() {
-    const kclMeq = parseFloat(document.getElementById('kcl-meq-input').value) || 0;
-    const kAcMeq = parseFloat(document.getElementById('k-acetate-meq-input').value) || 0;
-    
-    // Calculate ml
-    const kclVol = r1(kclMeq / 2.0);
-    const kAcVol = r1(kAcMeq / 3.0);
-    
-    // Update displays
-    document.getElementById('kcl-volume').textContent = kclVol.toFixed(1);
-    document.getElementById('k-acetate-volume').textContent = kAcVol.toFixed(1);
-    
-    // Calculate remaining
-    const maxK = getMaxKMeq();
-    const usedK = kclMeq + kAcMeq;
-    const remainingK = maxK - usedK;
-    
-    // Update remaining display
-    const remainingEl = document.getElementById('remaining-k');
-    remainingEl.textContent = r2(remainingK).toFixed(2) + ' mEq';
-    
-    // Color coding
-    if (remainingK < -0.01) {
-        remainingEl.style.color = '#dc2626';
-        remainingEl.style.fontWeight = '700';
-    } else if (remainingK > 0.1) {
-        remainingEl.style.color = '#f59e0b';
-        remainingEl.style.fontWeight = '600';
-    } else {
-        remainingEl.style.color = '#059669';
-        remainingEl.style.fontWeight = '600';
-    }
-    
-    return { kclVol, kAcVol, remainingK };
-}
-
-// Validate and limit mEq input
-function validateNaMeqInput(inputEl, maxAllowed) {
-    let value = parseFloat(inputEl.value) || 0;
-    
-    if (value > maxAllowed) {
-        inputEl.value = maxAllowed.toFixed(2);
-        inputEl.classList.add('error');
-        setTimeout(() => inputEl.classList.remove('error'), 1000);
-    } else if (value < 0) {
-        inputEl.value = '0.00';
-    }
-}
-
-function validateKMeqInput(inputEl, maxAllowed) {
-    let value = parseFloat(inputEl.value) || 0;
-    
-    if (value > maxAllowed) {
-        inputEl.value = maxAllowed.toFixed(2);
-        inputEl.classList.add('error');
-        setTimeout(() => inputEl.classList.remove('error'), 1000);
-    } else if (value < 0) {
-        inputEl.value = '0.00';
-    }
-}
     // ===== Main TPN Calculation Function =====
     function calculateTPN() {
         const bw = parseFloat(document.getElementById('bw').value) || 0;
@@ -2277,18 +1877,15 @@ function validateKMeqInput(inputEl, maxAllowed) {
 
         const pVol_1 = r1(p * bw);
         const naFromGly = pVol_1 * 2;
-        
-       // ===== Sodium Calculation V2 =====
-const naReq = na * bw;
+        const naReq_raw = na * bw;
+        const rNa_raw = Math.max(0, naReq_raw - naFromGly);
+        const naclVol_1 = rNa_raw > 0 ? r1(rNa_raw / 0.5) : 0;
+        const nacl20Vol_1 = rNa_raw > 0 ? r1(rNa_raw / 3.4) : 0;
+        const naAcVol_1 = rNa_raw > 0 ? r1(rNa_raw / 3.0) : 0;
 
-document.getElementById('p-volume').textContent = pVol_1.toFixed(1) + ' ml';
-document.getElementById('na-from-glycophos').textContent = r1(naFromGly).toFixed(1) + ' mEq';
-
-// Update Na sources (will be called by checkbox events)
-const naResults = updateNaMl();
-
-       // ===== Potassium Calculation V2 =====
-const kResults = updateKMl();
+        const totalK_raw = k * bw;
+        const kclVol_1 = totalK_raw > 0 ? r1(totalK_raw / 2.0) : 0;
+        const kAcVol_1 = totalK_raw > 0 ? r1(totalK_raw / 3.0) : 0;
 
         const caVol_1 = r1((ca * bw) / 0.25);
         const mgVol_2 = r2((mg * bw) / 2.0);
@@ -2352,9 +1949,14 @@ const kResults = updateKMl();
         totalUsed += hep_disp_1;
         totalUsed += additionalVolume;
 
-  // ✅ รวม Na และ K volumes (V2)
-totalUsed += naResults.naclVol + naResults.nacl20Vol + naResults.naAcVol;
-totalUsed += kResults.kclVol + kResults.kAcVol;
+        const naSource = document.querySelector('input[name="na-source"]:checked')?.value;
+        if (naSource === 'nacl') totalUsed += naclVol_1;
+        if (naSource === 'nacl20') totalUsed += nacl20Vol_1;
+        if (naSource === 'na-acetate') totalUsed += naAcVol_1;
+
+        const kSource = document.querySelector('input[name="k-source"]:checked')?.value;
+        if (kSource === 'kcl') totalUsed += kclVol_1;
+        if (kSource === 'k-acetate') totalUsed += kAcVol_1;
 
         if (includeVitaminK) {
             if (vkChoice === 'daily') totalUsed += vitK_day_raw;
@@ -2391,6 +1993,13 @@ totalUsed += kResults.kclVol + kResults.kAcVol;
         const dispTotalKg = dispPN + dispMilk;
         document.getElementById('tf-from-milk').textContent = r0(tfMilk_raw) + ' ml/kg/day';
         document.getElementById('milk-calories-kg').textContent = dispMilk + ' kcal/kg/day';
+        document.getElementById('p-volume').textContent = pVol_1.toFixed(1) + ' ml';
+        document.getElementById('na-from-glycophos').textContent = r1(naFromGly).toFixed(1) + ' mEq';
+        document.getElementById('nacl-volume').textContent = naclVol_1.toFixed(1) + ' ml';
+        document.getElementById('nacl20-volume').textContent = nacl20Vol_1.toFixed(1) + ' ml';
+        document.getElementById('na-acetate-volume').textContent = naAcVol_1.toFixed(1) + ' ml';
+        document.getElementById('kcl-volume').textContent = kclVol_1.toFixed(1) + ' ml';
+        document.getElementById('k-acetate-volume').textContent = kAcVol_1.toFixed(1) + ' ml';
         document.getElementById('ca-volume').textContent = caVol_1.toFixed(1) + ' ml';
         document.getElementById('mg-volume').textContent = mgVol_2.toFixed(2) + ' ml';
 
@@ -2587,86 +2196,21 @@ totalUsed += kResults.kclVol + kResults.kAcVol;
                     const calculatedBag = calculateBagVolume(rate);
                     bagEl.value = calculatedBag;
                 }
-// ===== Na/K Event Listeners V2 =====
-document.querySelectorAll('input[name="na-source"]').forEach(checkbox => {
-    checkbox.addEventListener('change', () => {
-        calculateNaSources();
-        calculateTPN();
-    });
-});
+                calculateTPN();
+            });
+        }
 
-document.querySelectorAll('input[name="k-source"]').forEach(checkbox => {
-    checkbox.addEventListener('change', () => {
-        calculateKSources();
-        calculateTPN();
-    });
-});
-
-document.getElementById('nacl-meq-input')?.addEventListener('input', function() {
-    const maxNa = getMaxNaMeq();
-    validateNaMeqInput(this, maxNa);
-    updateNaMl();
-    calculateTPN();
-});
-
-document.getElementById('nacl20-meq-input')?.addEventListener('input', function() {
-    const maxNa = getMaxNaMeq();
-    validateNaMeqInput(this, maxNa);
-    updateNaMl();
-    calculateTPN();
-});
-
-document.getElementById('na-acetate-meq-input')?.addEventListener('input', function() {
-    const maxNa = getMaxNaMeq();
-    validateNaMeqInput(this, maxNa);
-    updateNaMl();
-    calculateTPN();
-});
-
-document.getElementById('kcl-meq-input')?.addEventListener('input', function() {
-    const maxK = getMaxKMeq();
-    validateKMeqInput(this, maxK);
-    updateKMl();
-    calculateTPN();
-});
-
-document.getElementById('k-acetate-meq-input')?.addEventListener('input', function() {
-    const maxK = getMaxKMeq();
-    validateKMeqInput(this, maxK);
-    updateKMl();
-    calculateTPN();
-});
-
-['bw', 'na', 'p'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) {
-        el.addEventListener('input', () => {
-            calculateNaSources();
-            calculateTPN();
+        ['bw','bag','protein','dextrose','fat','p','na','k','ca','mg','order-date'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) {
+                el.addEventListener('input', () => {
+                    calculateTPN();
+                    if (id === 'bw' || id === 'fat') {
+                        updateFatDisplay();
+                    }
+                });
+            }
         });
-    }
-});
-
-['bw', 'k'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) {
-        el.addEventListener('input', () => {
-            calculateKSources();
-            calculateTPN();
-        });
-    }
-});
-
-// เพิ่ม event listeners สำหรับ inputs อื่นๆ
-['bw', 'rate', 'bag', 'protein', 'dextrose', 'fat', 'p', 'na', 'k', 'ca', 'mg'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) {
-        el.addEventListener('input', calculateTPN);
-    }
-});
-
-calculateTPN();
-updateFatDisplay();
 
         const milkEl = document.getElementById('milk');
         if (milkEl) {
