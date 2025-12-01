@@ -1647,7 +1647,9 @@
 
     function autosaveCollect() {
         const ids = ['order-date','patient-hn','patient-name','patient-ward','bw','rate','bag',
-                     'protein','dextrose','fat','milk','total-milk','p','na','k','ca','mg'];
+                     'protein','dextrose','fat','milk','total-milk','p','na','k','ca','mg','additional-name',
+    'additional-amount','additional-unit'];
+        
         const data = {};
         ids.forEach(id => {
             const el = document.getElementById(id);
@@ -2174,6 +2176,17 @@
         initProductSelection();
         autosaveRestore();
 
+        // ← เพิ่ม block นี้
+    const SAVED = JSON.parse(localStorage.getItem(AUTOSAVE_KEY) || '{}');
+    if (SAVED['additional-name']) {
+      document.getElementById('additional-name').value = SAVED['additional-name'];
+    }
+    if (SAVED['additional-amount']) {
+      document.getElementById('additional-amount').value = SAVED['additional-amount'];
+    }
+    if (SAVED['additional-unit']) {
+      document.getElementById('additional-unit').value = SAVED['additional-unit'];
+    }
         const setSelectorDisplay = () => {
             const pf = document.querySelector('input[name="peditrace-freq"]:checked')?.value || 'daily';
             document.getElementById('peditrace-day-selector').style.display = (pf === 'weekly') ? 'block' : 'none';
