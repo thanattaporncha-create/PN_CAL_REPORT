@@ -1208,38 +1208,42 @@
                 </div>
             </div>
         </div>
-        
         <!-- Sodium (Na) -->
-        <div class="electrolyte-item">
-            <div class="electrolyte-header">
-                <div class="electrolyte-input">
-                    <label for="na">Na (mEq/kg/day)</label>
-                    <input type="text" inputmode="decimal" id="na" placeholder="กรอกปริมาณ Na">
-                </div>
-                <div class="electrolyte-result">
-                    <div class="electrolyte-result-label">Na จาก Glycophos®</div>
-                    <div class="electrolyte-result-value" id="na-from-glycophos">0 mEq</div>
-                </div>
-            </div>
-            <div class="source-selection">
-                <h4>เลือกแหล่ง Na ที่ต้องการ:</h4>
-                <label class="source-option">
-                    <input type="radio" name="na-source" value="nacl" id="nacl-radio">
-                    <span class="source-option-label">3%NaCl (0.5 mEq/ml)</span>
-                    <span class="source-option-value" id="nacl-volume">0 ml</span>
-                </label>
-                <label class="source-option">
-                    <input type="radio" name="na-source" value="nacl20" id="nacl20-radio">
-                    <span class="source-option-label" style="color:#dc2626; font-weight:400;">20%NaCl (3.4 mEq/ml)</span>
-                    <span class="source-option-value" id="nacl20-volume">0 ml</span>
-                </label>
-                <label class="source-option">
-                    <input type="radio" name="na-source" value="na-acetate" id="na-acetate-radio">
-                    <span class="source-option-label">Na acetate (3 mEq/ml)</span>
-                    <span class="source-option-value" id="na-acetate-volume">0 ml</span>
-                </label>
+<div class="electrolyte-item">
+    <div class="electrolyte-header">
+        <div class="electrolyte-input">
+            <label for="na">Na (mEq/kg/day)</label>
+            <input type="text" inputmode="decimal" id="na" placeholder="กรอกปริมาณ Na">
+        </div>
+        <div class="electrolyte-result">
+            <div class="electrolyte-result-label">Na จาก Glycophos®</div>
+            <div class="electrolyte-result-value" id="na-from-glycophos">0 mEq</div>
+        </div>
+    </div>
+    <div class="source-selection">
+        <h4>เลือกแหล่ง Na ที่ต้องการ (เลือกได้หลายตัวเลือก - หักลดหลั่นตามลำดับ):</h4>
+        <label class="source-option">
+            <input type="checkbox" name="na-source" value="nacl" id="nacl-checkbox">
+            <span class="source-option-label">3%NaCl (0.5 mEq/ml)</span>
+            <span class="source-option-value" id="nacl-volume">0 ml</span>
+        </label>
+        <label class="source-option">
+            <input type="checkbox" name="na-source" value="nacl20" id="nacl20-checkbox">
+            <span class="source-option-label" style="color:#dc2626; font-weight:400;">20%NaCl (3.4 mEq/ml)</span>
+            <span class="source-option-value" id="nacl20-volume">0 ml</span>
+        </label>
+        <label class="source-option">
+            <input type="checkbox" name="na-source" value="na-acetate" id="na-acetate-checkbox">
+            <span class="source-option-label">Na acetate (3 mEq/ml)</span>
+            <span class="source-option-value" id="na-acetate-volume">0 ml</span>
+        </label>
+        <div style="margin-top:10px; padding:10px; background:#fef3c7; border-radius:6px; border:1px solid #fbbf24;">
+            <div style="font-size:0.85em; color:#92400e; font-weight:600;">
+                💡 Na ที่เหลือต้องการ: <span id="remaining-na">0 mEq</span>
             </div>
         </div>
+    </div>
+</div>
         
         <!-- Calcium (Ca) -->
         <div class="electrolyte-item">
@@ -1269,29 +1273,34 @@
             </div>
         </div>
         
-        <!-- Potassium (K) -->
-        <div class="electrolyte-item">
-            <div class="electrolyte-header">
-                <div class="electrolyte-input">
-                    <label for="k">K (mEq/kg/day)</label>
-                    <input type="text" inputmode="decimal" id="k" placeholder="กรอกปริมาณ K">
-                </div>
-                <div style="display:grid; grid-template-columns:1fr; gap:0;"></div>
-            </div>
-            <div class="source-selection">
-                <h4>เลือกแหล่ง K ที่ต้องการ:</h4>
-                <label class="source-option">
-                    <input type="radio" name="k-source" value="kcl" id="kcl-radio">
-                    <span class="source-option-label">15% KCl (2 mEq/ml)</span>
-                    <span class="source-option-value" id="kcl-volume">0 ml</span>
-                </label>
-                <label class="source-option">
-                    <input type="radio" name="k-source" value="k-acetate" id="k-acetate-radio">
-                    <span class="source-option-label">K acetate (3 mEq/ml)</span>
-                    <span class="source-option-value" id="k-acetate-volume">0 ml</span>
-                </label>
+       <!-- Potassium (K) -->
+<div class="electrolyte-item">
+    <div class="electrolyte-header">
+        <div class="electrolyte-input">
+            <label for="k">K (mEq/kg/day)</label>
+            <input type="text" inputmode="decimal" id="k" placeholder="กรอกปริมาณ K">
+        </div>
+        <div style="display:grid; grid-template-columns:1fr; gap:0;"></div>
+    </div>
+    <div class="source-selection">
+        <h4>เลือกแหล่ง K ที่ต้องการ (เลือกได้หลายตัวเลือก - หักลดหลั่นตามลำดับ):</h4>
+        <label class="source-option">
+            <input type="checkbox" name="k-source" value="kcl" id="kcl-checkbox">
+            <span class="source-option-label">15% KCl (2 mEq/ml)</span>
+            <span class="source-option-value" id="kcl-volume">0 ml</span>
+        </label>
+        <label class="source-option">
+            <input type="checkbox" name="k-source" value="k-acetate" id="k-acetate-checkbox">
+            <span class="source-option-label">K acetate (3 mEq/ml)</span>
+            <span class="source-option-value" id="k-acetate-volume">0 ml</span>
+        </label>
+        <div style="margin-top:10px; padding:10px; background:#fef3c7; border-radius:6px; border:1px solid #fbbf24;">
+            <div style="font-size:0.85em; color:#92400e; font-weight:600;">
+                💡 K ที่เหลือต้องการ: <span id="remaining-k">0 mEq</span>
             </div>
         </div>
+    </div>
+</div>
     </section>
     
     <!-- Micronutrients Section -->
@@ -1416,31 +1425,52 @@
         </div>
     </section>
     
-    <!-- Heparin Section -->
-    <section class="section">
-        <h2>Add Heparin</h2>
-        <div class="calculation-section">
-            <div class="calc-row">
-                <div class="calc-label">มี PICC-line หรือไม่?</div>
-                <div style="display:flex; align-items:center; gap:10px;">
-                    <label style="display:flex; align-items:center; gap:8px; cursor:pointer;">
-                        <input type="checkbox" id="picc-line-checkbox" style="transform:scale(1.2);">
-                        <span style="font-weight:500;">มี PICC-line</span>
-                    </label>
-                </div>
-                <div></div>
+   <!-- Heparin Section -->
+<section class="section">
+    <h2>Add Heparin</h2>
+    <div class="calculation-section">
+        
+        <!-- ROW 1: PICC-line checkbox -->
+        <div class="calc-row">
+            <div class="calc-label">มี PICC-line หรือไม่?</div>
+            <div style="display:flex; align-items:center; gap:10px;">
+                <label style="display:flex; align-items:center; gap:8px; cursor:pointer;">
+                    <input type="checkbox" id="picc-line-checkbox" style="transform:scale(1.2);">
+                    <span style="font-weight:500;">มี PICC-line</span>
+                </label>
             </div>
-            <div class="calc-row">
-                <div class="calc-label">Heparin</div>
-                <div style="display:flex; flex-direction:column; gap:8px;">
-                    <div style="display:flex; align-items:center; gap:10px;">
-                        <span class="calc-result" id="heparin-volume" style="margin-left:5px;">0 ml</span>
-                    </div>
-                </div>
-                <div></div>
-            </div>
+            <div></div>
         </div>
-    </section>
+        
+        <!-- ROW 2: Heparin Concentration (ส่วนที่เพิ่มใหม่) -->
+        <div class="calc-row" id="heparin-concentration-row" style="display:none;">
+            <div class="calc-label">Heparin Concentration</div>
+            <div style="display:flex; flex-direction:column; gap:8px;">
+                <label style="display:flex; align-items:center; gap:8px; cursor:pointer;">
+                    <input type="radio" name="heparin-conc" value="1" checked style="transform:scale(1.2);">
+                    <span>1 unit/ml (bag ÷ 50)</span>
+                </label>
+                <label style="display:flex; align-items:center; gap:8px; cursor:pointer;">
+                    <input type="radio" name="heparin-conc" value="0.5" style="transform:scale(1.2);">
+                    <span>0.5 unit/ml (bag ÷ 100)</span>
+                </label>
+            </div>
+            <div></div>
+        </div>
+        
+        <!-- ROW 3: Heparin Volume -->
+        <div class="calc-row">
+            <div class="calc-label">Heparin</div>
+            <div style="display:flex; flex-direction:column; gap:8px;">
+                <div style="display:flex; align-items:center; gap:10px;">
+                    <span class="calc-result" id="heparin-volume" style="margin-left:5px;">0 ml</span>
+                </div>
+            </div>
+            <div></div>
+        </div>
+        
+    </div>
+</section>
     
     <!-- Additional Section -->
     <section class="section">
