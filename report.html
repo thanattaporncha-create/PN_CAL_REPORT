@@ -709,6 +709,17 @@ body {
         });
     }
 
+    // — ดึงรายการ Additional มาต่อท้าย compositions —
+if (Array.isArray(data.additionalList)) {
+  data.additionalList.forEach(add => {
+    compositions.push({
+      name: add.name,
+      input: add.input,
+      volume: add.volume,
+      note:   add.note
+    });
+  });
+}
     // Handle Fat with administration options
     const fatVolNum = data.fatVol ? parseFloat(String(data.fatVol).replace(/[^0-9.]/g, '')) : 0;
     if (fatVolNum > 0) {
