@@ -789,7 +789,30 @@
     }
 }
 
+/* ✅ เพิ่มตรงนี้ (ก่อน </style>) */
+/* ✅ mEq Input Styles */
+.meq-input {
+    -webkit-appearance: none;
+    -moz-appearance: textfield;
+    transition: all 0.2s ease;
+}
 
+.meq-input::-webkit-outer-spin-button,
+.meq-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.meq-input:hover {
+    border-color: #4facfe !important;
+}
+
+.meq-input:focus {
+    outline: none;
+    border-color: #4facfe !important;
+    box-shadow: 0 0 0 2px rgba(79, 172, 254, 0.15) !important;
+}
+    
 </style>
 <style>
     @view-transition {
@@ -1221,22 +1244,69 @@
         </div>
     </div>
     <div class="source-selection">
-        <h4>เลือกแหล่ง Na ที่ต้องการ (เลือกได้หลายตัวเลือก - หักลดหลั่นตามลำดับ):</h4>
+        <h4>เลือกแหล่ง Na ที่ต้องการ (เลือกได้หลายตัวเลือก - แบ่งเท่าๆ กัน):</h4>
+        
+        <!-- 3% NaCl -->
         <label class="source-option">
             <input type="checkbox" name="na-source" value="nacl" id="nacl-checkbox">
             <span class="source-option-label">3%NaCl (0.5 mEq/ml)</span>
-            <span class="source-option-value" id="nacl-volume">0 ml</span>
+            <div style="display:flex; gap:10px; align-items:center;">
+                <div style="display:flex; align-items:center; gap:5px;">
+                    <span style="font-size:0.85em; color:#64748b;">mEq:</span>
+                    <input type="number" class="meq-input" id="nacl-meq-input" 
+                           value="0" step="0.1" inputmode="decimal"
+                           style="width:60px; text-align:center; font-size:0.85em; 
+                                  border:1px solid #e2e8f0; border-radius:4px; padding:4px;">
+                </div>
+                <div style="display:flex; align-items:center; gap:5px;">
+                    <span style="font-size:0.85em; color:#64748b;">ml:</span>
+                    <span class="source-option-value" id="nacl-volume" 
+                          style="font-weight:600; color:#1e40af; min-width:50px;">0</span>
+                </div>
+            </div>
         </label>
+        
+        <!-- 20% NaCl -->
         <label class="source-option">
             <input type="checkbox" name="na-source" value="nacl20" id="nacl20-checkbox">
             <span class="source-option-label" style="color:#dc2626; font-weight:400;">20%NaCl (3.4 mEq/ml)</span>
-            <span class="source-option-value" id="nacl20-volume">0 ml</span>
+            <div style="display:flex; gap:10px; align-items:center;">
+                <div style="display:flex; align-items:center; gap:5px;">
+                    <span style="font-size:0.85em; color:#64748b;">mEq:</span>
+                    <input type="number" class="meq-input" id="nacl20-meq-input" 
+                           value="0" step="0.1" inputmode="decimal"
+                           style="width:60px; text-align:center; font-size:0.85em; 
+                                  border:1px solid #e2e8f0; border-radius:4px; padding:4px;">
+                </div>
+                <div style="display:flex; align-items:center; gap:5px;">
+                    <span style="font-size:0.85em; color:#64748b;">ml:</span>
+                    <span class="source-option-value" id="nacl20-volume" 
+                          style="font-weight:600; color:#1e40af; min-width:50px;">0</span>
+                </div>
+            </div>
         </label>
+        
+        <!-- Na Acetate -->
         <label class="source-option">
             <input type="checkbox" name="na-source" value="na-acetate" id="na-acetate-checkbox">
             <span class="source-option-label">Na acetate (3 mEq/ml)</span>
-            <span class="source-option-value" id="na-acetate-volume">0 ml</span>
+            <div style="display:flex; gap:10px; align-items:center;">
+                <div style="display:flex; align-items:center; gap:5px;">
+                    <span style="font-size:0.85em; color:#64748b;">mEq:</span>
+                    <input type="number" class="meq-input" id="na-acetate-meq-input" 
+                           value="0" step="0.1" inputmode="decimal"
+                           style="width:60px; text-align:center; font-size:0.85em; 
+                                  border:1px solid #e2e8f0; border-radius:4px; padding:4px;">
+                </div>
+                <div style="display:flex; align-items:center; gap:5px;">
+                    <span style="font-size:0.85em; color:#64748b;">ml:</span>
+                    <span class="source-option-value" id="na-acetate-volume" 
+                          style="font-weight:600; color:#1e40af; min-width:50px;">0</span>
+                </div>
+            </div>
         </label>
+        
+        <!-- Remaining Na Display -->
         <div style="margin-top:10px; padding:10px; background:#fef3c7; border-radius:6px; border:1px solid #fbbf24;">
             <div style="font-size:0.85em; color:#92400e; font-weight:600;">
                 💡 Na ที่เหลือต้องการ: <span id="remaining-na">0 mEq</span>
@@ -1283,17 +1353,49 @@
         <div style="display:grid; grid-template-columns:1fr; gap:0;"></div>
     </div>
     <div class="source-selection">
-        <h4>เลือกแหล่ง K ที่ต้องการ (เลือกได้หลายตัวเลือก - หักลดหลั่นตามลำดับ):</h4>
+        <h4>เลือกแหล่ง K ที่ต้องการ (เลือกได้หลายตัวเลือก - แบ่งเท่าๆ กัน):</h4>
+        
+        <!-- KCl -->
         <label class="source-option">
             <input type="checkbox" name="k-source" value="kcl" id="kcl-checkbox">
             <span class="source-option-label">15% KCl (2 mEq/ml)</span>
-            <span class="source-option-value" id="kcl-volume">0 ml</span>
+            <div style="display:flex; gap:10px; align-items:center;">
+                <div style="display:flex; align-items:center; gap:5px;">
+                    <span style="font-size:0.85em; color:#64748b;">mEq:</span>
+                    <input type="number" class="meq-input" id="kcl-meq-input" 
+                           value="0" step="0.1" inputmode="decimal"
+                           style="width:60px; text-align:center; font-size:0.85em; 
+                                  border:1px solid #e2e8f0; border-radius:4px; padding:4px;">
+                </div>
+                <div style="display:flex; align-items:center; gap:5px;">
+                    <span style="font-size:0.85em; color:#64748b;">ml:</span>
+                    <span class="source-option-value" id="kcl-volume" 
+                          style="font-weight:600; color:#1e40af; min-width:50px;">0</span>
+                </div>
+            </div>
         </label>
+        
+        <!-- K Acetate -->
         <label class="source-option">
             <input type="checkbox" name="k-source" value="k-acetate" id="k-acetate-checkbox">
             <span class="source-option-label">K acetate (3 mEq/ml)</span>
-            <span class="source-option-value" id="k-acetate-volume">0 ml</span>
+            <div style="display:flex; gap:10px; align-items:center;">
+                <div style="display:flex; align-items:center; gap:5px;">
+                    <span style="font-size:0.85em; color:#64748b;">mEq:</span>
+                    <input type="number" class="meq-input" id="k-acetate-meq-input" 
+                           value="0" step="0.1" inputmode="decimal"
+                           style="width:60px; text-align:center; font-size:0.85em; 
+                                  border:1px solid #e2e8f0; border-radius:4px; padding:4px;">
+                </div>
+                <div style="display:flex; align-items:center; gap:5px;">
+                    <span style="font-size:0.85em; color:#64748b;">ml:</span>
+                    <span class="source-option-value" id="k-acetate-volume" 
+                          style="font-weight:600; color:#1e40af; min-width:50px;">0</span>
+                </div>
+            </div>
         </label>
+        
+        <!-- Remaining K Display -->
         <div style="margin-top:10px; padding:10px; background:#fef3c7; border-radius:6px; border:1px solid #fbbf24;">
             <div style="font-size:0.85em; color:#92400e; font-weight:600;">
                 💡 K ที่เหลือต้องการ: <span id="remaining-k">0 mEq</span>
@@ -1822,6 +1924,10 @@
         localStorage.removeItem(AUTOSAVE_KEY);
         updateProteinLabel();
         updateFatLabel();
+        // ✅ Reset Na/K checkboxes and mEq inputs
+document.querySelectorAll('input[name="na-source"]').forEach(cb => cb.checked = false);
+document.querySelectorAll('input[name="k-source"]').forEach(cb => cb.checked = false);
+document.querySelectorAll('.meq-input').forEach(input => input.value = '0');
         calculateTPN();
         alert('✅ ล้างข้อมูลเรียบร้อยแล้ว');
     }
@@ -1864,6 +1970,138 @@
         return d1 === 9 ? Math.ceil(v) : Math.floor(v);
     }
 
+    // ✅ ฟังก์ชันคำนวณ Na sources แบบ Hybrid (Option B)
+function calculateNaSourcesHybrid(naReq, naFromGly) {
+    const totalNeeded = Math.max(0, naReq - naFromGly);
+    
+    // เช็คว่า check อะไรบ้าง
+    const naclChecked = document.getElementById('nacl-checkbox')?.checked;
+    const nacl20Checked = document.getElementById('nacl20-checkbox')?.checked;
+    const naAcChecked = document.getElementById('na-acetate-checkbox')?.checked;
+    
+    const checkedCount = [naclChecked, nacl20Checked, naAcChecked].filter(Boolean).length;
+    
+    let naclMeq = 0, nacl20Meq = 0, naAcMeq = 0;
+    
+    if (checkedCount === 0) {
+        naclMeq = nacl20Meq = naAcMeq = 0;
+    } else {
+        const perSource = totalNeeded / checkedCount;
+        if (naclChecked) naclMeq = perSource;
+        if (nacl20Checked) nacl20Meq = perSource;
+        if (naAcChecked) naAcMeq = perSource;
+    }
+    
+    const naclVol = naclMeq > 0 ? r1(naclMeq / 0.5) : 0;
+    const nacl20Vol = nacl20Meq > 0 ? r1(nacl20Meq / 3.4) : 0;
+    const naAcVol = naAcMeq > 0 ? r1(naAcMeq / 3.0) : 0;
+    
+    const remainingNa = Math.max(0, totalNeeded - naclMeq - nacl20Meq - naAcMeq);
+    
+    return { 
+        naclMeq: r2(naclMeq),
+        nacl20Meq: r2(nacl20Meq),
+        naAcMeq: r2(naAcMeq),
+        naclVol, 
+        nacl20Vol, 
+        naAcVol, 
+        remainingNa: r2(remainingNa)
+    };
+}
+
+// ✅ ฟังก์ชันคำนวณ K sources แบบ Hybrid (Option B)
+function calculateKSourcesHybrid(kReq) {
+    const totalNeeded = Math.max(0, kReq);
+    
+    const kclChecked = document.getElementById('kcl-checkbox')?.checked;
+    const kAcChecked = document.getElementById('k-acetate-checkbox')?.checked;
+    
+    const checkedCount = [kclChecked, kAcChecked].filter(Boolean).length;
+    
+    let kclMeq = 0, kAcMeq = 0;
+    
+    if (checkedCount === 0) {
+        kclMeq = kAcMeq = 0;
+    } else {
+        const perSource = totalNeeded / checkedCount;
+        if (kclChecked) kclMeq = perSource;
+        if (kAcChecked) kAcMeq = perSource;
+    }
+    
+    const kclVol = kclMeq > 0 ? r1(kclMeq / 2.0) : 0;
+    const kAcVol = kAcMeq > 0 ? r1(kAcMeq / 3.0) : 0;
+    
+    const remainingK = Math.max(0, totalNeeded - kclMeq - kAcMeq);
+    
+    return { 
+        kclMeq: r2(kclMeq),
+        kAcMeq: r2(kAcMeq),
+        kclVol, 
+        kAcVol, 
+        remainingK: r2(remainingK)
+    };
+}
+
+// ✅ ฟังก์ชันคำนวณ ml จาก mEq ที่ User แก้เอง (Na)
+function calculateNaFromManualMeq() {
+    const naclMeq = parseFloat(document.getElementById('nacl-meq-input')?.value) || 0;
+    const nacl20Meq = parseFloat(document.getElementById('nacl20-meq-input')?.value) || 0;
+    const naAcMeq = parseFloat(document.getElementById('na-acetate-meq-input')?.value) || 0;
+    
+    const naclVol = naclMeq > 0 ? r1(naclMeq / 0.5) : 0;
+    const nacl20Vol = nacl20Meq > 0 ? r1(nacl20Meq / 3.4) : 0;
+    const naAcVol = naAcMeq > 0 ? r1(naAcMeq / 3.0) : 0;
+    
+    document.getElementById('nacl-volume').textContent = naclVol.toFixed(1);
+    document.getElementById('nacl20-volume').textContent = nacl20Vol.toFixed(1);
+    document.getElementById('na-acetate-volume').textContent = naAcVol.toFixed(1);
+    
+    const bw = parseFloat(document.getElementById('bw').value) || 0;
+    const na = parseFloat(document.getElementById('na').value) || 0;
+    const p = parseFloat(document.getElementById('p').value) || 0;
+    const naFromGly = (p * bw) * 2;
+    const totalNeeded = Math.max(0, (na * bw) - naFromGly);
+    const remainingNa = Math.max(0, totalNeeded - naclMeq - nacl20Meq - naAcMeq);
+    
+    document.getElementById('remaining-na').textContent = r2(remainingNa).toFixed(2) + ' mEq';
+    
+    const remainingNaEl = document.getElementById('remaining-na');
+    if (remainingNa > 0.1) {
+        remainingNaEl.style.color = '#dc2626';
+        remainingNaEl.style.fontWeight = '700';
+    } else {
+        remainingNaEl.style.color = '#92400e';
+        remainingNaEl.style.fontWeight = '600';
+    }
+}
+
+// ✅ ฟังก์ชันคำนวณ ml จาก mEq ที่ User แก้เอง (K)
+function calculateKFromManualMeq() {
+    const kclMeq = parseFloat(document.getElementById('kcl-meq-input')?.value) || 0;
+    const kAcMeq = parseFloat(document.getElementById('k-acetate-meq-input')?.value) || 0;
+    
+    const kclVol = kclMeq > 0 ? r1(kclMeq / 2.0) : 0;
+    const kAcVol = kAcMeq > 0 ? r1(kAcMeq / 3.0) : 0;
+    
+    document.getElementById('kcl-volume').textContent = kclVol.toFixed(1);
+    document.getElementById('k-acetate-volume').textContent = kAcVol.toFixed(1);
+    
+    const bw = parseFloat(document.getElementById('bw').value) || 0;
+    const k = parseFloat(document.getElementById('k').value) || 0;
+    const totalNeeded = Math.max(0, k * bw);
+    const remainingK = Math.max(0, totalNeeded - kclMeq - kAcMeq);
+    
+    document.getElementById('remaining-k').textContent = r2(remainingK).toFixed(2) + ' mEq';
+    
+    const remainingKEl = document.getElementById('remaining-k');
+    if (remainingK > 0.1) {
+        remainingKEl.style.color = '#dc2626';
+        remainingKEl.style.fontWeight = '700';
+    } else {
+        remainingKEl.style.color = '#92400e';
+        remainingKEl.style.fontWeight = '600';
+    }
+}
     // ===== Main TPN Calculation Function =====
     function calculateTPN() {
         const bw = parseFloat(document.getElementById('bw').value) || 0;
@@ -1907,15 +2145,53 @@
 
         const pVol_1 = r1(p * bw);
         const naFromGly = pVol_1 * 2;
-        const naReq_raw = na * bw;
-        const rNa_raw = Math.max(0, naReq_raw - naFromGly);
-        const naclVol_1 = rNa_raw > 0 ? r1(rNa_raw / 0.5) : 0;
-        const nacl20Vol_1 = rNa_raw > 0 ? r1(rNa_raw / 3.4) : 0;
-        const naAcVol_1 = rNa_raw > 0 ? r1(rNa_raw / 3.0) : 0;
+        // ===== Sodium Calculation (Hybrid Option B) =====
+const naReq_raw = na * bw;
+const naSources = calculateNaSourcesHybrid(naReq_raw, naFromGly);
 
-        const totalK_raw = k * bw;
-        const kclVol_1 = totalK_raw > 0 ? r1(totalK_raw / 2.0) : 0;
-        const kAcVol_1 = totalK_raw > 0 ? r1(totalK_raw / 3.0) : 0;
+// Update mEq inputs
+document.getElementById('nacl-meq-input').value = naSources.naclMeq.toFixed(2);
+document.getElementById('nacl20-meq-input').value = naSources.nacl20Meq.toFixed(2);
+document.getElementById('na-acetate-meq-input').value = naSources.naAcMeq.toFixed(2);
+
+// Update ml displays
+document.getElementById('nacl-volume').textContent = naSources.naclVol.toFixed(1);
+document.getElementById('nacl20-volume').textContent = naSources.nacl20Vol.toFixed(1);
+document.getElementById('na-acetate-volume').textContent = naSources.naAcVol.toFixed(1);
+document.getElementById('remaining-na').textContent = naSources.remainingNa.toFixed(2) + ' mEq';
+
+// เปลี่ยนสีถ้ายังเหลือ Na
+const remainingNaEl = document.getElementById('remaining-na');
+if (naSources.remainingNa > 0.1) {
+    remainingNaEl.style.color = '#dc2626';
+    remainingNaEl.style.fontWeight = '700';
+} else {
+    remainingNaEl.style.color = '#92400e';
+    remainingNaEl.style.fontWeight = '600';
+}
+
+       // ===== Potassium Calculation (Hybrid Option B) =====
+const totalK_raw = k * bw;
+const kSources = calculateKSourcesHybrid(totalK_raw);
+
+// Update mEq inputs
+document.getElementById('kcl-meq-input').value = kSources.kclMeq.toFixed(2);
+document.getElementById('k-acetate-meq-input').value = kSources.kAcMeq.toFixed(2);
+
+// Update ml displays
+document.getElementById('kcl-volume').textContent = kSources.kclVol.toFixed(1);
+document.getElementById('k-acetate-volume').textContent = kSources.kAcVol.toFixed(1);
+document.getElementById('remaining-k').textContent = kSources.remainingK.toFixed(2) + ' mEq';
+
+// เปลี่ยนสีถ้ายังเหลือ K
+const remainingKEl = document.getElementById('remaining-k');
+if (kSources.remainingK > 0.1) {
+    remainingKEl.style.color = '#dc2626';
+    remainingKEl.style.fontWeight = '700';
+} else {
+    remainingKEl.style.color = '#92400e';
+    remainingKEl.style.fontWeight = '600';
+}
 
         const caVol_1 = r1((ca * bw) / 0.25);
         const mgVol_2 = r2((mg * bw) / 2.0);
@@ -1979,14 +2255,9 @@
         totalUsed += hep_disp_1;
         totalUsed += additionalVolume;
 
-        const naSource = document.querySelector('input[name="na-source"]:checked')?.value;
-        if (naSource === 'nacl') totalUsed += naclVol_1;
-        if (naSource === 'nacl20') totalUsed += nacl20Vol_1;
-        if (naSource === 'na-acetate') totalUsed += naAcVol_1;
-
-        const kSource = document.querySelector('input[name="k-source"]:checked')?.value;
-        if (kSource === 'kcl') totalUsed += kclVol_1;
-        if (kSource === 'k-acetate') totalUsed += kAcVol_1;
+        // ✅ รวม Na และ K volumes
+totalUsed += naSources.naclVol + naSources.nacl20Vol + naSources.naAcVol;
+totalUsed += kSources.kclVol + kSources.kAcVol;
 
         if (includeVitaminK) {
             if (vkChoice === 'daily') totalUsed += vitK_day_raw;
@@ -2226,6 +2497,30 @@
                     const calculatedBag = calculateBagVolume(rate);
                     bagEl.value = calculatedBag;
                 }
+
+                // ✅ Na/K checkboxes - re-calculate on check/uncheck
+document.querySelectorAll('input[name="na-source"]').forEach(checkbox => {
+    checkbox.addEventListener('change', () => {
+        calculateTPN();
+    });
+});
+
+document.querySelectorAll('input[name="k-source"]').forEach(checkbox => {
+    checkbox.addEventListener('change', () => {
+        calculateTPN();
+    });
+});
+
+// ✅ mEq inputs - calculate ml when user types
+document.querySelectorAll('.meq-input').forEach(input => {
+    input.addEventListener('input', function() {
+        if (this.id.startsWith('nacl') || this.id.startsWith('na-acetate')) {
+            calculateNaFromManualMeq();
+        } else if (this.id.startsWith('kcl') || this.id.startsWith('k-acetate')) {
+            calculateKFromManualMeq();
+        }
+    });
+});
                 calculateTPN();
             });
         }
