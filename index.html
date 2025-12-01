@@ -2587,10 +2587,7 @@ totalUsed += kResults.kclVol + kResults.kAcVol;
                     const calculatedBag = calculateBagVolume(rate);
                     bagEl.value = calculatedBag;
                 }
-
-                // ===== Na/K Event Listeners V2 =====
-
-// Na checkboxes - reset and recalculate
+// ===== Na/K Event Listeners V2 =====
 document.querySelectorAll('input[name="na-source"]').forEach(checkbox => {
     checkbox.addEventListener('change', () => {
         calculateNaSources();
@@ -2598,7 +2595,6 @@ document.querySelectorAll('input[name="na-source"]').forEach(checkbox => {
     });
 });
 
-// K checkboxes - reset and recalculate
 document.querySelectorAll('input[name="k-source"]').forEach(checkbox => {
     checkbox.addEventListener('change', () => {
         calculateKSources();
@@ -2606,7 +2602,6 @@ document.querySelectorAll('input[name="k-source"]').forEach(checkbox => {
     });
 });
 
-// Na mEq inputs - validate and update ml
 document.getElementById('nacl-meq-input')?.addEventListener('input', function() {
     const maxNa = getMaxNaMeq();
     validateNaMeqInput(this, maxNa);
@@ -2628,7 +2623,6 @@ document.getElementById('na-acetate-meq-input')?.addEventListener('input', funct
     calculateTPN();
 });
 
-// K mEq inputs - validate and update ml
 document.getElementById('kcl-meq-input')?.addEventListener('input', function() {
     const maxK = getMaxKMeq();
     validateKMeqInput(this, maxK);
@@ -2643,12 +2637,12 @@ document.getElementById('k-acetate-meq-input')?.addEventListener('input', functi
     calculateTPN();
 });
 
-// When BW, Na, K, P changes - recalculate sources
 ['bw', 'na', 'p'].forEach(id => {
     const el = document.getElementById(id);
     if (el) {
         el.addEventListener('input', () => {
             calculateNaSources();
+            calculateTPN();
         });
     }
 });
@@ -2658,17 +2652,21 @@ document.getElementById('k-acetate-meq-input')?.addEventListener('input', functi
     if (el) {
         el.addEventListener('input', () => {
             calculateKSources();
+            calculateTPN();
         });
+    }
+});
+
+// เพิ่ม event listeners สำหรับ inputs อื่นๆ
+['bw', 'rate', 'bag', 'protein', 'dextrose', 'fat', 'p', 'na', 'k', 'ca', 'mg'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) {
+        el.addEventListener('input', calculateTPN);
     }
 });
 
 calculateTPN();
 updateFatDisplay();
-              
-                    }
-                });
-            }
-        });
 
         const milkEl = document.getElementById('milk');
         if (milkEl) {
