@@ -459,16 +459,17 @@ body {
 
 <script>
     function goBack() {
-        // ✅ บันทึกข้อมูล fat options กลับไปที่ autosave
-        const AUTOSAVE_KEY = 'tpnCalculatorState';
-        const currentAutosave = JSON.parse(localStorage.getItem(AUTOSAVE_KEY) || '{}');
-        
-        // อัพเดทค่า fat options จาก report data
-        if (data.fatPriming) currentAutosave.fatPriming = data.fatPriming;
-        if (data.fatDripDuration) currentAutosave.fatDripDuration = data.fatDripDuration;
-        if (data.fatSplit) currentAutosave.fatSplit = data.fatSplit;
-        
-        localStorage.setItem(AUTOSAVE_KEY, JSON.stringify(currentAutosave));
+        // report.html: บรรทัดประมาณ 470 (ในฟังก์ชัน goBack)
+        // ✅ บันทึกข้อมูล fat options กลับไปที่ autosave
+        const AUTOSAVE_KEY = 'tpnFormAutosave'; // << แก้จาก tpnCalculatorState เป็น tpnFormAutosave
+        const currentAutosave = JSON.parse(localStorage.getItem(AUTOSAVE_KEY) || '{}');
+        
+        // อัพเดทค่า fat options จาก report data
+        if (data.fatPriming) currentAutosave.fatPriming = data.fatPriming;
+        if (data.fatDripDuration) currentAutosave.fatDripDuration = data.fatDripDuration;
+        if (data.fatSplit) currentAutosave.fatSplit = data.fatSplit;
+        
+        localStorage.setItem(AUTOSAVE_KEY, JSON.stringify(currentAutosave));
         
         window.location.href = 'index.html';
     }
