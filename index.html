@@ -1417,30 +1417,44 @@
     </section>
     
     <!-- Heparin Section -->
-    <section class="section">
-        <h2>Add Heparin</h2>
-        <div class="calculation-section">
-            <div class="calc-row">
-                <div class="calc-label">มี PICC-line หรือไม่?</div>
-                <div style="display:flex; align-items:center; gap:10px;">
-                    <label style="display:flex; align-items:center; gap:8px; cursor:pointer;">
-                        <input type="checkbox" id="picc-line-checkbox" style="transform:scale(1.2);">
-                        <span style="font-weight:500;">มี PICC-line</span>
-                    </label>
-                </div>
-                <div></div>
+<section class="section">
+    <h2>Add Heparin</h2>
+    <div class="calculation-section">
+        <div class="calc-row">
+            <div class="calc-label">มี PICC-line หรือไม่?</div>
+            <div style="display:flex; align-items:center; gap:10px;">
+                <label style="display:flex; align-items:center; gap:8px; cursor:pointer;">
+                    <input type="checkbox" id="picc-line-checkbox" style="transform:scale(1.2);">
+                    <span style="font-weight:500;">มี PICC-line</span>
+                </label>
             </div>
-            <div class="calc-row">
-                <div class="calc-label">Heparin</div>
-                <div style="display:flex; flex-direction:column; gap:8px;">
-                    <div style="display:flex; align-items:center; gap:10px;">
-                        <span class="calc-result" id="heparin-volume" style="margin-left:5px;">0 ml</span>
-                    </div>
-                </div>
-                <div></div>
-            </div>
+            <div></div>
         </div>
-    </section>
+        <div class="calc-row">
+            <div class="calc-label">เลือกความเข้มข้น Heparin:</div>
+            <div style="display:flex; gap:15px; flex-wrap:wrap;">
+                <label class="frequency-option" style="flex:0 0 auto; min-width:150px;">
+                    <input type="radio" name="heparin-concentration" value="1" checked>
+                    <span class="frequency-option-label">1 u/ml (bag/50)</span>
+                </label>
+                <label class="frequency-option" style="flex:0 0 auto; min-width:150px;">
+                    <input type="radio" name="heparin-concentration" value="0.5">
+                    <span class="frequency-option-label">0.5 u/ml (bag/100)</span>
+                </label>
+            </div>
+            <div></div>
+        </div>
+        <div class="calc-row">
+            <div class="calc-label">Heparin</div>
+            <div style="display:flex; flex-direction:column; gap:8px;">
+                <div style="display:flex; align-items:center; gap:10px;">
+                    <span class="calc-result" id="heparin-volume" style="margin-left:5px;">0 ml</span>
+                </div>
+            </div>
+            <div></div>
+        </div>
+    </div>
+</section>
     
     <!-- Additional Section -->
     <section class="section">
@@ -1668,6 +1682,7 @@
         const cernDay = document.getElementById('cernevit-day')?.value || '1';
         const vitKDay = document.getElementById('vitamin-k-day')?.value || '1';
         const hasPicc = document.getElementById('picc-line-checkbox')?.checked || false;
+        const heparinConc = document.querySelector('input[name="heparin-concentration"]:checked')?.value || '1';
         
         // ✅ เพิ่ม Fat administration options
         const fatPriming = document.querySelector('input[name="fat-priming"]:checked')?.value || 'priming';
@@ -1675,10 +1690,10 @@
         const fatSplit = document.querySelector('input[name="fat-split"]:checked')?.value || 'no-split';
 
         Object.assign(data, {
-            route, proteinProduct, fatProduct, naSrc, kSrc,
-            peditFreq, cernFreq, vitKChoice, peditDay, cernDay, vitKDay, hasPicc,
-            fatPriming, fatDripDuration, fatSplit
-        });
+    route, proteinProduct, fatProduct, naSrc, kSrc,
+    peditFreq, cernFreq, vitKChoice, peditDay, cernDay, vitKDay, hasPicc, heparinConc,
+    fatPriming, fatDripDuration, fatSplit
+});
 
         localStorage.setItem(AUTOSAVE_KEY, JSON.stringify(data));
     }
@@ -1734,6 +1749,9 @@
             if (vday) vday.value = data.vitKDay ?? '1';
             const picc = document.getElementById('picc-line-checkbox');
             if (picc) picc.checked = !!data.hasPicc;
+            if (data.heparinConc) {
+    document.querySelector(`input[name="heparin-concentration"][value="${data.heparinConc}"]`)?.click();
+}
 
             updateProteinLabel();
             updateFatLabel();
@@ -1933,8 +1951,10 @@
         else if (vkChoice === 'weekly') includeVitaminK = shouldIncludeMicronutrient('weekly', vkDay, orderDate);
 
         const picc = document.getElementById('picc-line-checkbox')?.checked || false;
-        const hep_calc_1 = r1(bag > 0 ? bag / 50 : 0);
-        const hep_disp_1 = picc ? hep_calc_1 : 0;
+const heparinConcentration = document.querySelector('input[name="heparin-concentration"]:checked')?.value || '1';
+const divisor = (heparinConcentration === '1') ? 50 : 100;
+const hep_calc_1 = r1(bag > 0 ? bag / divisor : 0);
+const hep_disp_1 = picc ? hep_calc_1 : 0;
         
         // Get additional values
         const additionalAmount = parseFloat(document.getElementById('additional-amount').value) || 0;
@@ -2245,7 +2265,11 @@
                 calculateTPN();
             });
         }
-        
+        document.querySelectorAll('input[name="heparin-concentration"]').forEach(r => {
+    r.addEventListener('change', () => {
+        calculateTPN();
+    });
+});
         // Fat administration event listeners
         document.querySelectorAll('input[name="fat-priming"]').forEach(r => {
             r.addEventListener('change', () => {
