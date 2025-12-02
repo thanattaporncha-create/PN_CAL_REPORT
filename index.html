@@ -2477,10 +2477,11 @@ if (picc) {
             milkCalKg: extractNumberString(dsel('breakdown-milk')),
             tfFromMilk: dsel('tf-from-milk'),
             // Fat administration options
-            fatPriming: document.querySelector('input[name="fat-priming"]:checked')?.value || 'priming',
-            fatDripDuration: document.querySelector('input[name="fat-drip-duration"]:checked')?.value || '24',
-            fatSplit: document.querySelector('input[name="fat-split"]:checked')?.value || 'no-split'
-        };
+           fatPriming: document.querySelector('input[name="fat-priming"]:checked')?.value || 'priming',
+    fatDripDuration: document.querySelector('input[name="fat-drip-duration"]:checked')?.value || '24',
+    fatSplit: document.querySelector('input[name="fat-split"]:checked')?.value || 'no-split',
+    npcnRatio: (document.getElementById('npc-n-ratio')?.textContent || '0:1').replace(':1', '')
+};
 // — สร้าง list ของ Additional —
 const additionalList = [];
 if (reportData.additionalName) {
