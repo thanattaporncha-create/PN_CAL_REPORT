@@ -1786,64 +1786,83 @@ if (data.heparinConc) {
         } catch(e) { }
     }
 
-    function clearAllData() {
-        if (!confirm('⚠️ คุณต้องการล้างข้อมูลทั้งหมดใช่หรือไม่?')) return;
+   function clearAllData() {
+    if (!confirm('⚠️ คุณต้องการล้างข้อมูลทั้งหมดใช่หรือไม่?')) return;
 
-        const ids = ['patient-hn','patient-name','patient-ward','bw','rate','bag',
-                     'protein','dextrose','fat','milk','total-milk','p','na','k','ca','mg'];
-        ids.forEach(id => {
-            const el = document.getElementById(id);
-            if (el) el.value = '';
-        });
+    const ids = ['patient-hn','patient-name','patient-ward','bw','rate','bag',
+                 'protein','dextrose','fat','milk','total-milk','p','na','k','ca','mg',
+                 'additional-name','additional-amount'];
+    ids.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.value = '';
+    });
 
-        const dateEl = document.getElementById('order-date');
-        if (dateEl) {
-            const today = new Date();
-            dateEl.value = today.toISOString().split('T')[0];
-        }
-
-        document.querySelector('input[name="tpn-route"][value="central"]')?.click();
-
-        // Reset product selections
-        const aminovenRadio = document.querySelector('input[name="protein-product"][value="aminoven"]');
-        if (aminovenRadio) {
-            aminovenRadio.checked = true;
-            document.querySelectorAll('.product-option[data-product="protein"]').forEach(opt => opt.classList.remove('selected'));
-            aminovenRadio.closest('.product-option').classList.add('selected');
-        }
-
-        const smofRadio = document.querySelector('input[name="fat-product"][value="smof"]');
-        if (smofRadio) {
-            smofRadio.checked = true;
-            document.querySelectorAll('.product-option[data-product="fat"]').forEach(opt => opt.classList.remove('selected'));
-            smofRadio.closest('.product-option').classList.add('selected');
-        }
-
-        document.querySelector('input[name="na-source"]')?.checked && (document.querySelector('input[name="na-source"]').checked = false);
-        document.querySelector('input[name="k-source"]')?.checked && (document.querySelector('input[name="k-source"]').checked = false);
-        document.querySelector('input[name="peditrace-freq"][value="daily"]')?.click();
-        document.querySelector('input[name="cernevit-freq"][value="daily"]')?.click();
-        document.querySelector('input[name="vitamin-k-choice"][value="none"]')?.click();
-
-        const peditDay = document.getElementById('peditrace-day');
-        if (peditDay) peditDay.value = '1';
-        const cernDay = document.getElementById('cernevit-day');
-        if (cernDay) cernDay.value = '1';
-        const vitKDay = document.getElementById('vitamin-k-day');
-        if (vitKDay) vitKDay.value = '1';
-        const picc = document.getElementById('picc-line-checkbox');
-        if (picc) picc.checked = false;
-
-        if (window.clearStickerImage) {
-            window.clearStickerImage();
-        }
-
-        localStorage.removeItem(AUTOSAVE_KEY);
-        updateProteinLabel();
-        updateFatLabel();
-        calculateTPN();
-        alert('✅ ล้างข้อมูลเรียบร้อยแล้ว');
+    const dateEl = document.getElementById('order-date');
+    if (dateEl) {
+        const today = new Date();
+        dateEl.value = today.toISOString().split('T')[0];
     }
+
+    document.querySelector('input[name="tpn-route"][value="central"]')?.click();
+
+    // Reset product selections
+    const aminovenRadio = document.querySelector('input[name="protein-product"][value="aminoven"]');
+    if (aminovenRadio) {
+        aminovenRadio.checked = true;
+        document.querySelectorAll('.product-option[data-product="protein"]').forEach(opt => opt.classList.remove('selected'));
+        aminovenRadio.closest('.product-option').classList.add('selected');
+    }
+
+    const smofRadio = document.querySelector('input[name="fat-product"][value="smof"]');
+    if (smofRadio) {
+        smofRadio.checked = true;
+        document.querySelectorAll('.product-option[data-product="fat"]').forEach(opt => opt.classList.remove('selected'));
+        smofRadio.closest('.product-option').classList.add('selected');
+    }
+
+    document.querySelector('input[name="na-source"]')?.checked && (document.querySelector('input[name="na-source"]').checked = false);
+    document.querySelector('input[name="k-source"]')?.checked && (document.querySelector('input[name="k-source"]').checked = false);
+    document.querySelector('input[name="peditrace-freq"][value="daily"]')?.click();
+    document.querySelector('input[name="cernevit-freq"][value="daily"]')?.click();
+    document.querySelector('input[name="vitamin-k-choice"][value="none"]')?.click();
+
+    const peditDay = document.getElementById('peditrace-day');
+    if (peditDay) peditDay.value = '1';
+    const cernDay = document.getElementById('cernevit-day');
+    if (cernDay) cernDay.value = '1';
+    const vitKDay = document.getElementById('vitamin-k-day');
+    if (vitKDay) vitKDay.value = '1';
+    
+    // ✅ Reset Heparin - ยกเลิกการติ๊ก PICC และซ่อน concentration
+    const picc = document.getElementById('picc-line-checkbox');
+    if (picc) {
+        picc.checked = false;
+        const heparinRow = document.getElementById('heparin-concentration-row');
+        if (heparinRow) heparinRow.style.display = 'none';
+    }
+    // Reset heparin concentration เป็น default (1 unit/ml)
+    document.querySelector('input[name="heparin-concentration"][value="1"]')?.click();
+    
+    // ✅ Reset Fat Administration Options
+    document.querySelector('input[name="fat-priming"][value="priming"]')?.click();
+    document.querySelector('input[name="fat-drip-duration"][value="24"]')?.click();
+    document.querySelector('input[name="fat-split"][value="no-split"]')?.click();
+    
+    // Reset additional unit
+    const additionalUnit = document.getElementById('additional-unit');
+    if (additionalUnit) additionalUnit.value = 'ml';
+
+    if (window.clearStickerImage) {
+        window.clearStickerImage();
+    }
+
+    localStorage.removeItem(AUTOSAVE_KEY);
+    updateProteinLabel();
+    updateFatLabel();
+    updateFatDisplay();
+    calculateTPN();
+    alert('✅ ล้างข้อมูลเรียบร้อยแล้ว');
+}
 
     // ===== Helper Functions =====
     function shouldIncludeMicronutrient(freq, selectedDay, orderDate) {
