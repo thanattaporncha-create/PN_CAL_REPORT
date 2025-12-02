@@ -468,6 +468,7 @@ body {
         if (data.fatPriming) currentAutosave.fatPriming = data.fatPriming;
         if (data.fatDripDuration) currentAutosave.fatDripDuration = data.fatDripDuration;
         if (data.fatSplit) currentAutosave.fatSplit = data.fatSplit;
+        if (data.heparinConc) currentAutosave.heparinConc = data.heparinConc;
         
         localStorage.setItem(AUTOSAVE_KEY, JSON.stringify(currentAutosave));
         
@@ -698,16 +699,19 @@ body {
     }
 
     // ✅ แสดง Heparin เมื่อมี PICC line (อยู่ก่อน Fat)
-    if (data.hasPicc) {
-        const heparinVol = data.heparinVol || '0';
-        compositions.push({
-            name: 'Heparin (1 unit/ml)',
-            input: '-',
-            volume: heparinVol,
-            note: 'สำหรับ PICC line',
-            highlight: false
-        });
-    }
+if (data.hasPicc) {
+    const heparinVol = data.heparinVol || '0';
+    const heparinConc = data.heparinConc || '1';
+    const concDisplay = (heparinConc === '1') ? '1 unit/ml' : '0.5 unit/ml';
+    
+    compositions.push({
+        name: `Heparin (${concDisplay})`,
+        input: '-',
+        volume: heparinVol,
+        note: 'สำหรับ PICC line',
+        highlight: false
+    });
+}
 
     // — ดึงรายการ Additional มาต่อท้าย compositions —
 if (Array.isArray(data.additionalList)) {
