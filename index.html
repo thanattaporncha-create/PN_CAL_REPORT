@@ -1430,20 +1430,23 @@
             </div>
             <div></div>
         </div>
-        <div class="calc-row">
+        
+        <!-- Heparin Concentration Selection (แสดงเฉพาะเมื่อติ๊ก PICC) -->
+        <div class="calc-row" id="heparin-concentration-row" style="display:none;">
             <div class="calc-label">เลือกความเข้มข้น Heparin:</div>
             <div style="display:flex; gap:15px; flex-wrap:wrap;">
                 <label class="frequency-option" style="flex:0 0 auto; min-width:150px;">
                     <input type="radio" name="heparin-concentration" value="1" checked>
-                    <span class="frequency-option-label">1 u/ml (bag/50)</span>
+                    <span class="frequency-option-label">1 unit/ml</span>
                 </label>
                 <label class="frequency-option" style="flex:0 0 auto; min-width:150px;">
                     <input type="radio" name="heparin-concentration" value="0.5">
-                    <span class="frequency-option-label">0.5 u/ml (bag/100)</span>
+                    <span class="frequency-option-label">0.5 unit/ml</span>
                 </label>
             </div>
             <div></div>
         </div>
+        
         <div class="calc-row">
             <div class="calc-label">Heparin</div>
             <div style="display:flex; flex-direction:column; gap:8px;">
@@ -1747,9 +1750,17 @@
             if (cday) cday.value = data.cernDay ?? '1';
             const vday = document.getElementById('vitamin-k-day');
             if (vday) vday.value = data.vitKDay ?? '1';
-            const picc = document.getElementById('picc-line-checkbox');
-            if (picc) picc.checked = !!data.hasPicc;
-            if (data.heparinConc) {
+           const picc = document.getElementById('picc-line-checkbox');
+if (picc) {
+    picc.checked = !!data.hasPicc;
+    // แสดง/ซ่อน heparin concentration row ตามสถานะ PICC
+    const heparinRow = document.getElementById('heparin-concentration-row');
+    if (data.hasPicc && heparinRow) {
+        heparinRow.style.display = 'grid';
+    }
+}
+
+if (data.heparinConc) {
     document.querySelector(`input[name="heparin-concentration"][value="${data.heparinConc}"]`)?.click();
 }
 
@@ -2260,11 +2271,17 @@ const hep_disp_1 = picc ? hep_calc_1 : 0;
         }));
 
         const picc = document.getElementById('picc-line-checkbox');
-        if (picc) {
-            picc.addEventListener('change', () => {
-                calculateTPN();
-            });
+if (picc) {
+    picc.addEventListener('change', function() {
+        const heparinRow = document.getElementById('heparin-concentration-row');
+        if (this.checked) {
+            heparinRow.style.display = 'grid';
+        } else {
+            heparinRow.style.display = 'none';
         }
+        calculateTPN();
+    });
+}
         document.querySelectorAll('input[name="heparin-concentration"]').forEach(r => {
     r.addEventListener('change', () => {
         calculateTPN();
