@@ -420,11 +420,14 @@ body {
       <table class="summary-table">
           <tbody>
               <tr>
-                  <th>Total PN calories per day</th>
-                  <td><span class="summary-value-strong" id="display-pn-cal">0</span> kcal/day</td>
-              </tr>
-              <tr>
-                  <th>Total mOsmol/L</th>
+    <th>Total PN calories per day</th>
+    <td>
+        <span class="summary-value-strong" id="display-pn-cal">0</span> kcal/day
+        <span style="margin-left: 12px; color: #4b5563;">(NPC:N = <span class="summary-value-strong" id="display-npc-n">0</span>:1)</span>
+    </td>
+</tr>
+<tr>
+    <th>Total mOsmol/L</th>
                   <td>
                       <span id="display-osmol">~0</span>
                       <span id="osmol-note" class="osmol-ok" style="margin-left:8px;">✓ &lt; 900 (เหมาะสำหรับ Peripheral)</span>
@@ -809,6 +812,7 @@ if (Array.isArray(data.additionalList)) {
     document.getElementById('display-pn-total').textContent = data.pnCalKg || '0';
     document.getElementById('display-milk-total').textContent = data.milkCalKg || '0';
     document.getElementById('display-grand-total').textContent = data.totalCalKg || '0';
+    document.getElementById('display-npc-n').textContent = data.npcnRatio || '0';
 
     const now = new Date();
     const dateStr = now.toLocaleDateString('th-TH', {
