@@ -2439,6 +2439,7 @@ if (picc) {
             vitKWeekly: extractNumberString(dsel('vitamin-k-weekly')),
             hasPicc: document.getElementById('picc-line-checkbox')?.checked || false,
             heparinVol: extractNumberString(dsel('heparin-volume')),
+            heparinConc: document.querySelector('input[name="heparin-concentration"]:checked')?.value || '1',
             sterileWater: extractNumberString(dsel('sterile-water-volume')),
             totalOsmol: extractNumberString(dsel('total-osmol')),
             totalCalDay: extractNumberString(dsel('total-calories-day')),
