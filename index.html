@@ -1833,15 +1833,19 @@ if (data.heparinConc) {
     const vitKDay = document.getElementById('vitamin-k-day');
     if (vitKDay) vitKDay.value = '1';
     
-    // ✅ Reset Heparin - ยกเลิกการติ๊ก PICC และซ่อน concentration
-    const picc = document.getElementById('picc-line-checkbox');
-    if (picc) {
-        picc.checked = false;
-        const heparinRow = document.getElementById('heparin-concentration-row');
-        if (heparinRow) heparinRow.style.display = 'none';
-    }
-    // Reset heparin concentration เป็น default (1 unit/ml)
-    document.querySelector('input[name="heparin-concentration"][value="1"]')?.click();
+   // ✅ Reset Heparin - ยกเลิกการติ๊ก PICC และซ่อน concentration
+const picc = document.getElementById('picc-line-checkbox');
+if (picc) {
+    picc.checked = false;
+    const heparinRow = document.getElementById('heparin-concentration-row');
+    if (heparinRow) heparinRow.style.display = 'none';
+    
+    // ✅ Uncheck ทั้งหมด - ไม่เลือกอะไรเลย
+    const heparin1 = document.querySelector('input[name="heparin-concentration"][value="1"]');
+    const heparin05 = document.querySelector('input[name="heparin-concentration"][value="0.5"]');
+    if (heparin1) heparin1.checked = false;
+    if (heparin05) heparin05.checked = false;
+}
     
     // ✅ Reset Fat Administration Options
     document.querySelector('input[name="fat-priming"][value="priming"]')?.click();
@@ -2318,12 +2322,17 @@ autosaveCollect();
             calculateTPN();
         }));
 
-        const picc = document.getElementById('picc-line-checkbox');
+   const picc = document.getElementById('picc-line-checkbox');
 if (picc) {
     picc.addEventListener('change', function() {
         const heparinRow = document.getElementById('heparin-concentration-row');
         if (this.checked) {
             heparinRow.style.display = 'grid';
+            // ✅ เมื่อติ๊ก PICC ใหม่ ให้ auto select 1 unit/ml เป็น default
+            const heparin1 = document.querySelector('input[name="heparin-concentration"][value="1"]');
+            if (heparin1 && !document.querySelector('input[name="heparin-concentration"]:checked')) {
+                heparin1.checked = true;
+            }
         } else {
             heparinRow.style.display = 'none';
         }
